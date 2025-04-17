@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Open http://localhost:3000 to view it in your browser.
+
+Tooling & Conventions
+ESLint
+Strict TypeScript rules
+
+No any allowed
+
+No console.log (only console.warn and console.error are permitted)
+
+Automatic unused import removal
+
+ESLint autofix enabled on commit and save
+
+npx eslint . --fix
+Prettier
+Prettier is configured with prettier-plugin-tailwindcss
+
+Tailwind CSS class order is automatically sorted
+
+
+npx prettier . --write
+
+Commit Rules
+Only feat: and fix: prefixes are allowed in commit messages
+
+All commits are linted with commitlint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Examples
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+git commit -m "feat: add login form"
+git commit -m "fix: button layout issue"
+Other types like chore:, test:, etc. will be rejected.
 
-To learn more about Next.js, take a look at the following resources:
+Branch Name Rules
+Only the following branch name patterns are accepted:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+feat/my-feature
+fix/my-bug
+Anything outside of this (e.g. main, dev, testbranch) is blocked from pushing.
 
-## Deploy on Vercel
+Husky + lint-staged
+Commits trigger eslint --fix and prettier --write via lint-staged
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+pre-commit, commit-msg, and pre-push hooks are enforced
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+VS Code Format on Save
+The .vscode/settings.json is versioned and ensures:
+
+Format on save is enabled
+
+ESLint autofix (including unused import removal) on save
+
+Tailwind class sorting on save via Prettier
+
+No manual formatting needed — just save the file.
+
+Required Extensions:
+Prettier - Code Formatter
+```
+
+## Scripts
+
+```bash
+npm run dev      # Start dev server
+npm run lint     # Run ESLint
+npm run format   # Run Prettier
+```
