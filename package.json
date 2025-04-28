@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.74.7",
     "@tanstack/react-query-devtools": "^5.74.7",
+    "daisyui": "^5.0.28",
     "i18next": "^25.0.1",
     "i18next-browser-languagedetector": "^8.0.5",
     "lucide-react": "^0.503.0",

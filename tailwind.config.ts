@@ -1,3 +1,5 @@
+import daisyui from 'daisyui'
+
 const config = {
   content: ['./src/**/*.{ts,tsx,js,jsx}'],
   theme: {
@@ -28,7 +30,7 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui],
 }
 
 export default config
