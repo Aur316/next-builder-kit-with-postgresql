@@ -1,4 +1,5 @@
 export * from './base-ui-elements'
+export * from './footer'
 export * from './meta'
 export * from './navbar'
 export * from './toast'
