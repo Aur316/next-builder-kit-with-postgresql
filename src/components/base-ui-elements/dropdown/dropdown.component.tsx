@@ -91,7 +91,12 @@ export const Dropdown = ({
                 transition: { duration: 0.35, staggerChildren: 0.05 },
               },
             }}
-            className={twMerge(baseStyle, baseColors, pickClassName)}
+            className={twMerge(
+              'absolute top-full left-0 z-50 mt-1 w-full',
+              baseStyle,
+              baseColors,
+              pickClassName,
+            )}
           >
             {placeholder && (
               <motion.li
