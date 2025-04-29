@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 @theme {
   --color-primary-dawn-violet-100: #fcfbff;
   --color-primary-dawn-violet-200: #f9f7ff;
