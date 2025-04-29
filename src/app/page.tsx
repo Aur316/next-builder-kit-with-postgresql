@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-10 px-4 text-center">
+    <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
       <div>
         <h1 className="text-3xl font-bold">{t('homePage.title')}</h1>
         <p className="text-primary-midnight-blue-100 mt-2 max-w-md text-sm">
