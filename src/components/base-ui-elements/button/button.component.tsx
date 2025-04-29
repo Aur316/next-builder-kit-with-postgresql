@@ -15,7 +15,7 @@ interface BaseButtonProps
   disabled?: boolean
   className?: string
   icon?: ReactNode
-  iconPosition: 'left' | 'right'
+  iconPosition?: 'left' | 'right'
   isConfirmSignaling?: boolean
   loading?: boolean
 }

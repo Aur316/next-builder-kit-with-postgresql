@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { ToastProvider } from '../components'
+import { Navbar, ToastProvider } from '../components'
 import { I18nProvider, ReactQueryProvider, StoreProvider } from '../providers'
 import './globals.css'
 
@@ -10,6 +10,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         <ReactQueryProvider>
           <I18nProvider>
+            <Navbar />
             <StoreProvider>
               {children}
               <ToastProvider />
