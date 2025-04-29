@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { Github } from 'lucide-react'
 
 import { getRoutes } from '../../constants'
+import { LanguageSwitcher } from '../language-switcher'
 import { DesktopMenu } from './desktop-menu.component'
 import { HamburgerButton } from './hamburger-button.component'
 import { MobileMenu } from './mobile-menu.component'
@@ -24,6 +25,7 @@ export const Navbar = () => {
     <nav className="bg-primary-midnight-blue-800 mx-auto mt-2 w-[90%] rounded-2xl px-4 py-3 text-white">
       <div className="flex items-center justify-between">
         <Github />
+        <LanguageSwitcher />
         <HamburgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <DesktopMenu routes={routes} />
       </div>

@@ -25,7 +25,7 @@ export function HamburgerButton({ isOpen, setIsOpen }: HamburgerButtonProps) {
             exit={{ rotate: -90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <X size={24} />
+            <X size={28} />
           </motion.div>
         ) : (
           <motion.div
@@ -35,7 +35,7 @@ export function HamburgerButton({ isOpen, setIsOpen }: HamburgerButtonProps) {
             exit={{ rotate: 90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Menu size={24} />
+            <Menu size={28} />
           </motion.div>
         )}
       </AnimatePresence>
