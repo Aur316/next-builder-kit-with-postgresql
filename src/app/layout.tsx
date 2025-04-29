@@ -8,11 +8,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className="flex min-h-dvh flex-col">
-        {' '}
         <ReactQueryProvider>
           <I18nProvider>
             <StoreProvider>
-              <div className="bg-primary-midnight-blue-900 flex min-h-screen flex-col overflow-hidden">
+              <div className="bg-primary-midnight-blue-900 flex min-h-dvh flex-col">
                 <Navbar />
                 <main className="flex flex-1 items-center justify-center overflow-y-auto">
                   {children}
