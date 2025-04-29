@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { usePathname } from 'next/navigation'
+
 import { Github } from 'lucide-react'
 
 import { getRoutes } from '../../constants'
@@ -10,8 +12,13 @@ import { HamburgerButton } from './hamburger-button.component'
 import { MobileMenu } from './mobile-menu.component'
 
 export const Navbar = () => {
-  const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const pathname = usePathname()
+  const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
+
+  if (!routes.some((route) => route.path === pathname)) {
+    return null
+  }
 
   return (
     <nav className="bg-primary-midnight-blue-800 mx-auto mt-2 w-[90%] rounded-2xl px-4 py-3 text-white">
