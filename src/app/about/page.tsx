@@ -14,7 +14,7 @@ export default function AboutPage() {
       <div className="max-w-xl space-y-6">
         <h1 className="text-3xl font-bold">{t('aboutPage.title')}</h1>
         <p className="text-primary-midnight-blue-100">
-          {t('aboutPage.description2')}
+          {t('aboutPage.description1')}
         </p>
         <p className="text-primary-midnight-blue-100">
           {t('aboutPage.description2')}

@@ -19,5 +19,8 @@
     "description1": "This is a clean and modular Next.js starter template built with TypeScript, Tailwind CSS, DaisyUI, and React Query. It follows strict coding conventions and includes reusable UI components, toast notifications, and API utilities.",
     "description2": "The goal is to provide a solid foundation for rapidly building modern web applications with consistent patterns.",
     "buttonText": "View Source on GitHub"
+  },
+  "footer": {
+    "rights": "All rights reserved."
   }
 }
