@@ -23,9 +23,7 @@ export const Navbar = () => {
   return (
     <nav className="bg-primary-midnight-blue-800 mx-auto mt-2 w-[90%] rounded-2xl px-4 py-3 text-white">
       <div className="flex items-center justify-between">
-        <span className="text-lg font-bold">
-          <Github />
-        </span>
+        <Github />
         <HamburgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
         <DesktopMenu routes={routes} />
       </div>
