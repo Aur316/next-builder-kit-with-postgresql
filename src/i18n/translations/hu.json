@@ -1,6 +1,23 @@
 {
   "home": "Főoldal",
-  "about": "Rólunk",
+  "about": "About",
   "back": "Vissza",
-  "not-found": "Az oldal nem található"
+  "not-found": "Az oldal nem található",
+  "homePage": {
+    "title": "Üdvözöl a Next Builder Kit",
+    "description": "Ez egy letisztult starter sablon TypeScript-tel, Tailwinddel, DaisyUI-vel, újrahasználható komponensekkel és legjobb gyakorlatokkal.",
+    "buttonText": "Kattints rám",
+    "inputLabel": "Neved",
+    "inputPlaceholder": "Kiss János",
+    "toggleText": "Értesítések engedélyezése",
+    "dropdownLabel": "Válassz egyet",
+    "checkboxText": "Elfogadom a feltételeket",
+    "toastSuccess": "Sikeresen elindítottál egy toast üzenetet."
+  },
+  "aboutPage": {
+    "title": "A projekt bemutatása",
+    "description1": "Ez egy letisztult és moduláris Next.js starter sablon, amely TypeScriptet, Tailwind CSS-t, DaisyUI-t és React Query-t használ. Szigorú kódolási szabályokat követ, és újrahasználható UI komponenseket, toast értesítéseket és API segédleteket tartalmaz.",
+    "description2": "A cél egy szilárd alap biztosítása a modern webalkalmazások gyors és következetes minták szerinti fejlesztéséhez.",
+    "buttonText": "Forrás megtekintése a GitHubon"
+  }
 }
