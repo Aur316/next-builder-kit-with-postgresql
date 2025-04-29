@@ -46,6 +46,8 @@ export const Input = forwardRef(function Input(
   const isVertical = labelPosition === 'top' || labelPosition === 'bottom'
   const isLabelFirst = labelPosition === 'top' || labelPosition === 'left'
 
+  const baseStyle = 'px-3 outline-none focus:border-primary-midnight-blue-800'
+
   const labelContent = label && (
     <label
       htmlFor={inputId}
@@ -74,7 +76,7 @@ export const Input = forwardRef(function Input(
         <textarea
           id={inputId}
           ref={ref as ForwardedRef<HTMLTextAreaElement>}
-          className={twMerge('px-3', inputClassName)}
+          className={twMerge(baseStyle, inputClassName)}
           autoComplete={props.autoComplete ?? 'off'}
           {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
           aria-required={req}
@@ -83,7 +85,7 @@ export const Input = forwardRef(function Input(
         <input
           id={inputId}
           ref={ref as ForwardedRef<HTMLInputElement>}
-          className={twMerge('px-3', inputClassName)}
+          className={twMerge(baseStyle, inputClassName)}
           autoComplete={props.autoComplete ?? 'off'}
           {...(props as InputHTMLAttributes<HTMLInputElement>)}
           aria-required={req}

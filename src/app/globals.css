@@ -61,3 +61,7 @@
   --color-secondary-red-800: #e86c57;
   --color-secondary-red-900: #e24b32;
 }
+
+body {
+  font-family: 'Geist', sans-serif;
+}
