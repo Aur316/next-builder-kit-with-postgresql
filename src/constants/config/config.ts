@@ -5,3 +5,8 @@ export const DROPDOWN_OPTIONS = [
   { value: 'svelte', label: '🔥 Svelte' },
   { value: 'vue', label: '🟢 Vue.js' },
 ]
+
+export const LANGUAGES = [
+  { value: 'en', label: '🇬🇧 English' },
+  { value: 'hu', label: '🇭🇺 Magyar' },
+]
