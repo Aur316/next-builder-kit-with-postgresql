@@ -1,11 +1,12 @@
 'use client'
 
-import { Button } from '../components'
+import { Button, Navbar } from '../components'
 import { showToast } from '../components/toast'
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-8">
+      <Navbar />
       <Button
         variant="primary"
         text="Show Success Toast"
