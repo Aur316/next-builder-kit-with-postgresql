@@ -13,7 +13,9 @@ export default function NotFound() {
       <h1 className="text-[120px] leading-none font-bold">
         <span className="text-primary-midnight-blue-900">404</span>
       </h1>
-      <p className="text-primary-midnight-blue-800 mt-4 text-xl">Not found</p>
+      <p className="text-primary-midnight-blue-800 mt-4 text-xl">
+        {t('not-found')}
+      </p>
       <br />
       <Link href="/" className="text-primary-midnight-blue-700 flex gap-2">
         <ArrowLeft />
