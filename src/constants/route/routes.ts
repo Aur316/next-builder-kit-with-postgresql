@@ -1,17 +1,4 @@
-enum RouteKey {
-  HOME = 'home',
-  ABOUT = 'about',
-}
-
-type Route = {
-  path: string
-  name: RouteKey
-  visibleInNavbar?: boolean
-}
-
-interface Routes {
-  routes: Array<Route>
-}
+import { RouteKey, Routes } from '../../types'
 
 export function getRoutes(): Routes {
   return {

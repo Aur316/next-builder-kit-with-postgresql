@@ -1,21 +1,28 @@
 'use client'
 
-import Link from 'next/link'
+import { useState } from 'react'
 
-import { useTranslation } from 'react-i18next'
+import { Github } from 'lucide-react'
 
 import { getRoutes } from '../../constants'
+import { DesktopMenu } from './desktop-menu.component'
+import { HamburgerButton } from './hamburger-button.component'
+import { MobileMenu } from './mobile-menu.component'
 
 export const Navbar = () => {
-  const { t } = useTranslation()
   const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
   return (
-    <nav>
-      {routes.map((route) => (
-        <Link className="text-black" key={route.path} href={route.path}>
-          {t(route.name)}
-        </Link>
-      ))}
+    <nav className="bg-primary-midnight-blue-800 mx-auto mt-2 w-[90%] rounded-2xl px-4 py-3 text-white">
+      <div className="flex items-center justify-between">
+        <span className="text-lg font-bold">
+          <Github />
+        </span>
+        <HamburgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
+        <DesktopMenu routes={routes} />
+      </div>
+      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} routes={routes} />
     </nav>
   )
 }
