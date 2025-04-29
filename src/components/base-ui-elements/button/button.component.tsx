@@ -12,10 +12,10 @@ interface BaseButtonProps
   variant?: 'primary' | 'secondary'
   text?: string
   size?: 'xl' | 'lg' | 'md' | 'sm'
-  minWidthInRem?: number
   disabled?: boolean
   className?: string
-  leftIcon?: ReactNode
+  icon?: ReactNode
+  iconPosition: 'left' | 'right'
   isConfirmSignaling?: boolean
   loading?: boolean
 }
@@ -59,9 +59,9 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
       variant = 'primary',
       size = 'md',
       text,
-      minWidthInRem,
       className,
-      leftIcon,
+      icon,
+      iconPosition,
       isConfirmSignaling,
       loading,
       disabled,
@@ -87,15 +87,15 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
         {...props}
         className={buttonClasses}
         aria-disabled={isLoadingOrDisabled}
-        style={{ minWidth: minWidthInRem ? `${minWidthInRem}rem` : undefined }}
         disabled={isLoadingOrDisabled}
         ref={ref}
       >
         {!loading ? (
           <>
-            {leftIcon}
+            {iconPosition === 'left' && icon}
             {text}
             {children}
+            {iconPosition === 'right' && icon}
           </>
         ) : (
           <Loader />
