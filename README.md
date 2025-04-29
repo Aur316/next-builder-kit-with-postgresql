@@ -18,7 +18,7 @@ rm -rf .git
 
 # Getting Started
 
-At firs install the dependencies:
+At first install the dependencies:
 
 ```bash
 npm install
