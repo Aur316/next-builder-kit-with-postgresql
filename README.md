@@ -3,11 +3,11 @@
 1. Clone the repository and install dependencies
 
 ```bash
-git clone https://github.com/Aur316/simple-model.git
+git clone https://github.com/Aur316/next-builder-kit.git
 ```
 
 ```bash
-cd simple-model
+cd next-builder-kit
 ```
 
 ```bash
@@ -139,7 +139,7 @@ This allows simplified and consistent imports, improves maintainability, and dec
 
 ## DaisyUI
 
-[DaisyUI](https://daisyui.com/) is also integrated for utility-first, styled UI components built on top of Tailwind CSS. It helps speed up development with pre-designed, customizable elements.
+[DaisyUI](https://daisyui.com/) is also integrated for utility-first, styled UI components built on top of [Tailwind](https://tailwindcss.com/) CSS. It helps speed up development with pre-designed, customizable elements.
 
 ## HTTP Client & API Utilities
 
