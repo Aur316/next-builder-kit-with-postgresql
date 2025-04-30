@@ -24,14 +24,12 @@ const typeClasses = {
   primary: [
     'bg-primary-midnight-blue-900',
     'text-white',
-    'hover:bg-primary-midnight-blue-900hover2',
+    'hover:bg-primary-midnight-blue-900',
     'active:bg-primary-midnight-blue-800',
   ],
   secondary: [
     'bg-white',
     'text-primary-midnight-blue-800',
-    'border',
-    'border-primary-midnight-blue-700',
     'hover:border-primary-midnight-blue-100',
     'hover:bg-primary-midnight-blue-400',
     'active:bg-primary-midnight-blue-200',
@@ -73,7 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
     const isLoadingOrDisabled = disabled || loading
 
     const buttonClasses = twJoin(
-      'flex gap-2 items-center w-full justify-center rounded-full font-medium transition-colors duration-300 ease-in-out tracking-wider cursor-pointer',
+      'flex gap-2 items-center w-full justify-center rounded-2xl font-medium transition-colors duration-300 ease-in-out tracking-wider cursor-pointer',
       isConfirmSignaling
         ? 'pointer-events-none bg-secondary-ghaf-green-800'
         : null,
