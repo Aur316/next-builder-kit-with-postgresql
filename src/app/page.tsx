@@ -27,15 +27,15 @@ export default function Home() {
   }
 
   return (
-    <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
-      <div>
+    <main className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
+      <section>
         <h1 className="text-3xl font-bold">{t('homePage.title')}</h1>
         <p className="text-primary-midnight-blue-100 mt-2 max-w-md text-sm">
           {t('homePage.description')}
         </p>
-      </div>
+      </section>
 
-      <div className="flex flex-col items-center gap-4">
+      <section className="flex flex-col items-center gap-4">
         <Button
           text={t('homePage.buttonText')}
           variant="secondary"
@@ -56,7 +56,7 @@ export default function Home() {
           options={DROPDOWN_OPTIONS}
         />
         <Checkbox text={t('homePage.checkboxText')} />
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }

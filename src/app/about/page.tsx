@@ -2,7 +2,7 @@
 
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '../../components'
+import { Button, SpinnableBorderWrapper } from '../../components'
 
 export default function AboutPage() {
   const { t } = useTranslation()
@@ -10,7 +10,7 @@ export default function AboutPage() {
     window.open('https://github.com/Aur316/simple-model', '_blank')
   }
   return (
-    <main className="bg-primary-midnight-blue-900 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+    <main className="flex h-full flex-col items-center justify-center px-4 text-center text-white">
       <div className="max-w-xl space-y-6">
         <h1 className="text-3xl font-bold">{t('aboutPage.title')}</h1>
         <p className="text-primary-midnight-blue-100">
@@ -21,11 +21,13 @@ export default function AboutPage() {
         </p>
 
         <div className="flex justify-center">
-          <Button
-            text={t('aboutPage.buttonText')}
-            variant="secondary"
-            onClick={viewSource}
-          />
+          <SpinnableBorderWrapper isSpinning baseStyle="rounded-2xl">
+            <Button
+              text={t('aboutPage.buttonText')}
+              variant="secondary"
+              onClick={viewSource}
+            />
+          </SpinnableBorderWrapper>
         </div>
       </div>
     </main>
