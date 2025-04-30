@@ -30,6 +30,11 @@ Run the development server:
 npm run dev
 ```
 
+3. Create with one command
+```bash
+npx create-next-builder-kit my-app
+```
+
 Open http://localhost:3000 to view it in your browser.
 
 ## Tooling & Conventions: ESLint, Strict, TypeScript rules
