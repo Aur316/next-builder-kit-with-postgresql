@@ -16,6 +16,11 @@ rm -rf .git
 
 2. If you'd rather start with a new repository based on this one, click the green <code style="color : green">Use this template</code> button at the top of the GitHub page. This will let you generate a fresh copy of the repository under your own GitHub account, preserving all files but without commit history.
 
+3. Create with one command
+```bash
+npx create-next-builder-kit my-app
+```
+
 # Getting Started
 
 At first install the dependencies:
@@ -28,11 +33,6 @@ Run the development server:
 
 ```bash
 npm run dev
-```
-
-3. Create with one command
-```bash
-npx create-next-builder-kit my-app
 ```
 
 Open http://localhost:3000 to view it in your browser.
