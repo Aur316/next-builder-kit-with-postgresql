@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
-import { Route } from '../../types'
+import { Route } from '../../../types'
 
 interface MobileMenuProps {
   isOpen: boolean
