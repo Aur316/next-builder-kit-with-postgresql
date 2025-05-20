@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
+    <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
       <section id="mainHeader">
         <h1 className="text-center text-3xl font-bold">
           {t('homePage.title')}
@@ -37,7 +37,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="flex flex-col items-center gap-4">
+      <section id="mainContent" className="flex flex-col items-center gap-4">
         <Button
           text={t('homePage.buttonText')}
           variant="secondary"
@@ -59,6 +59,6 @@ export default function Home() {
         />
         <Checkbox text={t('homePage.checkboxText')} />
       </section>
-    </main>
+    </div>
   )
 }
