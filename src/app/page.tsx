@@ -22,7 +22,7 @@ export default function Home() {
   const triggerToast = () => {
     showToast({
       type: 'success',
-      description: t('main.toastSuccess'),
+      description: t('homePage.toastSuccess'),
     })
   }
 
@@ -46,9 +46,9 @@ export default function Home() {
         <Input
           label={t('homePage.inputLabel')}
           placeholder={t('homePage.inputPlaceholder')}
-          inputClassName="border-primary-midnight-blue-700 w-[180px] rounded-xl border"
+          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
         />
-        <Toggle text={t('homePage.toggleText')} />
+        <Toggle text={t('homePage.toggleText')} className="toggle-info" />
         <Dropdown
           label={t('homePage.dropdownLabel')}
           value={selectedItem ?? undefined}
