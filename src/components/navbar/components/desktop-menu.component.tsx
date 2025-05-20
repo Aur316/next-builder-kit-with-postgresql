@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useTranslation } from 'react-i18next'
 
-import { Route } from '../../types'
+import { Route } from '../../../types'
 
 interface DesktopMenuProps {
   routes: Array<Route>
