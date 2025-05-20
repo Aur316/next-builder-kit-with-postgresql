@@ -1,7 +1,6 @@
 export * from './base-ui-elements'
 export * from './footer'
 export * from './language-switcher'
-export * from './meta'
 export * from './navbar'
 export * from './spinnable-border-wrapper'
 export * from './toast'

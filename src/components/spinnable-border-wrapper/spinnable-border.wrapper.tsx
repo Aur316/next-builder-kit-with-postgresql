@@ -49,11 +49,9 @@ export function SpinnableBorderWrapper({
           ),
       )}
     >
-      {
-        <div className="after:bg-primary-purple-100/10 relative after:absolute after:inset-0 after:opacity-0 hover:after:opacity-100">
-          {children}
-        </div>
-      }
+      <div className="after:bg-primary-purple-100/10 relative self-end after:pointer-events-none after:absolute after:inset-0 after:opacity-0 hover:after:opacity-100">
+        {children}
+      </div>
     </div>
   )
 }

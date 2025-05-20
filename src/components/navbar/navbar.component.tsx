@@ -8,13 +8,11 @@ import { Github } from 'lucide-react'
 
 import { getRoutes } from '../../constants'
 import { LanguageSwitcher } from '../language-switcher'
-import { DesktopMenu } from './desktop-menu.component'
-import { HamburgerButton } from './hamburger-button.component'
-import { MobileMenu } from './mobile-menu.component'
+import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
 
   if (!routes.some((route) => route.path === pathname)) {

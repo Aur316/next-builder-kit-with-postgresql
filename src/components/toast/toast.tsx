@@ -95,7 +95,7 @@ const CopyButton = ({ onClick }: CopyButtonProps) => {
   return (
     <div
       onClick={onClick}
-      className="hover:border-primary-midnight-blue-600 text-primary-midnight-blue-900 active:text-primary-midnight-blue-600 active:bg-primary-midnight-blue-300 rounded-lg border border-transparent bg-transparent p-2 hover:cursor-pointer"
+      className="hover:border-primary-midnight-blue-600 text-primary-midnight-blue-900 active:text-primary-midnight-blue-600 active:bg-primary-midnight-blue-300 ml-auto rounded-lg border border-transparent bg-transparent p-2 hover:cursor-pointer"
     >
       <Copy size={18} />
     </div>

@@ -7,7 +7,12 @@ interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-export const Toggle = ({ text, className, id, ...props }: ToggleProps) => {
+export const Toggle = ({
+  text,
+  className = 'toggle-primary',
+  id,
+  ...props
+}: ToggleProps) => {
   const internalId = useId()
   const inputId = id ?? internalId
 
@@ -18,7 +23,7 @@ export const Toggle = ({ text, className, id, ...props }: ToggleProps) => {
         <input
           id={inputId}
           type="checkbox"
-          className={twMerge('toggle toggle-primary', className)}
+          className={twMerge('toggle', className)}
           {...props}
         />
       </label>
