@@ -28,9 +28,11 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
-      <section>
-        <h1 className="text-3xl font-bold">{t('homePage.title')}</h1>
-        <p className="text-primary-midnight-blue-100 mt-2 max-w-md text-sm">
+      <section id="mainHeader">
+        <h1 className="text-center text-3xl font-bold">
+          {t('homePage.title')}
+        </h1>
+        <p className="text-primary-midnight-blue-100 mt-2 max-w-md text-center text-sm">
           {t('homePage.description')}
         </p>
       </section>
