@@ -18,7 +18,7 @@ rm -rf .git
 
 3. Create with one command
 ```bash
-npx create-next-builder-kit
+npx next-builder-kit
 ```
 
 # Getting Started
