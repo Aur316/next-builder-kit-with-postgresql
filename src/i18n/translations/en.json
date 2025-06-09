@@ -21,6 +21,9 @@
     "description2": "The goal is to provide a solid foundation for rapidly building modern web applications with consistent patterns.",
     "buttonText": "View Source on GitHub"
   },
+  "galleryPage": {
+    "coverflow": "Coverflow Gallery"
+  },
   "footer": {
     "rights": "All rights reserved."
   }
