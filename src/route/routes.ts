@@ -1,4 +1,4 @@
-import { RouteKey, Routes } from '../../types'
+import { RouteKey, Routes } from '../types'
 
 export function getRoutes(): Routes {
   return {

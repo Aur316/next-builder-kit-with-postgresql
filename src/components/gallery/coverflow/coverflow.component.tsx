@@ -17,7 +17,7 @@ interface CoverflowProps {
 
 export function Coverflow({ title, links }: CoverflowProps) {
   return (
-    <div className="overflow-y-hidden">
+    <div className="overflow-y-hidden px-8">
       <h2 className="text-primary-midnight-blue-600 text-2xl">{title}</h2>
       <Swiper
         effect={'coverflow'}
