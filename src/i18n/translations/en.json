@@ -2,6 +2,7 @@
   "home": "Home",
   "about": "About",
   "gallery": "Gallery",
+  "posts": "Posts",
   "back": "Go back",
   "not-found": "Page not found",
   "homePage": {
@@ -20,6 +21,16 @@
     "description1": "This is a clean and modular Next.js starter template built with TypeScript, Tailwind CSS, DaisyUI, and React Query. It follows strict coding conventions and includes reusable UI components, toast notifications, and API utilities.",
     "description2": "The goal is to provide a solid foundation for rapidly building modern web applications with consistent patterns.",
     "buttonText": "View Source on GitHub"
+  },
+  "galleryPage": {
+    "coverflow": "Coverflow Gallery"
+  },
+  "postsPage": {
+    "postForm": {
+      "title": "Title",
+      "content": "Content",
+      "createPost": "Create Post"
+    }
   },
   "footer": {
     "rights": "All rights reserved."

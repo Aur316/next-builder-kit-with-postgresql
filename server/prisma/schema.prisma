@@ -8,9 +8,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Post {
   id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
+  title     String   
+  content   String
   createdAt DateTime @default(now())
 }
