@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
 import express from 'express'
 
-dotenv.config()
+import { postRoutes } from './modules/posts'
 
 const app = express()
 app.use(express.json())
+app.use('/api/posts', postRoutes)
 
-app.listen(4000)
+export default app

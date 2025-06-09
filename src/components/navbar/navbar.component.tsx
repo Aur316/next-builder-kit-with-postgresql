@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 
 import { Github } from 'lucide-react'
 
-import { getRoutes } from '../../constants'
+import { getRoutes } from '../../route'
 import { LanguageSwitcher } from '../language-switcher'
 import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 

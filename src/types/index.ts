@@ -1,2 +1,2 @@
-export * from './navbar-model'
-export * from './use-http-model'
+export * from './navbar-model.type'
+export * from './use-http-model.type'
