@@ -135,6 +135,7 @@ This allows simplified and consistent imports, improves maintainability, and dec
 ## What else does this repository provide?
 
 - Base UI elements such as buttons with icon positions, inputs with labels, styled checkboxes, toggles, and dropdown components
+- [swiperjs](https://swiperjs.com/) integration for gallery support
 - A basic, responsive navbar optimized for both mobile and desktop
 - [i18n](https://www.i18next.com/) integration for multi-language support
 - A simple store setup using the Context API
