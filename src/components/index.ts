@@ -1,5 +1,6 @@
 export * from './base-ui-elements'
 export * from './footer'
+export * from './gallery'
 export * from './language-switcher'
 export * from './navbar'
 export * from './spinnable-border-wrapper'

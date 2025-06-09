@@ -5,6 +5,7 @@ export function getRoutes(): Routes {
     routes: [
       { path: '/', name: RouteKey.HOME, visibleInNavbar: true },
       { path: '/about', name: RouteKey.ABOUT, visibleInNavbar: true },
+      { path: '/gallery', name: RouteKey.GALLERY, visibleInNavbar: true },
     ],
   }
 }
