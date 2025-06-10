@@ -17,11 +17,7 @@ export const PostList = () => {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-  const {
-    deletePost,
-    // isPending: isDeletePending,
-    // isError: isDeleteError,
-  } = useDeletePost()
+  const { deletePost, isPending: isDeletePending } = useDeletePost()
 
   return (
     <QueryStateHandler
@@ -66,6 +62,7 @@ export const PostList = () => {
           description={t('postsPage.confirmDeleteDescription')}
           confirmText={t('yes')}
           cancelText={t('no')}
+          pending={isDeletePending}
         />
       )}
     </QueryStateHandler>
