@@ -1,14 +1,15 @@
+import type { PropsWithChildren } from 'react'
+
 import { Loader } from '../base-ui-elements'
 
-type Props = {
+type Props = PropsWithChildren<{
   isLoading: boolean
   isError: boolean
   isEmpty?: boolean
   errorMessage: string
   emptyMessage: string
-  children: React.ReactNode
   style?: string
-}
+}>
 
 export const QueryStateHandler = ({
   isLoading,
