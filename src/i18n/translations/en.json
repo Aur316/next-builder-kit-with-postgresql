@@ -5,6 +5,8 @@
   "posts": "Posts",
   "back": "Go back",
   "not-found": "Page not found",
+  "yes": "Yes",
+  "no": "No",
   "homePage": {
     "title": "Welcome to Next Builder Kit",
     "description": "This is a clean starter template with TypeScript, Tailwind, DaisyUI, reusable components and best practices.",
@@ -30,7 +32,9 @@
       "title": "Title",
       "content": "Content",
       "createPost": "Create Post"
-    }
+    },
+    "confirmDeleteTitle": "Are you sure you want to delete this post?",
+    "confirmDeleteDescription": "This action cannot be undone."
   },
   "queryStateHandler": {
     "errorMessage": "Failed to load posts",
