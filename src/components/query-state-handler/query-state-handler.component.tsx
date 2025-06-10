@@ -21,7 +21,7 @@ export const QueryStateHandler = ({
   style,
 }: Props) => {
   if (isLoading) return <Loader />
-  if (isError) return <p>{errorMessage}</p>
-  if (isEmpty) return <p>{emptyMessage}</p>
+  if (isError) return <p className="mx-auto">{errorMessage}</p>
+  if (isEmpty) return <p className="mx-auto">{emptyMessage}</p>
   return <div className={style}>{children}</div>
 }

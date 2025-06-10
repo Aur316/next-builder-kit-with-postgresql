@@ -14,6 +14,7 @@ type ConfirmDeleteModalProps = {
   description: string
   confirmText: string
   cancelText: string
+  pending: boolean
 }
 
 export const ConfirmDeleteModal = ({
@@ -24,6 +25,7 @@ export const ConfirmDeleteModal = ({
   description,
   confirmText,
   cancelText,
+  pending,
 }: ConfirmDeleteModalProps) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -66,6 +68,7 @@ export const ConfirmDeleteModal = ({
               onConfirm()
               onClose()
             }}
+            loading={pending}
           />
         </div>
       </div>
