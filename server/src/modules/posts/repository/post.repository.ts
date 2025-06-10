@@ -14,3 +14,13 @@ export const getAllPosts = async (): Promise<Array<Post>> => {
     orderBy: { updatedAt: 'desc' },
   })
 }
+
+export const removePost = async (postId: string): Promise<Post> => {
+  return db.post.update({
+    where: { id: postId },
+    data: {
+      isDeleted: true,
+      deletedAt: new Date(),
+    },
+  })
+}

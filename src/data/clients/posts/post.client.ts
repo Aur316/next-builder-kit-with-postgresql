@@ -15,5 +15,5 @@ export const postApiClient = {
     httpClient.get<GetPostsResponse>(ROOT),
 
   delete: (postId: string): Promise<null> =>
-    httpClient.delete<null>(`${ROOT}/${postId}`),
+    httpClient.patch<null>(`${ROOT}/${postId}/delete`, {}),
 }

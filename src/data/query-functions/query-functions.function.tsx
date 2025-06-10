@@ -31,7 +31,7 @@ export const getPostsFn = async (): Promise<
 export const deletePostFn = async (
   postId: string,
 ): Promise<OperationResult<null, ApiErrorResult>> => {
-  return await apiCallHandler(() => postApiClient.delete(`/${postId}`), {
+  return await apiCallHandler(() => postApiClient.delete(`${postId}`), {
     showErrorToast: true,
     errorMessage: 'Failed to delete post',
     showSuccessToast: true,
