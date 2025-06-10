@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5001/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 })
+
 export const httpClient = {
   get: async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
     const response = await instance.get<T>(url, config)
