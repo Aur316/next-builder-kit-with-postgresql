@@ -33,6 +33,10 @@
       "content": "Content",
       "createPost": "Create Post"
     },
+    "postFormErrors": {
+      "title": "Title is required",
+      "content": "Content is required"
+    },
     "confirmDeleteTitle": "Are you sure you want to delete this post?",
     "confirmDeleteDescription": "This action cannot be undone."
   },

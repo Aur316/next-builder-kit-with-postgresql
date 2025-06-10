@@ -32,7 +32,8 @@ export const PostForm = () => {
       <form.Field
         name="title"
         validators={{
-          onChange: ({ value }) => !value.trim().length && 'Title is required',
+          onChange: ({ value }) =>
+            !value.trim().length && t('postsPage.postFormErrors.title'),
         }}
       >
         {(field) => (
@@ -57,7 +58,7 @@ export const PostForm = () => {
         name="content"
         validators={{
           onChange: ({ value }) =>
-            !value.trim().length && 'Content is required',
+            !value.trim().length && t('postsPage.postFormErrors.content'),
         }}
       >
         {(field) => (

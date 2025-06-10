@@ -33,6 +33,10 @@
       "content": "Tartalom",
       "createPost": "Bejegyzés mentése"
     },
+    "postFormErrors": {
+      "title": "Cím megadása kötelező",
+      "content": "Tartalom megadása kötelező"
+    },
     "confirmDeleteTitle": "Biztosan törölni szeretnéd ezt a bejegyzést?",
     "confirmDeleteDescription": "Ez a művelet nem visszavonható."
   },
