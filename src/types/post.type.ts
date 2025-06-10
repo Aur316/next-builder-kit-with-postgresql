@@ -11,3 +11,10 @@ export type CreatePostResponse = {
 }
 
 export type GetPostsResponse = Array<CreatePostResponse>
+
+export type Post = {
+  id: string
+  title: string
+  content: string
+  createdAt: Date
+}
