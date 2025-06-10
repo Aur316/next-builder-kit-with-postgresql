@@ -62,3 +62,7 @@ export default function Home() {
     </div>
   )
 }
+
+// TODO:
+// createPostnál újratölt az egész oldal, ezt megjavítani
+// restore posts + végleges törlés lehetőség

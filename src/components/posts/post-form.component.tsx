@@ -22,7 +22,13 @@ export const PostForm = () => {
   })
 
   return (
-    <form onSubmit={form.handleSubmit} className="flex flex-col gap-4">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        form.handleSubmit()
+      }}
+      className="flex flex-col gap-4"
+    >
       <form.Field name="title">
         {(field) => (
           <Input
