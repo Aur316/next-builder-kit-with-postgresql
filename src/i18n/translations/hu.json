@@ -32,6 +32,10 @@
       "createPost": "Bejegyzés mentése"
     }
   },
+  "queryStateHandler": {
+    "errorMessage": "Nem sikerült betölteni a bejegyzéseket",
+    "emptyMessage": "Nincs elérhető bejegyzés"
+  },
   "footer": {
     "rights": "Minden jog fenntartva."
   }

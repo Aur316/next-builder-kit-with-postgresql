@@ -1,22 +1,26 @@
+import { Loader } from '../base-ui-elements'
+
 type Props = {
   isLoading: boolean
   isError: boolean
   isEmpty?: boolean
-  errorMessage?: string
-  emptyMessage?: string
+  errorMessage: string
+  emptyMessage: string
   children: React.ReactNode
+  style?: string
 }
 
 export const QueryStateHandler = ({
   isLoading,
   isError,
   isEmpty,
-  errorMessage = 'Something went wrong.',
-  emptyMessage = 'No data found.',
+  errorMessage,
+  emptyMessage,
   children,
+  style,
 }: Props) => {
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <Loader />
   if (isError) return <p>{errorMessage}</p>
   if (isEmpty) return <p>{emptyMessage}</p>
-  return <>{children}</>
+  return <div className={style}>{children}</div>
 }
