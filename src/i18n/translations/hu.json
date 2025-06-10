@@ -5,6 +5,8 @@
   "posts": "Bejegyzések",
   "back": "Vissza",
   "not-found": "Az oldal nem található",
+  "yes": "Igen",
+  "no": "Nem",
   "homePage": {
     "title": "Üdvözöl a Next Builder Kit",
     "description": "Ez egy letisztult starter sablon TypeScript-tel, Tailwinddel, DaisyUI-vel, újrahasználható komponensekkel és legjobb gyakorlatokkal.",
@@ -30,7 +32,9 @@
       "title": "Cím",
       "content": "Tartalom",
       "createPost": "Bejegyzés mentése"
-    }
+    },
+    "confirmDeleteTitle": "Biztosan törölni szeretnéd ezt a bejegyzést?",
+    "confirmDeleteDescription": "Ez a művelet nem visszavonható."
   },
   "queryStateHandler": {
     "errorMessage": "Nem sikerült betölteni a bejegyzéseket",

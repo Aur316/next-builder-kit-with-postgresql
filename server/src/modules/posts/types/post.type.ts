@@ -8,4 +8,5 @@ export type CreatePostResponseV1 = {
   title: string
   content: string
   createdAt: string
+  updatedAt: string
 }

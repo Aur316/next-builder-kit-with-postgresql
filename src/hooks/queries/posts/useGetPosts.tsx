@@ -11,7 +11,7 @@ import {
 import { Post } from '../../../types/post.type'
 
 export const useGetPosts = () => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: postKey.list(),
     queryFn: getPostsFn,
   })
@@ -23,7 +23,7 @@ export const useGetPosts = () => {
 
   return {
     posts,
-    isLoading,
+    isPending,
     isError,
   }
 }

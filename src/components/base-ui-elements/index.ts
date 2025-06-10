@@ -1,5 +1,6 @@
 export * from './button'
 export * from './checkbox'
+export * from './confirm-delete-modal'
 export * from './dropdown'
 export * from './input'
 export * from './loader'
