@@ -1,5 +1,5 @@
-import { mapPostToCreatePostResponse, mapPostToCreateResponse } from '../mapper'
-import { getAllPostsFromDb, insertPost } from '../repository'
+import { mapPostToCreateResponse } from '../mapper'
+import { getAllPosts, insertPost } from '../repository'
 import { CreatePostRequestV1, CreatePostResponseV1 } from '../types/post.type'
 
 export const createPost = async (
@@ -10,7 +10,7 @@ export const createPost = async (
   return mapPostToCreateResponse(result)
 }
 
-export const getAllPosts = async (): Promise<Array<CreatePostResponseV1>> => {
-  const result = await getAllPostsFromDb()
-  return result.map(mapPostToCreatePostResponse)
+export const getPosts = async (): Promise<Array<CreatePostResponseV1>> => {
+  const result = await getAllPosts()
+  return result.map(mapPostToCreateResponse)
 }
