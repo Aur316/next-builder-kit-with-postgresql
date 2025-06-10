@@ -32,6 +32,10 @@
       "createPost": "Create Post"
     }
   },
+  "queryStateHandler": {
+    "errorMessage": "Failed to load posts",
+    "emptyMessage": "No posts available"
+  },
   "footer": {
     "rights": "All rights reserved."
   }

@@ -9,3 +9,12 @@ export const mapPostToCreateResponse = (post: Post): CreatePostResponseV1 => {
     createdAt: post.createdAt.toISOString(),
   }
 }
+
+export const mapPostToCreatePostResponse = (
+  post: Post,
+): CreatePostResponseV1 => ({
+  id: post.id,
+  title: post.title,
+  content: post.content,
+  createdAt: post.createdAt.toISOString(),
+})

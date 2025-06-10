@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { createPost } from '../service'
+import { createPost, getAllPosts } from '../service'
 import { CreatePostRequestV1 } from '../types/post.type'
 
 export const handleCreatePost = async (
@@ -9,4 +9,12 @@ export const handleCreatePost = async (
 ): Promise<void> => {
   const post = await createPost(req.body)
   res.status(201).json(post)
+}
+
+export const handleGetAllPosts = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const posts = await getAllPosts()
+  res.status(200).json(posts)
 }
