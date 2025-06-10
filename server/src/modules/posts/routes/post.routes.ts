@@ -1,7 +1,9 @@
 import { Router } from 'express'
 
-import { createPostController } from '../controller/post.controller'
+import { validate } from '../../../middleware/validate'
+import { handleCreatePost } from '../controller/post.controller'
+import { createPostValidator } from '../validator'
 
 export const postRoutes = Router()
 
-postRoutes.post('/', createPostController)
+postRoutes.post('/', validate(createPostValidator), handleCreatePost)

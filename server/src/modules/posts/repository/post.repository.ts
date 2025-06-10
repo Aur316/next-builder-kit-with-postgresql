@@ -1,10 +1,7 @@
+import { Post } from '../../../generated/prisma'
 import { db } from '../../../lib'
 import { CreatePostRequestV1 } from '../types/post.type'
 
-export const insertPost = async (data: CreatePostRequestV1) => {
-  const result = await db.post.create({
-    data,
-  })
-
-  return result
+export const insertPost = (data: CreatePostRequestV1): Promise<Post> => {
+  return db.post.create({ data })
 }

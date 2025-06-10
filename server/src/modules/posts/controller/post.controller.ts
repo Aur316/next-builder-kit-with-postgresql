@@ -1,22 +1,12 @@
 import { Request, Response } from 'express'
 
-import { createPostService } from '../service'
-import { createPostValidator } from '../validator'
+import { createPost } from '../service'
+import { CreatePostRequestV1 } from '../types/post.type'
 
-export const createPostController = async (
-  req: Request,
+export const handleCreatePost = async (
+  req: Request<Record<string, never>, unknown, CreatePostRequestV1>,
   res: Response,
 ): Promise<void> => {
-  const parse = createPostValidator.safeParse(req.body)
-
-  if (!parse.success) {
-    res.status(400).json({
-      error: 'Invalid input',
-      issues: parse.error.format(),
-    })
-    return
-  }
-
-  const post = await createPostService(parse.data)
+  const post = await createPost(req.body)
   res.status(201).json(post)
 }
