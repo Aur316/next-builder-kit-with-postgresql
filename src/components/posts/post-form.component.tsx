@@ -19,16 +19,6 @@ export const PostForm = () => {
     onSubmit: async ({ value }) => {
       await createPost(value)
     },
-    validators: {
-      onChange: ({ value }) => {
-        return {
-          fields: {
-            title: !value.title.length && 'Title is required',
-            content: !value.content.length && 'Content is required',
-          },
-        }
-      },
-    },
   })
 
   return (
@@ -39,7 +29,12 @@ export const PostForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field name="title">
+      <form.Field
+        name="title"
+        validators={{
+          onChange: ({ value }) => !value.trim().length && 'Title is required',
+        }}
+      >
         {(field) => (
           <>
             <Input
@@ -58,7 +53,13 @@ export const PostForm = () => {
         )}
       </form.Field>
 
-      <form.Field name="content">
+      <form.Field
+        name="content"
+        validators={{
+          onChange: ({ value }) =>
+            !value.trim().length && 'Content is required',
+        }}
+      >
         {(field) => (
           <>
             <Input
