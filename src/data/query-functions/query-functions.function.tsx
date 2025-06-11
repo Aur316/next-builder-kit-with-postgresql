@@ -3,6 +3,7 @@ import {
   CreatePostRequest,
   CreatePostResponse,
   GetPostsResponse,
+  Post,
 } from '../../types/post.type'
 import { OperationResult } from '../api-call-handler'
 import { apiCallHandler } from '../api-call-handler/api-handler'
@@ -41,6 +42,15 @@ export const getActivePostsFn = async (): Promise<
   OperationResult<GetPostsResponse, ApiErrorResult>
 > => {
   return await apiCallHandler(() => postApiClient.getActive(), {
+    showErrorToast: true,
+    errorMessage: 'Failed to load posts',
+  })
+}
+
+export const getPostByIdFn = async (
+  postId: string,
+): Promise<OperationResult<Post, ApiErrorResult>> => {
+  return await apiCallHandler(() => postApiClient.getById(postId), {
     showErrorToast: true,
     errorMessage: 'Failed to load posts',
   })

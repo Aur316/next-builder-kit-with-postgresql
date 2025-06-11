@@ -6,6 +6,7 @@ import {
   getActivePosts,
   getAllPosts,
   getDeletedPosts,
+  getPostById,
 } from '../service'
 import { CreatePostRequestV1 } from '../types/post.type'
 
@@ -38,6 +39,15 @@ export const handleGetActivePosts = async (
   res: Response,
 ): Promise<void> => {
   const posts = await getActivePosts()
+  res.status(200).json(posts)
+}
+
+export const handleGetPostById = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const postId = req.params.id
+  const posts = await getPostById(postId)
   res.status(200).json(posts)
 }
 

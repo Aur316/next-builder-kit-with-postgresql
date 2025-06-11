@@ -2,6 +2,7 @@ import {
   CreatePostRequest,
   CreatePostResponse,
   GetPostsResponse,
+  Post,
 } from '../../../types/post.type'
 import { httpClient } from '../http'
 
@@ -19,6 +20,9 @@ export const postApiClient = {
 
   getActive: (): Promise<GetPostsResponse> =>
     httpClient.get<GetPostsResponse>(`${ROOT}/active`),
+
+  getById: (postId: string): Promise<Post> =>
+    httpClient.get<Post>(`${ROOT}/${postId}`),
 
   delete: (postId: string): Promise<null> =>
     httpClient.patch<null>(`${ROOT}/${postId}/delete`, {}),

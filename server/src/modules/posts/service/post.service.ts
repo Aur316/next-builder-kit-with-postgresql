@@ -3,6 +3,7 @@ import {
   fetchActivePosts,
   fetchAllPosts,
   fetchDeletedPosts,
+  fetchPostById,
   insertPost,
   removePost,
 } from '../repository'
@@ -32,6 +33,16 @@ export const getActivePosts = async (): Promise<
 > => {
   const posts = await fetchActivePosts()
   return posts.map(mapPostToCreateResponse)
+}
+
+export const getPostById = async (
+  postId: string,
+): Promise<CreatePostResponseV1> => {
+  const post = await fetchPostById(postId)
+  if (!post) {
+    throw new Error('Post not found')
+  }
+  return mapPostToCreateResponse(post)
 }
 
 export const deletePost = async (

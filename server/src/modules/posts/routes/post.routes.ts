@@ -1,14 +1,15 @@
 import { Router } from 'express'
 
-import { validate } from '../../../middleware/validate'
+import { validate, validateParams } from '../../../middleware/validate'
 import {
   handleCreatePost,
   handleDeletePost,
   handleGetActivePosts,
   handleGetAllPosts,
   handleGetDeletedlPosts,
+  handleGetPostById,
 } from '../controller/post.controller'
-import { createPostValidator } from '../validator'
+import { createPostValidator, postIdSchema } from '../validator'
 
 export const postRoutes = Router()
 
@@ -16,4 +17,5 @@ postRoutes.post('/', validate(createPostValidator), handleCreatePost)
 postRoutes.get('/all', handleGetAllPosts)
 postRoutes.get('/deleted', handleGetDeletedlPosts)
 postRoutes.get('/active', handleGetActivePosts)
+postRoutes.get('/:id', validateParams(postIdSchema), handleGetPostById)
 postRoutes.patch('/:id/delete', handleDeletePost)
