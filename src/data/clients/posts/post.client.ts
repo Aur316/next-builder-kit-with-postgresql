@@ -26,4 +26,7 @@ export const postApiClient = {
 
   softDelete: (postId: string): Promise<null> =>
     httpClient.patch<null>(`${ROOT}/${postId}/softDelete`, {}),
+
+  delete: (postId: string): Promise<null> =>
+    httpClient.delete<null>(`${ROOT}/${postId}`, {}),
 }

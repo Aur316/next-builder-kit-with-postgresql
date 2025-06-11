@@ -3,6 +3,7 @@ import { Router } from 'express'
 import { validate, validateParams } from '../../../middleware/validate'
 import {
   handleCreatePost,
+  handleDeletePost,
   handleGetActivePosts,
   handleGetAllPosts,
   handleGetDeletedlPosts,
@@ -19,3 +20,4 @@ postRoutes.get('/deleted', handleGetDeletedlPosts)
 postRoutes.get('/active', handleGetActivePosts)
 postRoutes.get('/:id', validateParams(postIdSchema), handleGetPostById)
 postRoutes.patch('/:id/softDelete', handleSoftDeletePost)
+postRoutes.delete('/:id', handleDeletePost)

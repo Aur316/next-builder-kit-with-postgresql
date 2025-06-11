@@ -46,3 +46,9 @@ export const softRemovePost = async (postId: string): Promise<Post> => {
     },
   })
 }
+
+export const removePost = async (postId: string): Promise<Post> => {
+  return db.post.delete({
+    where: { id: postId },
+  })
+}

@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
-import { OperationResult, softDeletePostFn } from '../../../data'
+import { OperationResult, deletePostFn } from '../../../data'
 
-export const useSoftDeletePost = () => {
+export const useDeletePost = () => {
   const queryClient = useQueryClient()
 
   const { mutateAsync, isPending, isError } = useMutation<
@@ -12,14 +12,14 @@ export const useSoftDeletePost = () => {
     Error,
     string
   >({
-    mutationFn: softDeletePostFn,
+    mutationFn: deletePostFn,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: postKey.active() })
+      await queryClient.invalidateQueries({ queryKey: postKey.deleted() })
     },
   })
 
   return {
-    softDeletePost: mutateAsync,
+    deletePost: mutateAsync,
     isPending,
     isError,
   }
