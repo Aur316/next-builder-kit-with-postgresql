@@ -29,6 +29,14 @@ export const fetchActivePosts = async (): Promise<Array<Post>> => {
   })
 }
 
+export const fetchPostById = async (postId: string): Promise<Post | null> => {
+  return db.post.findUnique({
+    where: {
+      id: postId,
+    },
+  })
+}
+
 export const removePost = async (postId: string): Promise<Post> => {
   return db.post.update({
     where: { id: postId },
