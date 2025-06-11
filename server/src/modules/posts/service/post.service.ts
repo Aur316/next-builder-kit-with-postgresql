@@ -1,5 +1,11 @@
 import { mapPostToCreateResponse } from '../mapper'
-import { getAllPosts, insertPost, removePost } from '../repository'
+import {
+  fetchActivePosts,
+  fetchAllPosts,
+  fetchDeletedPosts,
+  insertPost,
+  removePost,
+} from '../repository'
 import { CreatePostRequestV1, CreatePostResponseV1 } from '../types/post.type'
 
 export const createPost = async (
@@ -9,8 +15,22 @@ export const createPost = async (
   return mapPostToCreateResponse(insertedPost)
 }
 
-export const getPosts = async (): Promise<Array<CreatePostResponseV1>> => {
-  const posts = await getAllPosts()
+export const getAllPosts = async (): Promise<Array<CreatePostResponseV1>> => {
+  const posts = await fetchAllPosts()
+  return posts.map(mapPostToCreateResponse)
+}
+
+export const getDeletedPosts = async (): Promise<
+  Array<CreatePostResponseV1>
+> => {
+  const posts = await fetchDeletedPosts()
+  return posts.map(mapPostToCreateResponse)
+}
+
+export const getActivePosts = async (): Promise<
+  Array<CreatePostResponseV1>
+> => {
+  const posts = await fetchActivePosts()
   return posts.map(mapPostToCreateResponse)
 }
 

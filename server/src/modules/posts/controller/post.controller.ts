@@ -1,6 +1,12 @@
 import { Request, Response } from 'express'
 
-import { createPost, deletePost, getPosts } from '../service'
+import {
+  createPost,
+  deletePost,
+  getActivePosts,
+  getAllPosts,
+  getDeletedPosts,
+} from '../service'
 import { CreatePostRequestV1 } from '../types/post.type'
 
 export const handleCreatePost = async (
@@ -15,7 +21,23 @@ export const handleGetAllPosts = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const posts = await getPosts()
+  const posts = await getAllPosts()
+  res.status(200).json(posts)
+}
+
+export const handleGetDeletedlPosts = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const posts = await getDeletedPosts()
+  res.status(200).json(posts)
+}
+
+export const handleGetActivePosts = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const posts = await getActivePosts()
   res.status(200).json(posts)
 }
 

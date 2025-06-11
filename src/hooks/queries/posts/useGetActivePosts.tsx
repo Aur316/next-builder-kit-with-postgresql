@@ -4,16 +4,16 @@ import { useQuery } from '@tanstack/react-query'
 
 import { postKey } from '../../../constants'
 import {
-  getPostsFn,
+  getActivePostsFn,
   isSuccess,
   mapGetPostsResponseToPostList,
 } from '../../../data'
 import { Post } from '../../../types/post.type'
 
-export const useGetPosts = () => {
+export const useGetActivePosts = () => {
   const { data, isPending, isError } = useQuery({
-    queryKey: postKey.list(),
-    queryFn: getPostsFn,
+    queryKey: postKey.active(),
+    queryFn: getActivePostsFn,
   })
 
   const posts: Array<Post> | undefined = useMemo(() => {

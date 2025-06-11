@@ -6,7 +6,21 @@ export const insertPost = (data: CreatePostRequestV1): Promise<Post> => {
   return db.post.create({ data })
 }
 
-export const getAllPosts = async (): Promise<Array<Post>> => {
+export const fetchAllPosts = async (): Promise<Array<Post>> => {
+  return db.post.findMany({
+    orderBy: { updatedAt: 'desc' },
+  })
+}
+export const fetchDeletedPosts = async (): Promise<Array<Post>> => {
+  return db.post.findMany({
+    where: {
+      isDeleted: true,
+    },
+    orderBy: { updatedAt: 'desc' },
+  })
+}
+
+export const fetchActivePosts = async (): Promise<Array<Post>> => {
   return db.post.findMany({
     where: {
       isDeleted: false,

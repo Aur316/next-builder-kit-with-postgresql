@@ -19,7 +19,7 @@ export const useDeletePost = () => {
   })
 
   return {
-    deletePost: mutateAsync,
+    deletePosts: mutateAsync,
     isPending,
     isError,
   }
