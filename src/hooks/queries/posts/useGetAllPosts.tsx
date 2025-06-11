@@ -2,16 +2,20 @@ import { useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
+import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
 import {
+  OperationResult,
   getAllPostsFn,
   isSuccess,
   mapGetPostsResponseToPostList,
 } from '../../../data'
-import { Post } from '../../../types/post.type'
+import { GetPostsResponse, Post } from '../../../types/post.type'
 
 export const useGetAllPosts = () => {
-  const { data, isPending, isError } = useQuery({
+  const { data, isPending, isError } = useQuery<
+    OperationResult<GetPostsResponse, ApiErrorResult>
+  >({
     queryKey: postKey.list(),
     queryFn: getAllPostsFn,
   })

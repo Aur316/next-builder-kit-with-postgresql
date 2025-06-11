@@ -37,7 +37,7 @@ export const fetchPostById = async (postId: string): Promise<Post | null> => {
   })
 }
 
-export const removePost = async (postId: string): Promise<Post> => {
+export const softRemovePost = async (postId: string): Promise<Post> => {
   return db.post.update({
     where: { id: postId },
     data: {

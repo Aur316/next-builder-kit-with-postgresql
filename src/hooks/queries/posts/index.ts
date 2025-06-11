@@ -1,6 +1,6 @@
 export * from './useCreatePost'
-export * from './useDeletePost'
 export * from './useGetActivePosts'
 export * from './useGetAllPosts'
 export * from './useGetDeletedPosts'
 export * from './useGetPostById'
+export * from './useSoftDeletePost'

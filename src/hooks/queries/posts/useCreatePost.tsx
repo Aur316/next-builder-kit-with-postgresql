@@ -15,7 +15,7 @@ export const useCreatePost = () => {
   >({
     mutationFn: createPostFn,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: postKey.list() })
+      await queryClient.invalidateQueries({ queryKey: postKey.active() })
     },
   })
 

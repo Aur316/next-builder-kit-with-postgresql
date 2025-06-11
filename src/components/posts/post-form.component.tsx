@@ -18,6 +18,7 @@ export const PostForm = () => {
     },
     onSubmit: async ({ value }) => {
       await createPost(value)
+      form.reset()
     },
   })
 
@@ -44,6 +45,7 @@ export const PostForm = () => {
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+              placeholder="Enter title"
             />
             {!field.state.meta.isValid && (
               <em role="alert" className="text-sm text-red-500">
@@ -70,6 +72,7 @@ export const PostForm = () => {
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+              placeholder="Enter content"
             />
             {!field.state.meta.isValid && (
               <em role="alert" className="text-sm text-red-500">
