@@ -19,10 +19,28 @@ export const createPostFn = async (
   })
 }
 
-export const getPostsFn = async (): Promise<
+export const getAllPostsFn = async (): Promise<
   OperationResult<GetPostsResponse, ApiErrorResult>
 > => {
   return await apiCallHandler(() => postApiClient.getAll(), {
+    showErrorToast: true,
+    errorMessage: 'Failed to load posts',
+  })
+}
+
+export const getDeletedPostsFn = async (): Promise<
+  OperationResult<GetPostsResponse, ApiErrorResult>
+> => {
+  return await apiCallHandler(() => postApiClient.getDeleted(), {
+    showErrorToast: true,
+    errorMessage: 'Failed to load posts',
+  })
+}
+
+export const getActivePostsFn = async (): Promise<
+  OperationResult<GetPostsResponse, ApiErrorResult>
+> => {
+  return await apiCallHandler(() => postApiClient.getActive(), {
     showErrorToast: true,
     errorMessage: 'Failed to load posts',
   })

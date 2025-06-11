@@ -1,3 +1,5 @@
 export * from './useCreatePost'
 export * from './useDeletePost'
-export * from './useGetPosts'
+export * from './useGetActivePosts'
+export * from './useGetAllPosts'
+export * from './useGetDeletedPosts'

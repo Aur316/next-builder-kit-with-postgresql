@@ -6,18 +6,22 @@ import { Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { baseQueryStateHandlerStyle } from '../../constants'
-import { useDeletePost, useGetPosts } from '../../hooks'
+import { useDeletePost, useGetActivePosts } from '../../hooks'
 import { ConfirmDeleteModal } from '../base-ui-elements'
 import { QueryStateHandler } from '../query-state-handler'
 
 export const PostList = () => {
   const { t } = useTranslation()
-  const { posts, isPending: isGetPending, isError: isGetError } = useGetPosts()
+  const {
+    posts,
+    isPending: isGetPending,
+    isError: isGetError,
+  } = useGetActivePosts()
 
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-  const { deletePost, isPending: isDeletePending } = useDeletePost()
+  const { deletePosts, isPending: isDeletePending } = useDeletePost()
 
   return (
     <QueryStateHandler
@@ -55,7 +59,7 @@ export const PostList = () => {
           open={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onConfirm={() => {
-            deletePost(selectedPostId!)
+            deletePosts(selectedPostId!)
             setIsModalOpen(false)
           }}
           title={t('postsPage.confirmDeleteTitle')}
