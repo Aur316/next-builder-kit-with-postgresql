@@ -6,9 +6,9 @@ import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
 import {
   OperationResult,
-  getDeletedPostsFn,
   isSuccess,
   mapGetPostsResponseToPostList,
+  postQueryFns,
 } from '../../../data'
 import { GetPostsResponse, Post } from '../../../types/post.type'
 
@@ -17,7 +17,7 @@ export const useGetDeletedPosts = () => {
     OperationResult<GetPostsResponse, ApiErrorResult>
   >({
     queryKey: postKey.deleted(),
-    queryFn: getDeletedPostsFn,
+    queryFn: postQueryFns.getDeleted,
   })
 
   const posts: Array<Post> | undefined = useMemo(() => {

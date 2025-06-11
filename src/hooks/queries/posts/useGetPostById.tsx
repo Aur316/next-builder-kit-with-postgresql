@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
-import { OperationResult, getPostByIdFn, isSuccess } from '../../../data'
+import { OperationResult, isSuccess, postQueryFns } from '../../../data'
 import { Post } from '../../../types/post.type'
 
 export const useGetPostById = ({ postId }: { postId: string }) => {
@@ -12,7 +12,7 @@ export const useGetPostById = ({ postId }: { postId: string }) => {
     OperationResult<Post, ApiErrorResult>
   >({
     queryKey: postKey.detail(postId),
-    queryFn: () => getPostByIdFn(postId),
+    queryFn: () => postQueryFns.getById(postId),
     enabled: !!postId,
   })
 

@@ -9,71 +9,56 @@ import { OperationResult } from '../api-call-handler'
 import { apiCallHandler } from '../api-call-handler/api-handler'
 import { postApiClient } from '../clients'
 
-export const createPostFn = async (
-  payload: CreatePostRequest,
-): Promise<OperationResult<CreatePostResponse, ApiErrorResult>> => {
-  return await apiCallHandler(() => postApiClient.create(payload), {
-    showErrorToast: true,
-    errorMessage: 'Failed to create post',
-    showSuccessToast: true,
-    successMessage: 'Post created successfully',
-  })
-}
+export const postQueryFns = {
+  create: (
+    payload: CreatePostRequest,
+  ): Promise<OperationResult<CreatePostResponse, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.create(payload), {
+      showErrorToast: true,
+      errorMessage: 'Failed to create post',
+      showSuccessToast: true,
+      successMessage: 'Post created successfully',
+    }),
 
-export const getAllPostsFn = async (): Promise<
-  OperationResult<GetPostsResponse, ApiErrorResult>
-> => {
-  return await apiCallHandler(() => postApiClient.getAll(), {
-    showErrorToast: true,
-    errorMessage: 'Failed to load posts',
-  })
-}
+  getAll: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.getAll(), {
+      showErrorToast: true,
+      errorMessage: 'Failed to load posts',
+    }),
 
-export const getDeletedPostsFn = async (): Promise<
-  OperationResult<GetPostsResponse, ApiErrorResult>
-> => {
-  return await apiCallHandler(() => postApiClient.getDeleted(), {
-    showErrorToast: true,
-    errorMessage: 'Failed to load posts',
-  })
-}
+  getDeleted: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.getDeleted(), {
+      showErrorToast: true,
+      errorMessage: 'Failed to load posts',
+    }),
 
-export const getActivePostsFn = async (): Promise<
-  OperationResult<GetPostsResponse, ApiErrorResult>
-> => {
-  return await apiCallHandler(() => postApiClient.getActive(), {
-    showErrorToast: true,
-    errorMessage: 'Failed to load posts',
-  })
-}
+  getActive: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.getActive(), {
+      showErrorToast: true,
+      errorMessage: 'Failed to load posts',
+    }),
 
-export const getPostByIdFn = async (
-  postId: string,
-): Promise<OperationResult<Post, ApiErrorResult>> => {
-  return await apiCallHandler(() => postApiClient.getById(postId), {
-    showErrorToast: true,
-    errorMessage: 'Failed to load posts',
-  })
-}
+  getById: (postId: string): Promise<OperationResult<Post, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.getById(postId), {
+      showErrorToast: true,
+      errorMessage: 'Failed to load posts',
+    }),
 
-export const softDeletePostFn = async (
-  postId: string,
-): Promise<OperationResult<null, ApiErrorResult>> => {
-  return await apiCallHandler(() => postApiClient.softDelete(`${postId}`), {
-    showErrorToast: true,
-    errorMessage: 'Failed to delete post',
-    showSuccessToast: true,
-    successMessage: 'Post deleted successfully',
-  })
-}
+  softDelete: (
+    postId: string,
+  ): Promise<OperationResult<null, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.softDelete(postId), {
+      showErrorToast: true,
+      errorMessage: 'Failed to delete post',
+      showSuccessToast: true,
+      successMessage: 'Post deleted successfully',
+    }),
 
-export const deletePostFn = async (
-  postId: string,
-): Promise<OperationResult<null, ApiErrorResult>> => {
-  return await apiCallHandler(() => postApiClient.delete(`${postId}`), {
-    showErrorToast: true,
-    errorMessage: 'Failed to delete post',
-    showSuccessToast: true,
-    successMessage: 'Post deleted successfully',
-  })
+  delete: (postId: string): Promise<OperationResult<null, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.delete(postId), {
+      showErrorToast: true,
+      errorMessage: 'Failed to delete post',
+      showSuccessToast: true,
+      successMessage: 'Post deleted successfully',
+    }),
 }

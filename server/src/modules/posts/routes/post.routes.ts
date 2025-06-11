@@ -1,23 +1,13 @@
 import { Router } from 'express'
 
-import { validate, validateParams } from '../../../middleware/validate'
-import {
-  handleCreatePost,
-  handleDeletePost,
-  handleGetActivePosts,
-  handleGetAllPosts,
-  handleGetDeletedlPosts,
-  handleGetPostById,
-  handleSoftDeletePost,
-} from '../controller/post.controller'
-import { createPostValidator, postIdSchema } from '../validator'
+import { postController } from '../controller/post.controller'
 
 export const postRoutes = Router()
 
-postRoutes.post('/', validate(createPostValidator), handleCreatePost)
-postRoutes.get('/all', handleGetAllPosts)
-postRoutes.get('/deleted', handleGetDeletedlPosts)
-postRoutes.get('/active', handleGetActivePosts)
-postRoutes.get('/:id', validateParams(postIdSchema), handleGetPostById)
-postRoutes.patch('/:id/softDelete', handleSoftDeletePost)
-postRoutes.delete('/:id', handleDeletePost)
+postRoutes.post('/', postController.create)
+postRoutes.get('/all', postController.getAll)
+postRoutes.get('/deleted', postController.getDeleted)
+postRoutes.get('/active', postController.getActive)
+postRoutes.get('/:id', postController.getById)
+postRoutes.patch('/:id/softDelete', postController.softDelete)
+postRoutes.delete('/:id', postController.remove)
