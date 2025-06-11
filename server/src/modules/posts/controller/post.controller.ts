@@ -1,71 +1,47 @@
 import { Request, Response } from 'express'
 
-import {
-  createPost,
-  deletePost,
-  getActivePosts,
-  getAllPosts,
-  getDeletedPosts,
-  getPostById,
-  softDeletePost,
-} from '../service'
+import { postService } from '../service'
 import { CreatePostRequestV1 } from '../types/post.type'
 
-export const handleCreatePost = async (
-  req: Request<Record<string, never>, unknown, CreatePostRequestV1>,
-  res: Response,
-): Promise<void> => {
-  const addedPost = await createPost(req.body)
-  res.status(201).json(addedPost)
-}
+export const postController = {
+  async create(
+    req: Request<Record<string, never>, unknown, CreatePostRequestV1>,
+    res: Response,
+  ) {
+    const addedPost = await postService.create(req.body)
+    res.status(201).json(addedPost)
+  },
 
-export const handleGetAllPosts = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const posts = await getAllPosts()
-  res.status(200).json(posts)
-}
+  async getAll(req: Request, res: Response) {
+    const posts = await postService.getAll()
+    res.status(200).json(posts)
+  },
 
-export const handleGetDeletedlPosts = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const posts = await getDeletedPosts()
-  res.status(200).json(posts)
-}
+  async getDeleted(req: Request, res: Response) {
+    const posts = await postService.getDeleted()
+    res.status(200).json(posts)
+  },
 
-export const handleGetActivePosts = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const posts = await getActivePosts()
-  res.status(200).json(posts)
-}
+  async getActive(req: Request, res: Response) {
+    const posts = await postService.getActive()
+    res.status(200).json(posts)
+  },
 
-export const handleGetPostById = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const postId = req.params.id
-  const posts = await getPostById(postId)
-  res.status(200).json(posts)
-}
+  async getById(req: Request, res: Response) {
+    const postId = req.params.id
+    const post = await postService.getById(postId)
+    res.status(200).json(post)
+  },
 
-export const handleSoftDeletePost = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const postId = req.params.id
-  const softDeletedPost = await softDeletePost(postId)
-  res.status(200).json(softDeletedPost)
-}
+  async softDelete(req: Request, res: Response) {
+    const postId = req.params.id
+    const result = await postService.softDelete(postId)
+    res.status(200).json(result)
+  },
 
-export const handleDeletePost = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  const postId = req.params.id
-  const softDeletedPost = await deletePost(postId)
-  res.status(200).json(softDeletedPost)
+  async remove(req: Request, res: Response) {
+    const postId = req.params.id
+    const result = await postService.delete(postId)
+    res.status(200).json(result)
+  },
 }

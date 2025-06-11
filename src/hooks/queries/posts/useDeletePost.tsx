@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
-import { OperationResult, deletePostFn } from '../../../data'
+import { OperationResult, postQueryFns } from '../../../data'
 
 export const useDeletePost = () => {
   const queryClient = useQueryClient()
@@ -12,7 +12,7 @@ export const useDeletePost = () => {
     Error,
     string
   >({
-    mutationFn: deletePostFn,
+    mutationFn: postQueryFns.delete,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: postKey.deleted() })
     },

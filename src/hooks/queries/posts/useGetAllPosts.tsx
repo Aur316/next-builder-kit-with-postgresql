@@ -6,9 +6,9 @@ import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
 import {
   OperationResult,
-  getAllPostsFn,
   isSuccess,
   mapGetPostsResponseToPostList,
+  postQueryFns,
 } from '../../../data'
 import { GetPostsResponse, Post } from '../../../types/post.type'
 
@@ -17,7 +17,7 @@ export const useGetAllPosts = () => {
     OperationResult<GetPostsResponse, ApiErrorResult>
   >({
     queryKey: postKey.list(),
-    queryFn: getAllPostsFn,
+    queryFn: postQueryFns.getAll,
   })
 
   const posts: Array<Post> | undefined = useMemo(() => {

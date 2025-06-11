@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
-import { OperationResult, createPostFn } from '../../../data'
+import { OperationResult, postQueryFns } from '../../../data'
 import { CreatePostRequest, CreatePostResponse } from '../../../types/post.type'
 
 export const useCreatePost = () => {
@@ -13,7 +13,7 @@ export const useCreatePost = () => {
     Error,
     CreatePostRequest
   >({
-    mutationFn: createPostFn,
+    mutationFn: postQueryFns.create,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: postKey.active() })
     },
