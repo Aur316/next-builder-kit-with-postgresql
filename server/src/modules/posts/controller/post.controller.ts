@@ -2,11 +2,11 @@ import { Request, Response } from 'express'
 
 import {
   createPost,
-  deletePost,
   getActivePosts,
   getAllPosts,
   getDeletedPosts,
   getPostById,
+  softDeletePost,
 } from '../service'
 import { CreatePostRequestV1 } from '../types/post.type'
 
@@ -51,11 +51,11 @@ export const handleGetPostById = async (
   res.status(200).json(posts)
 }
 
-export const handleDeletePost = async (
+export const handleSoftDeletePost = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   const postId = req.params.id
-  const deletedPost = await deletePost(postId)
-  res.status(200).json(deletedPost)
+  const softDeletedPost = await softDeletePost(postId)
+  res.status(200).json(softDeletedPost)
 }

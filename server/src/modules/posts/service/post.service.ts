@@ -5,7 +5,7 @@ import {
   fetchDeletedPosts,
   fetchPostById,
   insertPost,
-  removePost,
+  softRemovePost,
 } from '../repository'
 import { CreatePostRequestV1, CreatePostResponseV1 } from '../types/post.type'
 
@@ -45,9 +45,9 @@ export const getPostById = async (
   return mapPostToCreateResponse(post)
 }
 
-export const deletePost = async (
+export const softDeletePost = async (
   postId: string,
 ): Promise<CreatePostResponseV1> => {
-  const deletedPost = await removePost(postId)
-  return mapPostToCreateResponse(deletedPost)
+  const softDeletedPost = await softRemovePost(postId)
+  return mapPostToCreateResponse(softDeletedPost)
 }
