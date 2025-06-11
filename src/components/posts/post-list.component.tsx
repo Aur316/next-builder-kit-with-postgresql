@@ -22,7 +22,7 @@ export const PostList = () => {
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-  const { deletePosts, isPending: isDeletePending } = useSoftDeletePost()
+  const { softDeletePost, isPending: isDeletePending } = useSoftDeletePost()
 
   return (
     <QueryStateHandler
@@ -66,7 +66,7 @@ export const PostList = () => {
           open={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onConfirm={() => {
-            deletePosts(selectedPostId!)
+            softDeletePost(selectedPostId!)
             setIsModalOpen(false)
           }}
           title={t('postsPage.confirmDeleteTitle')}

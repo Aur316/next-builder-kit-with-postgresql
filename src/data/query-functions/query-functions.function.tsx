@@ -66,3 +66,14 @@ export const softDeletePostFn = async (
     successMessage: 'Post deleted successfully',
   })
 }
+
+export const deletePostFn = async (
+  postId: string,
+): Promise<OperationResult<null, ApiErrorResult>> => {
+  return await apiCallHandler(() => postApiClient.delete(`${postId}`), {
+    showErrorToast: true,
+    errorMessage: 'Failed to delete post',
+    showSuccessToast: true,
+    successMessage: 'Post deleted successfully',
+  })
+}
