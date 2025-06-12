@@ -22,7 +22,10 @@ export const postApiClient = {
     httpClient.get<GetPostsResponse>(`${ROOT}/active`),
 
   getById: (postId: string): Promise<Post> =>
-    httpClient.get<Post>(`${ROOT}/${postId}`),
+    httpClient.get<Post>(`${ROOT}/byId/${postId}`),
+
+  getByQuery: (query: string): Promise<GetPostsResponse> =>
+    httpClient.get<GetPostsResponse>(`${ROOT}/search?${query}`),
 
   softDelete: (postId: string): Promise<null> =>
     httpClient.patch<null>(`${ROOT}/${postId}/softDelete`, {}),

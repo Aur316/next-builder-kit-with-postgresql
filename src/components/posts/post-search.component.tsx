@@ -1,0 +1,127 @@
+'use client'
+
+import { useMemo, useState } from 'react'
+
+import { SendHorizontal } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
+import { useGetByQuery } from '../../hooks/queries/posts/useGetByQuery'
+import { Button, Dropdown, Input } from '../base-ui-elements'
+import { PostList } from './post-list.component'
+
+export const PostSearch = () => {
+  const [titleValue, setTitleValue] = useState('')
+  const [titleFilter, setTitleFilter] = useState('contains')
+  const [titleMode, setTitleMode] = useState('insensitive')
+
+  const [contentValue, setContentValue] = useState('')
+  const [contentFilter, setContentFilter] = useState('contains')
+  const [contentMode, setContentMode] = useState('insensitive')
+  const [queryString, setQueryString] = useState<string>('')
+
+  const { t } = useTranslation()
+
+  const filterTypeOptions = useMemo(
+    () => [
+      { value: 'equals', label: t('filters.equals') },
+      { value: 'contains', label: t('filters.contains') },
+      { value: 'startsWith', label: t('filters.startsWith') },
+      { value: 'endsWith', label: t('filters.endsWith') },
+    ],
+    [t],
+  )
+
+  const modeOptions = useMemo(
+    () => [
+      { value: 'insensitive', label: t('filters.caseInsensitive') },
+      { value: 'default', label: t('filters.caseSensitive') },
+    ],
+    [t],
+  )
+
+  const handleSubmit = () => {
+    const params = new URLSearchParams()
+
+    if (titleValue) {
+      params.set('title', `${titleFilter}::${titleMode}::${titleValue}`)
+    }
+    if (contentValue) {
+      params.set('content', `${contentFilter}::${contentMode}::${contentValue}`)
+    }
+
+    const finalQuery = params.toString()
+    setQueryString(finalQuery)
+  }
+
+  const { posts, isLoading, isError } = useGetByQuery(queryString)
+
+  return (
+    <div className="mx-auto max-w-xl space-y-6 rounded-xl border border-white p-4 shadow-md">
+      {/* Title section */}
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <Dropdown
+            label="Title filter"
+            value={titleFilter}
+            onValueChange={setTitleFilter}
+            options={filterTypeOptions}
+          />
+          <Dropdown
+            label="Title mode"
+            value={titleMode}
+            onValueChange={setTitleMode}
+            options={modeOptions}
+          />
+        </div>
+        <Input
+          label="Title"
+          value={titleValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTitleValue(e.target.value)
+          }
+          containerClassName="w-full"
+          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+        />
+      </div>
+
+      {/* Content section */}
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <Dropdown
+            label="Content filter"
+            value={contentFilter}
+            onValueChange={setContentFilter}
+            options={filterTypeOptions}
+          />
+          <Dropdown
+            label="Content mode"
+            value={contentMode}
+            onValueChange={setContentMode}
+            options={modeOptions}
+          />
+        </div>
+        <Input
+          label="Content"
+          value={contentValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setContentValue(e.target.value)
+          }
+          containerClassName="w-full"
+          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+        />
+      </div>
+
+      <Button
+        onClick={handleSubmit}
+        text="search"
+        variant="secondary"
+        icon={<SendHorizontal />}
+        iconPosition="right"
+        loading={isLoading}
+      />
+      {posts && (
+        <PostList posts={posts} isLoading={isLoading} isError={isError} />
+      )}
+    </div>
+  )
+}

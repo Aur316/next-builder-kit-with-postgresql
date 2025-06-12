@@ -9,6 +9,14 @@
   "no": "Nem",
   "cancel": "Mégsem",
   "confirm": "Megerősítés",
+  "filters": {
+    "equals": "Egyezik",
+    "contains": "Tartalmazza",
+    "startsWith": "Ezzel kezdődik",
+    "endsWith": "Erre végződik",
+    "caseInsensitive": "Nem érzékeny kisbetűre",
+    "caseSensitive": "Érzékeny kisbetűre"
+  },
   "homePage": {
     "title": "Üdvözöl a Next Builder Kit",
     "description": "Ez egy letisztult starter sablon TypeScript-tel, Tailwinddel, DaisyUI-vel, újrahasználható komponensekkel és legjobb gyakorlatokkal.",
@@ -66,6 +74,9 @@
       },
       "getById": {
         "errorMessage": "A bejegyzés betöltése sikertelen"
+      },
+      "getByQuery": {
+        "errorMessage": "Sikertelen keresés"
       },
       "softDelete": {
         "errorMessage": "A bejegyzés törlése sikertelen",

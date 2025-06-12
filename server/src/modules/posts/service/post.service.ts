@@ -30,6 +30,13 @@ export const postService = {
     return mapPostToCreateResponse(post)
   },
 
+  async getByQuery(
+    query: Record<string, string>,
+  ): Promise<Array<CreatePostResponseV1>> {
+    const posts = await postRepository.fetchByQuery(query)
+    return posts.map(mapPostToCreateResponse)
+  },
+
   async softDelete(postId: string): Promise<CreatePostResponseV1> {
     const post = await postRepository.softRemove(postId)
     return mapPostToCreateResponse(post)

@@ -9,6 +9,14 @@
   "no": "No",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "filters": {
+    "equals": "Equals",
+    "contains": "Contains",
+    "startsWith": "Starts With",
+    "endsWith": "Ends With",
+    "caseInsensitive": "Case-insensitive",
+    "caseSensitive": "Case-sensitive"
+  },
   "homePage": {
     "title": "Welcome to Next Builder Kit",
     "description": "This is a clean starter template with TypeScript, Tailwind, DaisyUI, reusable components and best practices.",
@@ -47,7 +55,7 @@
   },
   "queryStateHandler": {
     "errorMessage": "Failed to load posts",
-    "emptyMessage": "No posts available"
+    "emptyMessage": "No posts found"
   },
   "toastMessages": {
     "post": {
@@ -66,6 +74,9 @@
       },
       "getById": {
         "errorMessage": "Failed to load post"
+      },
+      "getByQuery": {
+        "errorMessage": "Failed to serach posts"
       },
       "softDelete": {
         "errorMessage": "Failed to delete post",

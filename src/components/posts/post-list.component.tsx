@@ -7,18 +7,19 @@ import { Pen, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { baseQueryStateHandlerStyle } from '../../constants'
-import { useGetActivePosts, useSoftDeletePost } from '../../hooks'
+import { useSoftDeletePost } from '../../hooks'
+import { Post } from '../../types/post.type'
 import { ConfirmDeleteModal, IconWrapper } from '../base-ui-elements'
 import { QueryStateHandler } from '../query-state-handler'
 import { PostUpdate } from './post-update.component'
 
-export const PostList = () => {
+interface PostListProps {
+  posts: Array<Post> | undefined
+  isLoading: boolean
+  isError: boolean
+}
+export const PostList = ({ posts, isLoading, isError }: PostListProps) => {
   const { t } = useTranslation()
-  const {
-    posts,
-    isPending: isGetPending,
-    isError: isGetError,
-  } = useGetActivePosts()
 
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
@@ -29,8 +30,8 @@ export const PostList = () => {
   const selectedPost = posts?.find((p) => p.id === selectedPostId)
   return (
     <QueryStateHandler
-      isLoading={isGetPending}
-      isError={isGetError}
+      isLoading={isLoading}
+      isError={isError}
       isEmpty={!posts || !posts.length}
       errorMessage={t('queryStateHandler.errorMessage')}
       emptyMessage={t('queryStateHandler.emptyMessage')}

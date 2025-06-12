@@ -1,4 +1,4 @@
-import { Post } from '../../../generated/prisma'
+import { Post, Prisma } from '../../../generated/prisma'
 import { db } from '../../../lib'
 import { CreatePostRequestV1 } from '../types/post.type'
 
@@ -33,6 +33,39 @@ export const postRepository = {
     })
   },
 
+  fetchByQuery(query: Record<string, string>): Promise<Array<Post>> {
+    const whereRaw: Record<string, unknown> = {}
+
+    for (const [key, rawValue] of Object.entries(query)) {
+      if (!rawValue) continue
+
+      const value = decodeURIComponent(rawValue)
+
+      if (value === 'true' || value === 'false') {
+        whereRaw[key] = value === 'true'
+      } else if (!isNaN(Number(value))) {
+        whereRaw[key] = Number(value)
+      } else if (value.includes('::')) {
+        const [filterType, mode, actualValue] = value.split('::')
+        whereRaw[key] = {
+          [filterType]: actualValue,
+          mode: mode as 'insensitive' | 'default',
+        }
+      } else {
+        whereRaw[key] = {
+          contains: value,
+          mode: 'insensitive',
+        }
+      }
+    }
+
+    const where: Prisma.PostWhereInput = whereRaw
+
+    return db.post.findMany({
+      where,
+      orderBy: { updatedAt: 'desc' },
+    })
+  },
   softRemove(postId: string): Promise<Post> {
     return db.post.update({
       where: { id: postId },
