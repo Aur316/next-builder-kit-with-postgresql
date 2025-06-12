@@ -18,7 +18,12 @@ export const PostUpdate = ({ open, onClose, post }: UpdateModalProps) => {
   const { updatePost, isPending } = useUpdatePost()
   const { t } = useTranslation()
   return (
-    <BaseModal title="Update post" open={open} onClose={onClose} closeOnEscape>
+    <BaseModal
+      title={t('postPage.updatePost.modalTitle')}
+      open={open}
+      onClose={onClose}
+      closeOnEscape
+    >
       <PostForm
         id={post.id}
         title={post.title}
@@ -31,12 +36,12 @@ export const PostUpdate = ({ open, onClose, post }: UpdateModalProps) => {
           <Button
             variant="secondary"
             size="sm"
-            text={'Cancel'}
+            text={t('cancel')}
             onClick={onClose}
           />
           <Button
             type="submit"
-            text={t('postsPage.postForm.createPost')}
+            text={t('confirm')}
             variant="secondary"
             icon={<SendHorizontal />}
             iconPosition="right"

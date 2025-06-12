@@ -7,6 +7,8 @@
   "not-found": "Az oldal nem található",
   "yes": "Igen",
   "no": "Nem",
+  "canel": "Mégsem",
+  "confirm": "Megerősítés",
   "homePage": {
     "title": "Üdvözöl a Next Builder Kit",
     "description": "Ez egy letisztult starter sablon TypeScript-tel, Tailwinddel, DaisyUI-vel, újrahasználható komponensekkel és legjobb gyakorlatokkal.",
@@ -37,12 +39,47 @@
       "title": "Cím megadása kötelező",
       "content": "Tartalom megadása kötelező"
     },
+    "updatePost": {
+      "modalTitle": "Bejegyzés frissítése"
+    },
     "confirmDeleteTitle": "Biztosan törölni szeretnéd ezt a bejegyzést?",
     "confirmDeleteDescription": "Ez a művelet nem visszavonható."
   },
   "queryStateHandler": {
     "errorMessage": "Nem sikerült betölteni a bejegyzéseket",
     "emptyMessage": "Nincs elérhető bejegyzés"
+  },
+  "toastMessages": {
+    "post": {
+      "create": {
+        "errorMessage": "A bejegyzés létrehozása sikertelen",
+        "successMessage": "A bejegyzés sikeresen létrejött"
+      },
+      "getAll": {
+        "errorMessage": "A bejegyzések betöltése sikertelen"
+      },
+      "getDeleted": {
+        "errorMessage": "A törölt bejegyzések betöltése sikertelen"
+      },
+      "getActive": {
+        "errorMessage": "Az aktív bejegyzések betöltése sikertelen"
+      },
+      "getById": {
+        "errorMessage": "A bejegyzés betöltése sikertelen"
+      },
+      "softDelete": {
+        "errorMessage": "A bejegyzés törlése sikertelen",
+        "successMessage": "A bejegyzés sikeresen törölve lett"
+      },
+      "delete": {
+        "errorMessage": "A bejegyzés törlése sikertelen",
+        "successMessage": "A bejegyzés véglegesen törölve lett"
+      },
+      "update": {
+        "errorMessage": "A bejegyzés frissítése sikertelen",
+        "successMessage": "A bejegyzés sikeresen frissítve lett"
+      }
+    }
   },
   "footer": {
     "rights": "Minden jog fenntartva."

@@ -12,61 +12,78 @@ import { postApiClient } from '../clients'
 export const postQueryFns = {
   create: (
     payload: CreatePostRequest,
+    t: (key: string) => string,
   ): Promise<OperationResult<CreatePostResponse, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.create(payload), {
       showErrorToast: true,
-      errorMessage: 'Failed to create post',
+      errorMessage: t('toastMessages.post.create.errorMessage'),
       showSuccessToast: true,
-      successMessage: 'Post created successfully',
+      successMessage: t('toastMessages.post.create.successMessage'),
     }),
 
-  getAll: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+  getAll: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.getAll(), {
       showErrorToast: true,
-      errorMessage: 'Failed to load posts',
+      errorMessage: t('toastMessages.post.getAll.errorMessage'),
     }),
 
-  getDeleted: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+  getDeleted: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.getDeleted(), {
       showErrorToast: true,
-      errorMessage: 'Failed to load posts',
+      errorMessage: t('toastMessages.post.getDeleted.errorMessage'),
     }),
 
-  getActive: (): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+  getActive: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.getActive(), {
       showErrorToast: true,
-      errorMessage: 'Failed to load posts',
+      errorMessage: t('toastMessages.post.getActive.errorMessage'),
     }),
 
-  getById: (postId: string): Promise<OperationResult<Post, ApiErrorResult>> =>
+  getById: (
+    postId: string,
+    t: (key: string) => string,
+  ): Promise<OperationResult<Post, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.getById(postId), {
       showErrorToast: true,
-      errorMessage: 'Failed to load posts',
+      errorMessage: t('toastMessages.post.getById.errorMessage'),
     }),
 
   softDelete: (
     postId: string,
+    t: (key: string) => string,
   ): Promise<OperationResult<null, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.softDelete(postId), {
       showErrorToast: true,
-      errorMessage: 'Failed to delete post',
+      errorMessage: t('toastMessages.post.softDelete.errorMessage'),
       showSuccessToast: true,
-      successMessage: 'Post deleted successfully',
+      successMessage: t('toastMessages.post.softDelete.successMessage'),
     }),
 
-  delete: (postId: string): Promise<OperationResult<null, ApiErrorResult>> =>
+  delete: (
+    postId: string,
+    t: (key: string) => string,
+  ): Promise<OperationResult<null, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.delete(postId), {
       showErrorToast: true,
-      errorMessage: 'Failed to delete post',
+      errorMessage: t('toastMessages.post.delete.errorMessage'),
       showSuccessToast: true,
-      successMessage: 'Post deleted successfully',
+      successMessage: t('toastMessages.post.delete.successMessage'),
     }),
 
-  update: (post: Post): Promise<OperationResult<Post, ApiErrorResult>> =>
+  update: (
+    post: Post,
+    t: (key: string) => string,
+  ): Promise<OperationResult<Post, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.update(post), {
       showErrorToast: true,
-      errorMessage: 'Failed to update post',
+      errorMessage: t('toastMessages.post.update.errorMessage'),
       showSuccessToast: true,
-      successMessage: 'Post updated successfully',
+      successMessage: t('toastMessages.post.update.successMessage'),
     }),
 }
