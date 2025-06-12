@@ -1,6 +1,6 @@
 'use client'
 
-import { SendHorizontal } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { useUpdatePost } from '../../hooks'
@@ -17,12 +17,14 @@ interface UpdateModalProps {
 export const PostUpdate = ({ open, onClose, post }: UpdateModalProps) => {
   const { updatePost, isPending } = useUpdatePost()
   const { t } = useTranslation()
+
   return (
     <BaseModal
-      title={t('postPage.updatePost.modalTitle')}
+      title={t('postsPage.updatePost.modalTitle')}
       open={open}
       onClose={onClose}
       closeOnEscape
+      extraStyles="bg-primary-midnight-blue-900"
     >
       <PostForm
         id={post.id}
@@ -30,20 +32,22 @@ export const PostUpdate = ({ open, onClose, post }: UpdateModalProps) => {
         content={post.content}
         onSubmit={async (data) => {
           await updatePost(data as Post)
+          onClose()
         }}
       >
-        <div className="flex justify-end gap-2">
+        <div className="justify-space-between flex items-center gap-2">
           <Button
-            variant="secondary"
+            variant="primary"
             size="sm"
             text={t('cancel')}
             onClick={onClose}
           />
           <Button
             type="submit"
+            size="sm"
             text={t('confirm')}
             variant="secondary"
-            icon={<SendHorizontal />}
+            icon={<Check />}
             iconPosition="right"
             loading={isPending}
           />

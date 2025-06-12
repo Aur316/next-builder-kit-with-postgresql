@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Button, PostForm, PostList } from '../../components'
 import { useCreatePost } from '../../hooks'
+import { CreatePostRequest } from '../../types/post.type'
 
 export default function Posts() {
   const { t } = useTranslation()
@@ -12,7 +13,11 @@ export default function Posts() {
 
   return (
     <div className="flex flex-col gap-4">
-      <PostForm onSubmit={createPost}>
+      <PostForm
+        onSubmit={async (data) => {
+          await createPost(data as CreatePostRequest)
+        }}
+      >
         <Button
           type="submit"
           text={t('postsPage.postForm.createPost')}
