@@ -1,6 +1,7 @@
 'use client'
 
 import { PropsWithChildren } from 'react'
+import React from 'react'
 
 import { useForm } from '@tanstack/react-form'
 import { useTranslation } from 'react-i18next'
@@ -35,8 +36,13 @@ export const PostForm = ({
       title: title ?? '',
       content: content ?? '',
     },
+
     onSubmit: async ({ value }) => {
-      await onSubmit(id ? { ...value, id } : value)
+      await onSubmit(
+        id
+          ? ({ ...value, id } as UpdatePostRequest)
+          : (value as CreatePostRequest),
+      )
       form.reset()
     },
   })
@@ -57,7 +63,7 @@ export const PostForm = ({
         }}
       >
         {(field) => (
-          <>
+          <React.Fragment>
             <Input
               label={t('postsPage.postForm.title')}
               req
@@ -71,7 +77,7 @@ export const PostForm = ({
                 {field.state.meta.errors.join(', ')}
               </em>
             )}
-          </>
+          </React.Fragment>
         )}
       </form.Field>
 
@@ -83,7 +89,7 @@ export const PostForm = ({
         }}
       >
         {(field) => (
-          <>
+          <React.Fragment>
             <Input
               label={t('postsPage.postForm.content')}
               req
@@ -98,7 +104,7 @@ export const PostForm = ({
                 {field.state.meta.errors.join(', ')}
               </em>
             )}
-          </>
+          </React.Fragment>
         )}
       </form.Field>
 

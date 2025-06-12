@@ -31,16 +31,17 @@ export const ConfirmDeleteModal = ({
       onClose={onClose}
       open={open}
       closeOnEscape
+      extraStyles="bg-primary-midnight-blue-900"
     >
       <div className="flex justify-end gap-2">
         <Button
-          variant="secondary"
+          variant="primary"
           size="sm"
           text={cancelText}
           onClick={onClose}
         />
         <Button
-          variant="primary"
+          variant="secondary"
           size="sm"
           text={confirmText}
           onClick={() => {

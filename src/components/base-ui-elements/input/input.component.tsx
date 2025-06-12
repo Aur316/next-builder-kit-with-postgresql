@@ -18,6 +18,7 @@ type CommonProps = {
   inputClassName?: string
   req?: boolean
   isTextArea?: boolean
+  maxTextareaSize?: number
 }
 
 type InputProps = CommonProps &
@@ -36,6 +37,7 @@ export const Input = forwardRef(function Input(
     req,
     isTextArea,
     id,
+    maxTextareaSize = 100,
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
@@ -80,6 +82,11 @@ export const Input = forwardRef(function Input(
           autoComplete={props.autoComplete ?? 'off'}
           {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
           aria-required={req}
+          onInput={(e) => {
+            const el = e.currentTarget
+            el.style.height = 'auto'
+            el.style.height = Math.min(el.scrollHeight, maxTextareaSize) + 'px'
+          }}
         />
       ) : (
         <input

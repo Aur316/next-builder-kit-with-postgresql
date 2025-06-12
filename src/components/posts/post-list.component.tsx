@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Pen, Trash2 } from 'lucide-react'
@@ -9,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import { baseQueryStateHandlerStyle } from '../../constants'
 import { useGetActivePosts, useSoftDeletePost } from '../../hooks'
-import { ConfirmDeleteModal } from '../base-ui-elements'
+import { ConfirmDeleteModal, IconWrapper } from '../base-ui-elements'
 import { QueryStateHandler } from '../query-state-handler'
 import { PostUpdate } from './post-update.component'
 
@@ -49,22 +48,21 @@ export const PostList = () => {
             >
               <section className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">{post.title}</h3>
-                <div className="flex items-center gap-3">
-                  <Pen
-                    size={16}
+                <div className="flex items-center gap-1">
+                  <IconWrapper
+                    Icon={Pen}
                     onClick={() => {
                       setSelectedPostId(post.id)
                       setIsUpdateModalOpen(true)
                     }}
-                    className="hover:text-primary-midnight-blue-500 cursor-pointer transition-colors duration-200"
                   />
-                  <Trash2
-                    size={16}
+
+                  <IconWrapper
+                    Icon={Trash2}
                     onClick={() => {
                       setSelectedPostId(post.id)
                       setIsDeleteModalOpen(true)
                     }}
-                    className="hover:text-primary-midnight-blue-500 cursor-pointer transition-colors duration-200"
                   />
                 </div>
               </section>
@@ -80,24 +78,24 @@ export const PostList = () => {
                 post={selectedPost}
               />
             )}
+            {isDeleteModalOpen && (
+              <ConfirmDeleteModal
+                open={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onConfirm={() => {
+                  softDeletePost(selectedPostId!)
+                  setIsDeleteModalOpen(false)
+                }}
+                title={t('postsPage.confirmDeleteTitle')}
+                description={t('postsPage.confirmDeleteDescription')}
+                confirmText={t('yes')}
+                cancelText={t('no')}
+                pending={isDeletePending}
+              />
+            )}
           </React.Fragment>
         ))}
       </AnimatePresence>
-      {isDeleteModalOpen && (
-        <ConfirmDeleteModal
-          open={isDeleteModalOpen}
-          onClose={() => setIsDeleteModalOpen(false)}
-          onConfirm={() => {
-            softDeletePost(selectedPostId!)
-            setIsDeleteModalOpen(false)
-          }}
-          title={t('postsPage.confirmDeleteTitle')}
-          description={t('postsPage.confirmDeleteDescription')}
-          confirmText={t('yes')}
-          cancelText={t('no')}
-          pending={isDeletePending}
-        />
-      )}
     </QueryStateHandler>
   )
 }
