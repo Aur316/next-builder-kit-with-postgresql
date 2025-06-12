@@ -9,6 +9,7 @@
   "no": "Nem",
   "cancel": "Mégsem",
   "confirm": "Megerősítés",
+  "search": "Keresés",
   "filters": {
     "equals": "Egyezik",
     "contains": "Tartalmazza",
@@ -40,7 +41,9 @@
   "postsPage": {
     "postForm": {
       "title": "Cím",
+      "titlePlaceholder": "Adja meg a címet",
       "content": "Tartalom",
+      "contentPlaceholder": "Adja meg a tartalmat",
       "createPost": "Bejegyzés mentése"
     },
     "postFormErrors": {

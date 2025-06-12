@@ -59,6 +59,16 @@ export const PostSearch = () => {
     <div className="mx-auto max-w-xl space-y-6 rounded-xl border border-white p-4 shadow-md">
       {/* Title section */}
       <div className="space-y-2">
+        <Input
+          label={t('postsPage.postForm.title')}
+          placeholder={t('postsPage.postForm.titlePlaceholder')}
+          value={titleValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTitleValue(e.target.value)
+          }
+          containerClassName="w-full"
+          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+        />
         <div className="flex gap-2">
           <Dropdown
             label="Title filter"
@@ -73,19 +83,20 @@ export const PostSearch = () => {
             options={modeOptions}
           />
         </div>
-        <Input
-          label="Title"
-          value={titleValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setTitleValue(e.target.value)
-          }
-          containerClassName="w-full"
-          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
-        />
       </div>
 
       {/* Content section */}
       <div className="space-y-2">
+        <Input
+          label={t('postsPage.postForm.content')}
+          placeholder={t('postsPage.postForm.contentPlaceholder')}
+          value={contentValue}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setContentValue(e.target.value)
+          }
+          containerClassName="w-full"
+          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+        />
         <div className="flex gap-2">
           <Dropdown
             label="Content filter"
@@ -100,23 +111,15 @@ export const PostSearch = () => {
             options={modeOptions}
           />
         </div>
-        <Input
-          label="Content"
-          value={contentValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setContentValue(e.target.value)
-          }
-          containerClassName="w-full"
-          inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
-        />
       </div>
 
       <Button
         onClick={handleSubmit}
-        text="search"
+        text={t('search')}
         variant="secondary"
         icon={<Search />}
         iconPosition="right"
+        disabled={!titleValue && !contentValue}
         loading={isLoading}
       />
       {posts && (

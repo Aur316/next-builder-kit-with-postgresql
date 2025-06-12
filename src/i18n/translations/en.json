@@ -9,6 +9,7 @@
   "no": "No",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "search": "Search",
   "filters": {
     "equals": "Equals",
     "contains": "Contains",
@@ -40,7 +41,9 @@
   "postsPage": {
     "postForm": {
       "title": "Title",
+      "titlePlaceholder": "Enter title",
       "content": "Content",
+      "contentPlaceholder": "Enter content",
       "createPost": "Create Post"
     },
     "postFormErrors": {
