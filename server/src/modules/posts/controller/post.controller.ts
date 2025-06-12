@@ -44,4 +44,9 @@ export const postController = {
     const result = await postService.delete(postId)
     res.status(200).json(result)
   },
+
+  async update(req: Request, res: Response) {
+    const updatedPost = await postService.update(req.body)
+    res.status(200).json(updatedPost)
+  },
 }

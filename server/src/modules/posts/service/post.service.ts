@@ -1,3 +1,4 @@
+import { Post } from '../../../generated/prisma'
 import { mapPostToCreateResponse } from '../mapper'
 import { postRepository } from '../repository'
 import { CreatePostRequestV1, CreatePostResponseV1 } from '../types/post.type'
@@ -37,5 +38,9 @@ export const postService = {
   async delete(postId: string): Promise<CreatePostResponseV1> {
     const post = await postRepository.remove(postId)
     return mapPostToCreateResponse(post)
+  },
+
+  update(data: Partial<Post>): Promise<Post> {
+    return postRepository.update(data)
   },
 }

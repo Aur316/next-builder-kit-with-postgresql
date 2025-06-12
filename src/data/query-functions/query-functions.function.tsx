@@ -61,4 +61,12 @@ export const postQueryFns = {
       showSuccessToast: true,
       successMessage: 'Post deleted successfully',
     }),
+
+  update: (post: Post): Promise<OperationResult<Post, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.update(post), {
+      showErrorToast: true,
+      errorMessage: 'Failed to update post',
+      showSuccessToast: true,
+      successMessage: 'Post updated successfully',
+    }),
 }
