@@ -1,7 +1,6 @@
 'use client'
 
-import { PropsWithChildren } from 'react'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 
 import { useForm } from '@tanstack/react-form'
 import { useTranslation } from 'react-i18next'
@@ -66,11 +65,11 @@ export const PostForm = ({
           <React.Fragment>
             <Input
               label={t('postsPage.postForm.title')}
+              placeholder={t('postsPage.postForm.titlePlaceholder')}
               req
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
-              placeholder="Enter title"
             />
             {!field.state.meta.isValid && (
               <em role="alert" className="text-sm text-red-500">
@@ -92,12 +91,12 @@ export const PostForm = ({
           <React.Fragment>
             <Input
               label={t('postsPage.postForm.content')}
+              placeholder={t('postsPage.postForm.contentPlaceholder')}
               req
               isTextArea
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
-              placeholder="Enter content"
             />
             {!field.state.meta.isValid && (
               <em role="alert" className="text-sm text-red-500">
