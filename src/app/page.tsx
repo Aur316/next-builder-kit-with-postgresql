@@ -64,4 +64,7 @@ export default function Home() {
 }
 
 // TODO:
-// restore posts + végleges törlés lehetőség
+// update post
+// restore soft delete
+// search
+// hookokra is egy objektumot

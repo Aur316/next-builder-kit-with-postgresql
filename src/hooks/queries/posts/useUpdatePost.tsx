@@ -3,24 +3,24 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
 import { OperationResult, postQueryFns } from '../../../data'
-import { CreatePostRequest, CreatePostResponse } from '../../../types/post.type'
+import { Post } from '../../../types/post.type'
 
-export const useCreatePost = () => {
+export const useUpdatePost = () => {
   const queryClient = useQueryClient()
 
   const { mutateAsync, isPending, isError } = useMutation<
-    OperationResult<CreatePostResponse, ApiErrorResult>,
+    OperationResult<Post, ApiErrorResult>,
     Error,
-    CreatePostRequest
+    Post
   >({
-    mutationFn: postQueryFns.create,
+    mutationFn: postQueryFns.update,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: postKey.active() })
     },
   })
 
   return {
-    createPost: mutateAsync,
+    updatePost: mutateAsync,
     isPending,
     isError,
   }

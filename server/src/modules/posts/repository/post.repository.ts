@@ -48,4 +48,11 @@ export const postRepository = {
       where: { id: postId },
     })
   },
+
+  update(data: Partial<Post>): Promise<Post> {
+    return db.post.update({
+      where: { id: data.id },
+      data,
+    })
+  },
 }

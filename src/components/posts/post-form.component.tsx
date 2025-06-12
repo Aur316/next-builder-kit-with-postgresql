@@ -1,23 +1,42 @@
 'use client'
 
+import { PropsWithChildren } from 'react'
+
 import { useForm } from '@tanstack/react-form'
-import { SendHorizontal } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { useCreatePost } from '../../hooks'
-import { Button, Input } from '../base-ui-elements'
+import { CreatePostRequest } from '../../types/post.type'
+import { Input } from '../base-ui-elements'
 
-export const PostForm = () => {
-  const { createPost, isPending } = useCreatePost()
+type UpdatePostRequest = CreatePostRequest & { id: string }
+
+type PostFormInput = CreatePostRequest | UpdatePostRequest
+
+interface BasePostFormProps {
+  id?: string
+  title?: string
+  content?: string
+  onSubmit: (data: PostFormInput) => Promise<void>
+}
+
+type PostFormProps = PropsWithChildren<BasePostFormProps>
+
+export const PostForm = ({
+  children,
+  id,
+  title,
+  content,
+  onSubmit,
+}: PostFormProps) => {
   const { t } = useTranslation()
 
   const form = useForm({
     defaultValues: {
-      title: '',
-      content: '',
+      title: title ?? '',
+      content: content ?? '',
     },
     onSubmit: async ({ value }) => {
-      await createPost(value)
+      await onSubmit(id ? { ...value, id } : value)
       form.reset()
     },
   })
@@ -83,14 +102,7 @@ export const PostForm = () => {
         )}
       </form.Field>
 
-      <Button
-        type="submit"
-        text={t('postsPage.postForm.createPost')}
-        variant="secondary"
-        icon={<SendHorizontal />}
-        iconPosition="right"
-        loading={isPending}
-      />
+      {children}
     </form>
   )
 }
