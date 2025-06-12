@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
-import { SendHorizontal } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { useGetByQuery } from '../../hooks/queries/posts/useGetByQuery'
@@ -115,7 +115,7 @@ export const PostSearch = () => {
         onClick={handleSubmit}
         text="search"
         variant="secondary"
-        icon={<SendHorizontal />}
+        icon={<Search />}
         iconPosition="right"
         loading={isLoading}
       />

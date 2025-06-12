@@ -58,7 +58,7 @@ export const postRepository = {
         }
       }
     }
-
+    whereRaw.isDeleted = false
     const where: Prisma.PostWhereInput = whereRaw
 
     return db.post.findMany({
@@ -66,6 +66,7 @@ export const postRepository = {
       orderBy: { updatedAt: 'desc' },
     })
   },
+
   softRemove(postId: string): Promise<Post> {
     return db.post.update({
       where: { id: postId },
