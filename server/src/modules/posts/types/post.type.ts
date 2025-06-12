@@ -1,9 +1,9 @@
-export type CreatePostRequestV1 = {
+export type PostRequestV1 = {
   title: string
   content: string
 }
 
-export type CreatePostResponseV1 = {
+export type PostResponseV1 = {
   id: string
   title: string
   content: string

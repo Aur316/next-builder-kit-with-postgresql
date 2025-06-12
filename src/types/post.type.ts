@@ -1,16 +1,16 @@
-export type CreatePostRequest = {
+export type PostRequest = {
   title: string
   content: string
 }
 
-export type CreatePostResponse = {
+export type PostResponse = {
   id: string
   title: string
   content: string
   createdAt: string
 }
 
-export type GetPostsResponse = Array<CreatePostResponse>
+export type GetPostsResponse = Array<PostResponse>
 
 export type Post = {
   id: string

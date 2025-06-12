@@ -1,9 +1,9 @@
 import { Post, Prisma } from '../../../generated/prisma'
 import { db } from '../../../lib'
-import { CreatePostRequestV1 } from '../types/post.type'
+import { PostRequestV1 } from '../types/post.type'
 
 export const postRepository = {
-  insert(data: CreatePostRequestV1): Promise<Post> {
+  insert(data: PostRequestV1): Promise<Post> {
     return db.post.create({ data })
   },
 

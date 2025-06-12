@@ -1,7 +1,7 @@
 import { Post } from '../../../generated/prisma'
-import { CreatePostResponseV1 } from '../types/post.type'
+import { PostResponseV1 } from '../types/post.type'
 
-export const mapPostToCreateResponse = (post: Post): CreatePostResponseV1 => {
+export const mapPostToCreateResponse = (post: Post): PostResponseV1 => {
   return {
     id: post.id,
     title: post.title,
