@@ -5,12 +5,12 @@ import React, { PropsWithChildren } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { useTranslation } from 'react-i18next'
 
-import { CreatePostRequest } from '../../types/post.type'
+import { PostRequest } from '../../types/post.type'
 import { Input } from '../base-ui-elements'
 
-type UpdatePostRequest = CreatePostRequest & { id: string }
+type UpdatePostRequest = PostRequest & { id: string }
 
-type PostFormInput = CreatePostRequest | UpdatePostRequest
+type PostFormInput = PostRequest | UpdatePostRequest
 
 interface BasePostFormProps {
   id?: string
@@ -38,9 +38,7 @@ export const PostForm = ({
 
     onSubmit: async ({ value }) => {
       await onSubmit(
-        id
-          ? ({ ...value, id } as UpdatePostRequest)
-          : (value as CreatePostRequest),
+        id ? ({ ...value, id } as UpdatePostRequest) : (value as PostRequest),
       )
       form.reset()
     },

@@ -4,18 +4,18 @@ import { useTranslation } from 'react-i18next'
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
 import { OperationResult, postQueryFns } from '../../../data'
-import { CreatePostRequest, CreatePostResponse } from '../../../types/post.type'
+import { PostRequest, PostResponse } from '../../../types/post.type'
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient()
   const { t } = useTranslation()
 
   const { mutateAsync, isPending, isError } = useMutation<
-    OperationResult<CreatePostResponse, ApiErrorResult>,
+    OperationResult<PostResponse, ApiErrorResult>,
     Error,
-    CreatePostRequest
+    PostRequest
   >({
-    mutationFn: (post: CreatePostRequest) => postQueryFns.create(post, t),
+    mutationFn: (post: PostRequest) => postQueryFns.create(post, t),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: postKey.active() })
     },

@@ -1,9 +1,9 @@
 import { ApiErrorResult } from '../../api'
 import {
-  CreatePostRequest,
-  CreatePostResponse,
   GetPostsResponse,
   Post,
+  PostRequest,
+  PostResponse,
 } from '../../types/post.type'
 import { OperationResult } from '../api-call-handler'
 import { apiCallHandler } from '../api-call-handler/api-handler'
@@ -11,9 +11,9 @@ import { postApiClient } from '../clients'
 
 export const postQueryFns = {
   create: (
-    payload: CreatePostRequest,
+    payload: PostRequest,
     t: (key: string) => string,
-  ): Promise<OperationResult<CreatePostResponse, ApiErrorResult>> =>
+  ): Promise<OperationResult<PostResponse, ApiErrorResult>> =>
     apiCallHandler(() => postApiClient.create(payload), {
       showErrorToast: true,
       errorMessage: t('toastMessages.post.create.errorMessage'),

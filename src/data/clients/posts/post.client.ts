@@ -1,16 +1,16 @@
 import {
-  CreatePostRequest,
-  CreatePostResponse,
   GetPostsResponse,
   Post,
+  PostRequest,
+  PostResponse,
 } from '../../../types/post.type'
 import { httpClient } from '../http'
 
 const ROOT = '/posts'
 
 export const postApiClient = {
-  create: (payload: CreatePostRequest): Promise<CreatePostResponse> =>
-    httpClient.post<CreatePostResponse>(ROOT, payload),
+  create: (payload: PostRequest): Promise<PostResponse> =>
+    httpClient.post<PostResponse>(ROOT, payload),
 
   getAll: (): Promise<GetPostsResponse> =>
     httpClient.get<GetPostsResponse>(`${ROOT}/all`),

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
 import { postService } from '../service'
-import { CreatePostRequestV1 } from '../types/post.type'
+import { PostRequestV1 } from '../types/post.type'
 
 export const postController = {
   async create(
-    req: Request<Record<string, never>, unknown, CreatePostRequestV1>,
+    req: Request<Record<string, never>, unknown, PostRequestV1>,
     res: Response,
   ) {
     const addedPost = await postService.create(req.body)
