@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 import { ApiErrorResult } from '../../../api'
 import { postKey } from '../../../constants'
@@ -13,11 +14,13 @@ import {
 import { GetPostsResponse, Post } from '../../../types/post.type'
 
 export const useGetActivePosts = () => {
+  const { t } = useTranslation()
+
   const { data, isPending, isError } = useQuery<
     OperationResult<GetPostsResponse, ApiErrorResult>
   >({
     queryKey: postKey.active(),
-    queryFn: postQueryFns.getActive,
+    queryFn: () => postQueryFns.getActive(t),
   })
 
   const posts: Array<Post> | undefined = useMemo(() => {

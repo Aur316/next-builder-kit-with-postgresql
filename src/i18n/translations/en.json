@@ -7,6 +7,8 @@
   "not-found": "Page not found",
   "yes": "Yes",
   "no": "No",
+  "canel": "Cancel",
+  "confirm": "Confirm",
   "homePage": {
     "title": "Welcome to Next Builder Kit",
     "description": "This is a clean starter template with TypeScript, Tailwind, DaisyUI, reusable components and best practices.",
@@ -37,12 +39,47 @@
       "title": "Title is required",
       "content": "Content is required"
     },
+    "updatePost": {
+      "modalTitle": "Update post"
+    },
     "confirmDeleteTitle": "Are you sure you want to delete this post?",
     "confirmDeleteDescription": "This action cannot be undone."
   },
   "queryStateHandler": {
     "errorMessage": "Failed to load posts",
     "emptyMessage": "No posts available"
+  },
+  "toastMessages": {
+    "post": {
+      "create": {
+        "errorMessage": "Failed to create post",
+        "successMessage": "Post created successfully"
+      },
+      "getAll": {
+        "errorMessage": "Failed to load posts"
+      },
+      "getDeleted": {
+        "errorMessage": "Failed to load posts"
+      },
+      "getActive": {
+        "errorMessage": "Failed to load posts"
+      },
+      "getById": {
+        "errorMessage": "Failed to load post"
+      },
+      "softDelete": {
+        "errorMessage": "Failed to delete post",
+        "successMessage": "Post deleted successfully"
+      },
+      "delete": {
+        "errorMessage": "Failed to delete post",
+        "successMessage": "Post deleted successfully"
+      },
+      "update": {
+        "errorMessage": "Failed to update post",
+        "successMessage": "Post updated successfully"
+      }
+    }
   },
   "footer": {
     "rights": "All rights reserved."
