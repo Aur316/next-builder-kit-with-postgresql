@@ -33,6 +33,12 @@ export const postController = {
     res.status(200).json(post)
   },
 
+  async getByQuery(req: Request, res: Response) {
+    const query = req.query as Record<string, string>
+    const post = await postService.getByQuery(query)
+    res.status(200).json(post)
+  },
+
   async softDelete(req: Request, res: Response) {
     const postId = req.params.id
     const result = await postService.softDelete(postId)

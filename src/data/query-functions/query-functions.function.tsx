@@ -54,6 +54,15 @@ export const postQueryFns = {
       errorMessage: t('toastMessages.post.getById.errorMessage'),
     }),
 
+  getByQuery: (
+    query: string,
+    t: (key: string) => string,
+  ): Promise<OperationResult<GetPostsResponse, ApiErrorResult>> =>
+    apiCallHandler(() => postApiClient.getByQuery(query), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.post.getByQuery.errorMessage'),
+    }),
+
   softDelete: (
     postId: string,
     t: (key: string) => string,
