@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { SendHorizontal } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +18,11 @@ import { DROPDOWN_OPTIONS } from '../constants'
 export default function Home() {
   const { t } = useTranslation()
   const [selectedItem, setSelectedItem] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -48,6 +53,7 @@ export default function Home() {
             legend={t('homePage.inputLabel')}
             placeholder={t('homePage.inputPlaceholder')}
             inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+            ref={inputRef}
             required
           />
           <Dropdown
