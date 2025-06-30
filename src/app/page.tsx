@@ -55,6 +55,7 @@ export default function Home() {
         <Toggle text={t('homePage.toggleText')} className="toggle-info" />
         <Dropdown
           label={t('homePage.dropdownLabel')}
+          //legend={t('homePage.dropdownLabel')}
           name="Frameworks"
           setSelectedItem={setSelectedItem}
           value={selectedItem}
