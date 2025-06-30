@@ -17,16 +17,16 @@ export const Toggle = ({
   const inputId = id ?? internalId
 
   return (
-    <div className="form-control">
-      <label htmlFor={inputId} className="label cursor-pointer gap-2">
-        <span className="label-text">{text}</span>
-        <input
-          id={inputId}
-          type="checkbox"
-          className={twMerge('toggle', className)}
-          {...props}
-        />
+    <div className="form-control flex items-center gap-2">
+      <label htmlFor={inputId} className="label cursor-pointer">
+        {text}
       </label>
+      <input
+        id={inputId}
+        type="checkbox"
+        className={twMerge('toggle', className)}
+        {...props}
+      />
     </div>
   )
 }

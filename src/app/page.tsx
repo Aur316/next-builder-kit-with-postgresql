@@ -17,7 +17,7 @@ import { DROPDOWN_OPTIONS } from '../constants'
 
 export default function Home() {
   const { t } = useTranslation()
-  const [selectedItem, setSelectedItem] = useState<string | null>(null)
+  const [selectedItem, setSelectedItem] = useState<string>('')
 
   const triggerToast = () => {
     showToast({
@@ -46,18 +46,22 @@ export default function Home() {
           onClick={triggerToast}
         />
         <Input
-          label={t('homePage.inputLabel')}
+          // label={t('homePage.inputLabel')}
+          legend={t('homePage.inputLabel')}
           placeholder={t('homePage.inputPlaceholder')}
           inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
+          required
         />
         <Toggle text={t('homePage.toggleText')} className="toggle-info" />
         <Dropdown
           label={t('homePage.dropdownLabel')}
-          value={selectedItem ?? undefined}
-          onValueChange={setSelectedItem}
+          name="Frameworks"
+          setSelectedItem={setSelectedItem}
+          value={selectedItem}
           options={DROPDOWN_OPTIONS}
+          nestedOption="Frameworks"
         />
-        <Checkbox text={t('homePage.checkboxText')} />
+        <Checkbox label={t('homePage.checkboxText')} />
       </section>
     </div>
   )
