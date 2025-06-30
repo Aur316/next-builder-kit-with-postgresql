@@ -13,7 +13,7 @@
     "toggleText": "Értesítések engedélyezése",
     "dropdownLabel": "Válassz egyet",
     "checkboxText": "Elfogadom a feltételeket",
-    "toastSuccess": "Sikeresen elindítottál egy toast üzenetet."
+    "formSubmitted": "Sikeresen kitöltötted a formot."
   },
   "aboutPage": {
     "title": "A projekt bemutatása",
