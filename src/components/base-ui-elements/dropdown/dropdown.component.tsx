@@ -9,6 +9,7 @@ interface DropdownProps
   id?: string
   options: Array<{ value: string; label: string }>
   label?: string
+  legend?: string
   placeholder?: string
   nestedOption?: string
   setSelectedItem?: (value: string) => void
@@ -21,6 +22,7 @@ export const Dropdown = ({
   id,
   options,
   label,
+  legend,
   placeholder = 'Select...',
   nestedOption,
   setSelectedItem,
@@ -38,6 +40,10 @@ export const Dropdown = ({
     'border-primary-midnight-blue-700 bg-primary-midnight-blue-900'
   const baseOptionClassName =
     'hover:bg-primary-midnight-blue-700 cursor-pointer rounded px-3 py-2 text-sm text-white'
+  const baseFieldsetStyle = twMerge(
+    'border-primary-midnight-blue-700 block rounded-lg border border-solid p-2',
+    legend && 'pt-0.5',
+  )
 
   const renderOptions = () => {
     return options.map((option) => (
@@ -53,28 +59,31 @@ export const Dropdown = ({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      {label && (
-        <label
-          htmlFor={`dropdown-${dropDownId}`}
-          className={twMerge(
-            'cursor-pointer text-sm text-white',
-            labelClassName,
-          )}
-        >
-          {label}
-        </label>
-      )}
-      <fieldset>
+      <fieldset className={twMerge(legend && !label && baseFieldsetStyle)}>
+        {legend && !label ? (
+          <legend className="isolate block p-0.5">{legend}</legend>
+        ) : (
+          <label
+            htmlFor={dropDownId}
+            className={twMerge(
+              'cursor-pointer text-sm text-white',
+              labelClassName,
+            )}
+          >
+            {label}
+          </label>
+        )}
         <select
-          id={`dropdown-${dropDownId}`}
+          id={dropDownId}
           value={props.value}
           onChange={(event) => {
             setSelectedItem?.(event.target.value)
           }}
           className={twMerge(
-            baseStyle,
-            baseColors,
-            'flex cursor-pointer items-center justify-between',
+            'w-full outline-none',
+            !legend && baseStyle,
+            !legend && baseColors,
+            !legend && 'flex cursor-pointer items-center justify-between',
             selectClassName,
           )}
           {...props}

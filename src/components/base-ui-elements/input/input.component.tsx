@@ -71,7 +71,7 @@ export const Input = forwardRef(function Input(
         containerClassName,
       )}
     >
-      {isLabelFirst && labelContent}
+      {isLabelFirst && !legend && labelContent}
 
       {isTextArea ? (
         <fieldset className={twMerge(legend && !label && baseFieldsetStyle)}>
@@ -107,7 +107,7 @@ export const Input = forwardRef(function Input(
         </fieldset>
       )}
 
-      {!isLabelFirst && labelContent}
+      {!isLabelFirst && !legend && labelContent}
     </div>
   )
 })
