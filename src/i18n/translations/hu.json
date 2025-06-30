@@ -7,7 +7,7 @@
   "homePage": {
     "title": "Üdvözöl a Next Builder Kit",
     "description": "Ez egy letisztult starter sablon TypeScript-tel, Tailwinddel, DaisyUI-vel, újrahasználható komponensekkel és legjobb gyakorlatokkal.",
-    "buttonText": "Kattints rám",
+    "submitButtonText": "Küldés",
     "inputLabel": "Neved",
     "inputPlaceholder": "Kiss János",
     "toggleText": "Értesítések engedélyezése",

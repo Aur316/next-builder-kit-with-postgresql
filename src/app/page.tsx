@@ -63,7 +63,7 @@ export default function Home() {
           <Toggle text={t('homePage.toggleText')} className="toggle-info" />
           <Checkbox label={t('homePage.checkboxText')} required />
           <Button
-            text={t('homePage.buttonText')}
+            text={t('homePage.submitButtonText')}
             variant="secondary"
             icon={<SendHorizontal strokeWidth={1.5} />}
             iconPosition="right"

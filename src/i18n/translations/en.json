@@ -7,7 +7,7 @@
   "homePage": {
     "title": "Welcome to Next Builder Kit",
     "description": "This is a clean starter template with TypeScript, Tailwind, DaisyUI, reusable components and best practices.",
-    "buttonText": "Click Me",
+    "submitButtonText": "Submit",
     "inputLabel": "Your Name",
     "inputPlaceholder": "John Doe",
     "toggleText": "Enable notifications",
