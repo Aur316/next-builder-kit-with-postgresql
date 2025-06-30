@@ -30,10 +30,10 @@ export default function Home() {
   return (
     <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
       <section id="mainHeader">
-        <h1 className="text-center text-3xl font-bold">
+        <h1 className="text-center text-3xl font-bold text-white">
           {t('homePage.title')}
         </h1>
-        <p className="text-primary-midnight-blue-100 mt-2 max-w-md text-center text-sm">
+        <p className="mt-2 max-w-md text-center text-sm text-white">
           {t('homePage.description')}
         </p>
       </section>
