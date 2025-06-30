@@ -4,6 +4,11 @@ import { Footer, Navbar, ToastProvider } from '../components'
 import { I18nProvider, ReactQueryProvider, StoreProvider } from '../providers'
 import './globals.css'
 
+export const metadata = {
+  title: 'Next Builder Kit',
+  description: 'A modern Next.js application with TypeScript and Tailwind CSS',
+}
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
