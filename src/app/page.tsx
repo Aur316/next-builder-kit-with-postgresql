@@ -38,6 +38,13 @@ export default function Home() {
       type: 'success',
       description: t('homePage.formSubmitted'),
     })
+    setFormData({
+      name: '',
+      framework: '',
+      notification: false,
+      isAgreed: false,
+    })
+    inputRef.current?.focus()
   }
 
   return (
