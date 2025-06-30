@@ -2,8 +2,8 @@
 
 import { PropsWithChildren, useEffect } from 'react'
 
-import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 import { twMerge } from 'tailwind-merge'
 
 import { IconWrapper } from '../icon-wrapper'
