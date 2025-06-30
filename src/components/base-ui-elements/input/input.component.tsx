@@ -48,7 +48,8 @@ export const Input = forwardRef(function Input(
   const isVertical = labelPosition === 'top' || labelPosition === 'bottom'
   const isLabelFirst = labelPosition === 'top' || labelPosition === 'left'
 
-  const baseStyle = 'px-3 outline-none focus:border-primary-midnight-blue-800'
+  const baseStyle =
+    'px-3 outline-none focus:border-primary-midnight-blue-800 placeholder:text-primary-midnight-blue-700 text-white'
   const baseFieldsetStyle = twMerge(
     'border-primary-midnight-blue-700 block rounded-lg border border-solid p-2',
     legend && 'pt-0.5',
@@ -76,7 +77,7 @@ export const Input = forwardRef(function Input(
       {isTextArea ? (
         <fieldset className={twMerge(legend && !label && baseFieldsetStyle)}>
           {legend && !label && (
-            <legend className="isolate block p-0.5">{legend}</legend>
+            <legend className="isolate block p-0.5 text-white">{legend}</legend>
           )}
           <textarea
             id={inputId}
@@ -95,7 +96,7 @@ export const Input = forwardRef(function Input(
       ) : (
         <fieldset className={twMerge(legend && !label && baseFieldsetStyle)}>
           {legend && !label && (
-            <legend className="isolate block p-0.5">{legend}</legend>
+            <legend className="isolate block p-0.5 text-white">{legend}</legend>
           )}
           <input
             id={inputId}

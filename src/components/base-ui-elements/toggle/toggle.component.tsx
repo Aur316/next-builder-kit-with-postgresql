@@ -18,7 +18,10 @@ export const Toggle = ({
 
   return (
     <div className="form-control flex items-center gap-2">
-      <label htmlFor={inputId} className="label cursor-pointer">
+      <label
+        htmlFor={inputId}
+        className="label text-primary-midnight-blue-600 cursor-pointer"
+      >
         {text}
       </label>
       <input
