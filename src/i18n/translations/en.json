@@ -13,7 +13,7 @@
     "toggleText": "Enable notifications",
     "dropdownLabel": "Choose one",
     "checkboxText": "I agree to the terms",
-    "toastSuccess": "You successfully triggered a toast."
+    "formSubmitted": "You successfully filled the form."
   },
   "aboutPage": {
     "title": "About this project",
