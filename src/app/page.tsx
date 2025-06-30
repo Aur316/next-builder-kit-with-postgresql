@@ -14,10 +14,18 @@ import {
   showToast,
 } from '../components'
 import { DROPDOWN_OPTIONS } from '../constants'
+import { FormData } from '../types'
 
 export default function Home() {
   const { t } = useTranslation()
-  const [selectedItem, setSelectedItem] = useState<string>('')
+
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    framework: '',
+    notification: false,
+    isAgreed: false,
+  })
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -30,6 +38,13 @@ export default function Home() {
       type: 'success',
       description: t('homePage.formSubmitted'),
     })
+    setFormData({
+      name: '',
+      framework: '',
+      notification: false,
+      isAgreed: false,
+    })
+    inputRef.current?.focus()
   }
 
   return (
@@ -54,20 +69,36 @@ export default function Home() {
             placeholder={t('homePage.inputPlaceholder')}
             inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
             ref={inputRef}
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
           <Dropdown
             label={t('homePage.dropdownLabel')}
             //legend={t('homePage.dropdownLabel')}
             name="Frameworks"
-            setSelectedItem={setSelectedItem}
-            value={selectedItem}
+            setSelectedItem={(e) => setFormData({ ...formData, framework: e })}
+            value={formData.framework}
             options={DROPDOWN_OPTIONS}
             nestedOption="Frameworks"
             required
           />
-          <Toggle text={t('homePage.toggleText')} className="toggle-info" />
-          <Checkbox label={t('homePage.checkboxText')} required />
+          <Toggle
+            text={t('homePage.toggleText')}
+            className="toggle-info"
+            checked={formData.notification}
+            onChange={(e) =>
+              setFormData({ ...formData, notification: e.target.checked })
+            }
+          />
+          <Checkbox
+            label={t('homePage.checkboxText')}
+            required
+            checked={formData.isAgreed}
+            onChange={(e) =>
+              setFormData({ ...formData, isAgreed: e.target.checked })
+            }
+          />
           <Button
             text={t('homePage.submitButtonText')}
             variant="secondary"
