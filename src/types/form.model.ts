@@ -1,5 +1,6 @@
 export type FormData = {
   name: string
+  email: string
   message: string
   framework: string
   notification: boolean
