@@ -1,28 +1,26 @@
 'use client'
 
-import { PropsWithChildren, createContext, useContext, useState } from 'react'
+import { PropsWithChildren, createContext, useState } from 'react'
 
 interface StoreContextProps {
-  isSidebarOpen: boolean
-  setIsSidebarOpen: (value: boolean) => void
+  storeNumber: number
+  setStoreNumber: (value: number) => void
 }
 
-const StoreContext = createContext<StoreContextProps | undefined>(undefined)
+const defaultStoreContext: StoreContextProps = {
+  storeNumber: 0,
+  setStoreNumber: () => {},
+}
+
+export const StoreContext =
+  createContext<StoreContextProps>(defaultStoreContext)
 
 export const StoreProvider = ({ children }: PropsWithChildren) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
+  const [storeNumber, setStoreNumber] = useState<number>(0)
 
   return (
-    <StoreContext.Provider value={{ isSidebarOpen, setIsSidebarOpen }}>
+    <StoreContext value={{ storeNumber, setStoreNumber }}>
       {children}
-    </StoreContext.Provider>
+    </StoreContext>
   )
-}
-
-export const useStore = () => {
-  const context = useContext(StoreContext)
-  if (!context) {
-    throw new Error('useStore must be used within a StoreProvider')
-  }
-  return context
 }

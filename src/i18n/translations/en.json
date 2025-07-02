@@ -33,5 +33,10 @@
   },
   "componentErrors": {
     "legendAndLabel": "Legend and label cannot be used together"
+  },
+  "store": {
+    "context": {
+      "storeMessage": "Hello, I am coming from store Provider: "
+    }
   }
 }
