@@ -30,5 +30,8 @@
   },
   "footer": {
     "rights": "Minden jog fenntartva."
+  },
+  "componentErrors": {
+    "legendAndLabel": "A legend és a label nem használható együtt"
   }
 }

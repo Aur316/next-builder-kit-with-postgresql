@@ -30,5 +30,8 @@
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "componentErrors": {
+    "legendAndLabel": "Legend and label cannot be used together"
   }
 }

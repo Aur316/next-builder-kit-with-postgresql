@@ -2,6 +2,7 @@
 
 import { PropsWithChildren, SelectHTMLAttributes, useId } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { twMerge } from 'tailwind-merge'
 
 interface DropdownProps
@@ -33,6 +34,11 @@ export const Dropdown = ({
 }: DropdownProps) => {
   const internalId = useId()
   const dropDownId = id ?? internalId
+  const { t } = useTranslation()
+
+  if (legend && label) {
+    throw new Error(t('componentErrors.legendAndLabel'))
+  }
 
   const baseStyle =
     'w-full rounded-md border px-3 py-2 text-sm text-white focus:outline-none'
