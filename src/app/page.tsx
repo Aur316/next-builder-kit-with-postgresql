@@ -138,12 +138,13 @@ export default function Home() {
             onChange={agreementChange}
           />
           <Button
-            text={t('homePage.submitButton')}
             variant="secondary"
             icon={<SendHorizontal strokeWidth={1.5} />}
             iconPosition="right"
             type="submit"
-          />
+          >
+            {t('homePage.submitButton')}
+          </Button>
         </form>
       </section>
     </div>

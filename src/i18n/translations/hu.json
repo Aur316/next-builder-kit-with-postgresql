@@ -23,7 +23,8 @@
     "title": "A projekt bemutatása",
     "description1": "Ez egy letisztult és moduláris Next.js starter sablon, amely TypeScriptet, Tailwind CSS-t, DaisyUI-t és React Query-t használ. Szigorú kódolási szabályokat követ, és újrahasználható UI komponenseket, toast értesítéseket és API segédleteket tartalmaz.",
     "description2": "A cél egy szilárd alap biztosítása a modern webalkalmazások gyors és következetes minták szerinti fejlesztéséhez.",
-    "buttonText": "Forrás megtekintése a GitHubon"
+    "buttonText": "Forrás megtekintése a GitHubon",
+    "openModalButton": "Modal megnyitása"
   },
   "galleryPage": {
     "coverflow": "Coverflow Galéria"
@@ -38,5 +39,12 @@
     "context": {
       "storeMessage": "Hello, a store Provider-ból jövök: "
     }
+  },
+  "modal": {
+    "closeButton": "Bezárás",
+    "actionButton": "Művelet",
+    "title": "Üdvözöllek a Modalban!",
+    "description": "Ez egy példa modal, ami bemutatja a BaseModal komponens funkcionalitását.",
+    "successMessage": "Sikeres"
   }
 }
