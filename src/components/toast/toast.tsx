@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { CircleAlert, CircleCheck, Copy } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
@@ -91,7 +93,7 @@ interface CopyButtonProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const CopyButton = ({ onClick }: CopyButtonProps) => {
+const CopyButton = memo(function CopyButton({ onClick }: CopyButtonProps) {
   return (
     <div
       onClick={onClick}
@@ -100,4 +102,4 @@ const CopyButton = ({ onClick }: CopyButtonProps) => {
       <Copy size={18} />
     </div>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useId } from 'react'
+import { InputHTMLAttributes, memo, useId } from 'react'
 
 import { twMerge } from 'tailwind-merge'
 
@@ -7,12 +7,12 @@ interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-export const Toggle = ({
+export const Toggle = memo(function Toggle({
   text,
   className = 'toggle-primary',
   id,
   ...props
-}: ToggleProps) => {
+}: ToggleProps) {
   const internalId = useId()
   const inputId = id ?? internalId
 
@@ -32,4 +32,4 @@ export const Toggle = ({
       />
     </div>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useId } from 'react'
+import { InputHTMLAttributes, memo, useId } from 'react'
 
 import { twMerge } from 'tailwind-merge'
 
@@ -7,7 +7,12 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-export const Checkbox = ({ label, className, id, ...props }: CheckboxProps) => {
+export const Checkbox = memo(function Checkbox({
+  label,
+  className,
+  id,
+  ...props
+}: CheckboxProps) {
   const internalId = useId()
   const inputId = id ?? internalId
 
@@ -27,4 +32,4 @@ export const Checkbox = ({ label, className, id, ...props }: CheckboxProps) => {
       />
     </div>
   )
-}
+})
