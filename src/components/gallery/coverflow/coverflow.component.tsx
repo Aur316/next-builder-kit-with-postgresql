@@ -35,19 +35,17 @@ export function Coverflow({ title, links }: CoverflowProps) {
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper"
       >
-        {links.map((i, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <Image
-                src={i}
-                alt={`Slide image ${index + 1}`}
-                width={600}
-                height={400}
-                className="h-full w-full object-cover"
-              />
-            </SwiperSlide>
-          )
-        })}
+        {links.map((i, index) => (
+          <SwiperSlide key={index}>
+            <Image
+              src={i}
+              alt={`Slide image ${index + 1}`}
+              width={600}
+              height={400}
+              className="h-full w-full object-cover"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   )
