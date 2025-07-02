@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, memo, useCallback, useMemo } from 'react'
 
 import Link from 'next/link'
 
@@ -15,8 +15,26 @@ interface MobileMenuProps {
   routes: Array<Route>
 }
 
-export function MobileMenu({ isOpen, setIsOpen, routes }: MobileMenuProps) {
+export const MobileMenu = memo(function MobileMenu({
+  isOpen,
+  setIsOpen,
+  routes,
+}: MobileMenuProps) {
   const { t } = useTranslation()
+
+  const linkClick = useCallback(() => {
+    setIsOpen(false)
+  }, [setIsOpen])
+
+  const routeItems = useMemo(
+    () =>
+      routes.map((route) => (
+        <Link key={route.path} href={route.path} onClick={linkClick}>
+          {t(route.name)}
+        </Link>
+      )),
+    [routes, t, linkClick],
+  )
 
   return (
     <AnimatePresence initial={false}>
@@ -29,19 +47,9 @@ export function MobileMenu({ isOpen, setIsOpen, routes }: MobileMenuProps) {
           transition={{ duration: 0.25, ease: 'easeInOut' }}
           className="overflow-hidden md:hidden"
         >
-          <div className="mt-4 flex flex-col gap-3">
-            {routes.map((route) => (
-              <Link
-                key={route.path}
-                href={route.path}
-                onClick={() => setIsOpen(false)}
-              >
-                {t(route.name)}
-              </Link>
-            ))}
-          </div>
+          <div className="mt-4 flex flex-col gap-3">{routeItems}</div>
         </motion.div>
       )}
     </AnimatePresence>
   )
-}
+})

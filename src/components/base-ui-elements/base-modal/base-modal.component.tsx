@@ -1,6 +1,6 @@
 'use client'
 
-import { PropsWithChildren, useEffect } from 'react'
+import { PropsWithChildren, useCallback, useEffect } from 'react'
 
 import { X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -28,16 +28,19 @@ export function BaseModal({
   closeOnEscape,
   extraStyles,
 }: BaseModal) {
+  const escape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    },
+    [onClose],
+  )
+
   useEffect(() => {
     if (!closeOnEscape) return
 
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [onClose, closeOnEscape])
+    document.addEventListener('keydown', escape)
+    return () => document.removeEventListener('keydown', escape)
+  }, [escape, closeOnEscape])
 
   if (!open) return null
 
