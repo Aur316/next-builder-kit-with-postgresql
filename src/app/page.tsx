@@ -21,6 +21,7 @@ export default function Home() {
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
+    email: '',
     message: '',
     framework: '',
     notification: false,
@@ -41,6 +42,7 @@ export default function Home() {
     })
     setFormData({
       name: '',
+      email: '',
       framework: '',
       message: '',
       notification: false,
@@ -66,27 +68,41 @@ export default function Home() {
           onSubmit={handleSubmit}
         >
           <Input
-            label={t('homePage.inputLabel')}
-            //legend={t('homePage.inputLabel')}
-            placeholder={t('homePage.inputPlaceholder')}
+            label={t('homePage.nameLabel')}
+            // legend={t('homePage.nameLabel')}
+            placeholder={t('homePage.namePlaceholder')}
             ref={inputRef}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
+            type="text"
           />
           <Input
-            //label={t('homePage.textareaLabel')}
-            legend={t('homePage.textareaLabel')}
+            // label={t('homePage.emailLabel')}
+            legend={t('homePage.emailLabel')}
+            placeholder={t('homePage.emailPlaceholder')}
+            ref={inputRef}
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            required
+            type="email"
+            autoComplete="email"
+          />
+          <Input
+            // label={t('homePage.messageLabel')}
+            legend={t('homePage.messageLabel')}
             isTextArea
-            placeholder={t('homePage.textareaPlaceholder')}
+            placeholder={t('homePage.messagePlaceholder')}
             value={formData.message}
             onChange={(e) =>
               setFormData({ ...formData, message: e.target.value })
             }
           />
           <Dropdown
-            label={t('homePage.dropdownLabel')}
-            // legend={t('homePage.dropdownLabel')}
+            label={t('homePage.frameworkLabel')}
+            // legend={t('homePage.frameworkLabel')}
             name="Frameworks"
             setSelectedItem={(e) => setFormData({ ...formData, framework: e })}
             value={formData.framework}
@@ -95,7 +111,7 @@ export default function Home() {
             required
           />
           <Toggle
-            text={t('homePage.toggleText')}
+            text={t('homePage.notificationsLabel')}
             className="toggle-info"
             checked={formData.notification}
             onChange={(e) =>
@@ -103,7 +119,7 @@ export default function Home() {
             }
           />
           <Checkbox
-            label={t('homePage.checkboxText')}
+            label={t('homePage.agreeToTerms')}
             required
             checked={formData.isAgreed}
             onChange={(e) =>
@@ -111,7 +127,7 @@ export default function Home() {
             }
           />
           <Button
-            text={t('homePage.submitButtonText')}
+            text={t('homePage.submitButton')}
             variant="secondary"
             icon={<SendHorizontal strokeWidth={1.5} />}
             iconPosition="right"
