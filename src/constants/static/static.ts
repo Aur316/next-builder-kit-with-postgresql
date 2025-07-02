@@ -10,3 +10,12 @@ export const LANGUAGES = [
   { value: 'en', label: '🇬🇧 English' },
   { value: 'hu', label: '🇭🇺 Magyar' },
 ]
+
+export const initialFormData = {
+  name: '',
+  email: '',
+  message: '',
+  framework: '',
+  notification: false,
+  isAgreed: false,
+}

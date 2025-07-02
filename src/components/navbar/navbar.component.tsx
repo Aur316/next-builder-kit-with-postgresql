@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 
 import { usePathname } from 'next/navigation'
 
@@ -13,7 +13,18 @@ import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 export const Navbar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
+
+  const routes = useMemo(
+    () => getRoutes().routes.filter((r) => r.visibleInNavbar),
+    [],
+  )
+
+  const handleSetIsOpen = useCallback<Dispatch<SetStateAction<boolean>>>(
+    (value) => {
+      setIsOpen(value)
+    },
+    [],
+  )
 
   if (!routes.some((route) => route.path === pathname)) {
     return null
@@ -24,10 +35,10 @@ export const Navbar = () => {
       <div className="flex items-center justify-between">
         <Github />
         <LanguageSwitcher />
-        <HamburgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
+        <HamburgerButton isOpen={isOpen} setIsOpen={handleSetIsOpen} />
         <DesktopMenu routes={routes} />
       </div>
-      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} routes={routes} />
+      <MobileMenu isOpen={isOpen} setIsOpen={handleSetIsOpen} routes={routes} />
     </nav>
   )
 }

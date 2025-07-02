@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { SendHorizontal } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -13,20 +13,13 @@ import {
   Toggle,
   showToast,
 } from '../components'
-import { DROPDOWN_OPTIONS } from '../constants'
+import { DROPDOWN_OPTIONS, initialFormData } from '../constants'
 import { FormData } from '../types'
 
 export default function Home() {
   const { t } = useTranslation()
 
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
-    framework: '',
-    notification: false,
-    isAgreed: false,
-  })
+  const [formData, setFormData] = useState<FormData>(initialFormData)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -34,22 +27,51 @@ export default function Home() {
     inputRef.current?.focus()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    showToast({
-      type: 'success',
-      description: t('homePage.formSubmitted'),
-    })
-    setFormData({
-      name: '',
-      email: '',
-      framework: '',
-      message: '',
-      notification: false,
-      isAgreed: false,
-    })
-    inputRef.current?.focus()
-  }
+  const submit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      showToast({
+        type: 'success',
+        description: t('homePage.formSubmitted'),
+      })
+      setFormData(initialFormData)
+      inputRef.current?.focus()
+    },
+    [t],
+  )
+
+  const nameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, name: e.target.value }))
+  }, [])
+
+  const emailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, email: e.target.value }))
+  }, [])
+
+  const messageChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, message: e.target.value }))
+    },
+    [],
+  )
+
+  const frameworkChange = useCallback((framework: string) => {
+    setFormData((prev) => ({ ...prev, framework }))
+  }, [])
+
+  const notificationChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({ ...prev, notification: e.target.checked }))
+    },
+    [],
+  )
+
+  const agreementChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({ ...prev, isAgreed: e.target.checked }))
+    },
+    [],
+  )
 
   return (
     <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
@@ -63,17 +85,14 @@ export default function Home() {
       </section>
 
       <section id="mainContent">
-        <form
-          className="flex flex-col items-center gap-4"
-          onSubmit={handleSubmit}
-        >
+        <form className="flex flex-col items-center gap-4" onSubmit={submit}>
           <Input
             label={t('homePage.nameLabel')}
             // legend={t('homePage.nameLabel')}
             placeholder={t('homePage.namePlaceholder')}
             ref={inputRef}
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={nameChange}
             required
             type="text"
           />
@@ -83,9 +102,7 @@ export default function Home() {
             placeholder={t('homePage.emailPlaceholder')}
             ref={inputRef}
             value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            onChange={emailChange}
             required
             type="email"
             autoComplete="email"
@@ -96,15 +113,13 @@ export default function Home() {
             isTextArea
             placeholder={t('homePage.messagePlaceholder')}
             value={formData.message}
-            onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
-            }
+            onChange={messageChange}
           />
           <Dropdown
             label={t('homePage.frameworkLabel')}
             // legend={t('homePage.frameworkLabel')}
             name="Frameworks"
-            setSelectedItem={(e) => setFormData({ ...formData, framework: e })}
+            onChange={(e) => frameworkChange(e.target.value)}
             value={formData.framework}
             options={DROPDOWN_OPTIONS}
             nestedOption="Frameworks"
@@ -114,17 +129,13 @@ export default function Home() {
             text={t('homePage.notificationsLabel')}
             className="toggle-info"
             checked={formData.notification}
-            onChange={(e) =>
-              setFormData({ ...formData, notification: e.target.checked })
-            }
+            onChange={notificationChange}
           />
           <Checkbox
             label={t('homePage.agreeToTerms')}
             required
             checked={formData.isAgreed}
-            onChange={(e) =>
-              setFormData({ ...formData, isAgreed: e.target.checked })
-            }
+            onChange={agreementChange}
           />
           <Button
             text={t('homePage.submitButton')}
