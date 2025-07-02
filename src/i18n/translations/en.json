@@ -17,7 +17,10 @@
     "frameworkLabel": "Choose one",
     "notificationsLabel": "Enable notifications",
     "agreeToTerms": "I agree to the terms",
-    "formSubmitted": "You successfully filled the form."
+    "formSubmitted": "You successfully filled the form.",
+    "yesRadio": "Yes",
+    "noRadio": "No",
+    "radioChoiceLabel": "Which one?"
   },
   "aboutPage": {
     "title": "About this project",
