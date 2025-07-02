@@ -56,7 +56,6 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
     {
       variant = 'primary',
       size = 'md',
-      text,
       className,
       icon,
       iconPosition,
@@ -91,7 +90,6 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
         {!loading ? (
           <>
             {iconPosition === 'left' && icon}
-            {text}
             {children}
             {iconPosition === 'right' && icon}
           </>

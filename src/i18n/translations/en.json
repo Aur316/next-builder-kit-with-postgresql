@@ -23,7 +23,8 @@
     "title": "About this project",
     "description1": "This is a clean and modular Next.js starter template built with TypeScript, Tailwind CSS, DaisyUI, and React Query. It follows strict coding conventions and includes reusable UI components, toast notifications, and API utilities.",
     "description2": "The goal is to provide a solid foundation for rapidly building modern web applications with consistent patterns.",
-    "buttonText": "View Source on GitHub"
+    "buttonText": "View Source on GitHub",
+    "openModalButton": "Open Modal"
   },
   "galleryPage": {
     "coverflow": "Coverflow Gallery"
@@ -38,5 +39,12 @@
     "context": {
       "storeMessage": "Hello, I am coming from store Provider: "
     }
+  },
+  "modal": {
+    "closeButton": "Close",
+    "actionButton": "Action",
+    "title": "Welcome to the Modal",
+    "description": "This is a sample modal that demonstrates the BaseModal component functionality.",
+    "successMessage": "Success"
   }
 }
