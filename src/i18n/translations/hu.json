@@ -10,6 +10,8 @@
     "submitButtonText": "Küldés",
     "inputLabel": "Neved",
     "inputPlaceholder": "Kiss János",
+    "textareaLabel": "Üzenet",
+    "textareaPlaceholder": "Írj valamit ...",
     "toggleText": "Értesítések engedélyezése",
     "dropdownLabel": "Válassz egyet",
     "checkboxText": "Elfogadom a feltételeket",

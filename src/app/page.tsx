@@ -21,6 +21,7 @@ export default function Home() {
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
+    message: '',
     framework: '',
     notification: false,
     isAgreed: false,
@@ -41,6 +42,7 @@ export default function Home() {
     setFormData({
       name: '',
       framework: '',
+      message: '',
       notification: false,
       isAgreed: false,
     })
@@ -64,18 +66,27 @@ export default function Home() {
           onSubmit={handleSubmit}
         >
           <Input
-            // label={t('homePage.inputLabel')}
-            legend={t('homePage.inputLabel')}
+            label={t('homePage.inputLabel')}
+            //legend={t('homePage.inputLabel')}
             placeholder={t('homePage.inputPlaceholder')}
-            inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
             ref={inputRef}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
+          <Input
+            //label={t('homePage.textareaLabel')}
+            legend={t('homePage.textareaLabel')}
+            isTextArea
+            placeholder={t('homePage.textareaPlaceholder')}
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+          />
           <Dropdown
             label={t('homePage.dropdownLabel')}
-            //legend={t('homePage.dropdownLabel')}
+            // legend={t('homePage.dropdownLabel')}
             name="Frameworks"
             setSelectedItem={(e) => setFormData({ ...formData, framework: e })}
             value={formData.framework}

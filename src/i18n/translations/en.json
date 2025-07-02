@@ -10,6 +10,8 @@
     "submitButtonText": "Submit",
     "inputLabel": "Your Name",
     "inputPlaceholder": "John Doe",
+    "textareaLabel": "Message",
+    "textareaPlaceholder": "Write something ...",
     "toggleText": "Enable notifications",
     "dropdownLabel": "Choose one",
     "checkboxText": "I agree to the terms",

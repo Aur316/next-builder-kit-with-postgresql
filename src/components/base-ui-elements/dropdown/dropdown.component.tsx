@@ -37,7 +37,7 @@ export const Dropdown = ({
   const baseStyle =
     'w-full rounded-md border px-3 py-2 text-sm text-white focus:outline-none'
   const baseColors =
-    'border-primary-midnight-blue-700 bg-primary-midnight-blue-900'
+    'border-primary-midnight-blue-700 bg-primary-midnight-blue-900 hover:border-primary-midnight-blue-600'
   const baseOptionClassName =
     'hover:bg-primary-midnight-blue-700 cursor-pointer rounded px-3 py-2 text-sm text-white'
   const baseFieldsetStyle = twMerge(
@@ -65,10 +65,7 @@ export const Dropdown = ({
         ) : (
           <label
             htmlFor={dropDownId}
-            className={twMerge(
-              'cursor-pointer text-sm text-white',
-              labelClassName,
-            )}
+            className={twMerge('cursor-pointer text-white', labelClassName)}
           >
             {label}
           </label>
@@ -94,9 +91,7 @@ export const Dropdown = ({
             </option>
           )}
           {nestedOption ? (
-            <optgroup className="mt-6" label={nestedOption}>
-              {renderOptions()}
-            </optgroup>
+            <optgroup label={nestedOption}>{renderOptions()}</optgroup>
           ) : (
             renderOptions()
           )}
