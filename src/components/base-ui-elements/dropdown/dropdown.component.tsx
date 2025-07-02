@@ -13,7 +13,6 @@ interface DropdownProps
   legend?: string
   placeholder?: string
   nestedOption?: string
-  setSelectedItem?: (value: string) => void
   labelClassName?: string
   selectClassName?: string
   optionClassName?: string
@@ -26,7 +25,6 @@ export const Dropdown = ({
   legend,
   placeholder = 'Select...',
   nestedOption,
-  setSelectedItem,
   labelClassName,
   selectClassName,
   optionClassName,
@@ -79,9 +77,6 @@ export const Dropdown = ({
         <select
           id={dropDownId}
           value={props.value}
-          onChange={(event) => {
-            setSelectedItem?.(event.target.value)
-          }}
           className={twMerge(
             'w-full outline-none',
             !legend && baseStyle,

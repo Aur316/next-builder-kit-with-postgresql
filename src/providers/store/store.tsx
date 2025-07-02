@@ -1,6 +1,6 @@
 'use client'
 
-import { PropsWithChildren, createContext, useState } from 'react'
+import { PropsWithChildren, createContext, useMemo, useState } from 'react'
 
 interface StoreContextProps {
   storeNumber: number
@@ -18,9 +18,14 @@ export const StoreContext =
 export const StoreProvider = ({ children }: PropsWithChildren) => {
   const [storeNumber, setStoreNumber] = useState<number>(0)
 
+  const contextValue = useMemo(
+    () => ({ storeNumber, setStoreNumber }),
+    [storeNumber],
+  )
+
   return (
-    <StoreContext value={{ storeNumber, setStoreNumber }}>
+    <StoreContext.Provider value={contextValue}>
       {children}
-    </StoreContext>
+    </StoreContext.Provider>
   )
 }

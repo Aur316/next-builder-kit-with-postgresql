@@ -1,6 +1,6 @@
 'use client'
 
-import { use } from 'react'
+import { use, useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -11,9 +11,10 @@ export default function AboutPage() {
   const { t } = useTranslation()
   const { storeNumber } = use(StoreContext)
 
-  const viewSource = () => {
+  const viewSource = useCallback(() => {
     window.open('https://github.com/Aur316/simple-model', '_blank')
-  }
+  }, [])
+
   return (
     <div className="flex h-full flex-col items-center justify-center px-4 text-center text-white">
       <div className="max-w-xl space-y-6">
