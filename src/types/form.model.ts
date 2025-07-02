@@ -5,4 +5,5 @@ export type FormData = {
   framework: string
   notification: boolean
   isAgreed: boolean
+  radioChoice: string
 }

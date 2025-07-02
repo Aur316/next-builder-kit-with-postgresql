@@ -17,7 +17,10 @@
     "frameworkLabel": "Válassz egyet",
     "notificationsLabel": "Értesítések engedélyezése",
     "agreeToTerms": "Elfogadom a feltételeket",
-    "formSubmitted": "Sikeresen kitöltötted a formot."
+    "formSubmitted": "Sikeresen kitöltötted a formot.",
+    "yesRadio": "Igen",
+    "noRadio": "Nem",
+    "radioChoiceLabel": "Melyiket választod?"
   },
   "aboutPage": {
     "title": "A projekt bemutatása",

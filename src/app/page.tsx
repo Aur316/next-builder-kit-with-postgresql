@@ -13,7 +13,8 @@ import {
   Toggle,
   showToast,
 } from '../components'
-import { DROPDOWN_OPTIONS, initialFormData } from '../constants'
+import { RadioButtonGroup } from '../components/base-ui-elements'
+import { DROPDOWN_OPTIONS, RADIO_OPTIONS, initialFormData } from '../constants'
 import { FormData } from '../types'
 
 export default function Home() {
@@ -74,7 +75,7 @@ export default function Home() {
   )
 
   return (
-    <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4">
+    <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-10 px-4 py-2">
       <section id="mainHeader">
         <h1 className="text-center text-3xl font-bold text-white">
           {t('homePage.title')}
@@ -123,6 +124,16 @@ export default function Home() {
             value={formData.framework}
             options={DROPDOWN_OPTIONS}
             nestedOption="Frameworks"
+            required
+          />
+          <RadioButtonGroup
+            options={RADIO_OPTIONS}
+            label="homePage.radioChoiceLabel"
+            name="radio-choice"
+            value={formData.radioChoice}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, radioChoice: e.target.value }))
+            }
             required
           />
           <Toggle
