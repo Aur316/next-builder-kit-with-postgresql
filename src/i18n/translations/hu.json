@@ -33,5 +33,10 @@
   },
   "componentErrors": {
     "legendAndLabel": "A legend és a label nem használható együtt"
+  },
+  "store": {
+    "context": {
+      "storeMessage": "Hello, a store Provider-ból jövök: "
+    }
   }
 }
