@@ -8,6 +8,7 @@ import {
   useId,
 } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { twMerge } from 'tailwind-merge'
 
 type CommonProps = {
@@ -44,6 +45,11 @@ export const Input = forwardRef(function Input(
 ) {
   const internalId = useId()
   const inputId = id ?? internalId
+  const { t } = useTranslation()
+
+  if (legend && label) {
+    throw new Error(t('componentErrors.legendAndLabel'))
+  }
 
   const isVertical = labelPosition === 'top' || labelPosition === 'bottom'
   const isLabelFirst = labelPosition === 'top' || labelPosition === 'left'
