@@ -7,29 +7,29 @@ import { BaseModal } from '../base-ui-elements'
 import { Button } from '../base-ui-elements/button/button.component'
 
 interface ModalProps {
-  isModalOpen: boolean
-  closeModal: () => void
+  open: boolean
+  onClose: () => void
 }
 
-export function Modal({ isModalOpen, closeModal }: ModalProps) {
+export function Modal({ open = false, onClose }: ModalProps) {
   const { t } = useTranslation()
 
   return (
     <BaseModal
-      open={isModalOpen}
-      onClose={closeModal}
+      open={open}
+      onClose={onClose}
       title={t('modal.title')}
       description={t('modal.description')}
     >
       <div className="flex justify-end gap-2 pt-4">
-        <Button variant="secondary" onClick={closeModal}>
+        <Button variant="secondary" onClick={onClose}>
           {t('modal.closeButton')}
         </Button>
         <Button
           variant="primary"
           onClick={() => {
             toast.success(t('modal.successMessage'))
-            closeModal()
+            onClose()
           }}
         >
           {t('modal.actionButton')}
