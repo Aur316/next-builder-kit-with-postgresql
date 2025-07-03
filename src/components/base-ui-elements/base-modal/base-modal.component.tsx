@@ -4,6 +4,8 @@ import { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 
 import { X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import FocusLock from 'react-focus-lock'
+import { RemoveScroll } from 'react-remove-scroll'
 import { twMerge } from 'tailwind-merge'
 
 import { IconWrapper } from '../icon-wrapper'
@@ -44,76 +46,79 @@ export function BaseModal({
     return () => document.removeEventListener('keydown', escape)
   }, [escape, closeOnEscape, open])
 
-  // Handle scroll lock and focus management
   useEffect(() => {
     if (!open) return
 
-    // Lock scroll
-    const originalStyle = window.getComputedStyle(document.body).overflow
-    document.body.style.overflow = 'hidden'
+    // Store the currently focused element before opening modal
+    const previouslyFocusedElement = document.activeElement as HTMLElement
 
     // Focus modal
     if (modalRef.current) {
       modalRef.current.focus()
     }
 
-    return () => {
-      document.body.style.overflow = originalStyle
-    }
+    return () => previouslyFocusedElement?.focus()
   }, [open])
 
   if (!open) return null
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? 'modal-title' : undefined}
-        aria-describedby={description ? 'modal-description' : undefined}
-      >
-        <motion.div
-          ref={modalRef}
-          className={twMerge(
-            'w-full max-w-md rounded-xl bg-white p-6 shadow-xl focus:outline-none',
-            extraStyles,
-          )}
-          initial={{ scale: 0.95, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          transition={{ duration: 0.2 }}
-          tabIndex={-1}
-        >
-          <section className="mb-2 flex items-center justify-between gap-3">
-            {title && (
-              <h2
-                id="modal-title"
-                className="text-lg font-semibold text-gray-900"
-              >
-                {title}
-              </h2>
-            )}
+    <FocusLock>
+      <RemoveScroll>
+        <AnimatePresence>
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={title ? 'modal-title' : undefined}
+            aria-describedby={description ? 'modal-description' : undefined}
+          >
+            <motion.div
+              ref={modalRef}
+              className={twMerge(
+                'w-full max-w-md rounded-xl bg-white p-6 shadow-xl focus:outline-none',
+                extraStyles,
+              )}
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.2 }}
+              tabIndex={-1}
+            >
+              <section className="mb-2 flex items-center justify-between gap-3">
+                {title && (
+                  <h2
+                    id="modal-title"
+                    className="text-lg font-semibold text-gray-900"
+                  >
+                    {title}
+                  </h2>
+                )}
 
-            <IconWrapper
-              Icon={X}
-              onClick={onClose}
-              size={20}
-              className="text-gray-500 transition-colors hover:text-gray-700"
-              aria-label="Close modal"
-            />
-          </section>
-          {description && (
-            <p id="modal-description" className="mb-6 text-sm text-gray-600">
-              {description}
-            </p>
-          )}
-          {children}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+                <IconWrapper
+                  Icon={X}
+                  onClick={onClose}
+                  size={20}
+                  className="text-gray-500 transition-colors hover:text-gray-700"
+                  aria-label="Close modal"
+                />
+              </section>
+              {description && (
+                <p
+                  id="modal-description"
+                  className="mb-6 text-sm text-gray-600"
+                >
+                  {description}
+                </p>
+              )}
+              {children}
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      </RemoveScroll>
+    </FocusLock>
   )
 }
