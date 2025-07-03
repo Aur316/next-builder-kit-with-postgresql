@@ -1,27 +1,20 @@
 'use client'
 
-import { use, useCallback, useState } from 'react'
+import { use, useCallback } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
 import { Button, Modal, SpinnableBorderWrapper } from '../../components'
+import { useModal } from '../../hooks'
 import { StoreContext } from '../../providers'
 
 export default function AboutPage() {
   const { t } = useTranslation()
   const { storeNumber } = use(StoreContext)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { open, openModal, closeModal } = useModal()
 
   const viewSource = useCallback(() => {
     window.open('https://github.com/Aur316/simple-model', '_blank')
-  }, [])
-
-  const openModal = useCallback(() => {
-    setIsModalOpen(true)
-  }, [])
-
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false)
   }, [])
 
   return (
@@ -49,7 +42,7 @@ export default function AboutPage() {
           </SpinnableBorderWrapper>
         </div>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+      <Modal open={open} onClose={closeModal} />
     </div>
   )
 }

@@ -17,6 +17,7 @@ interface BaseModalProps {
   open: boolean
   closeOnEscape?: boolean
   extraStyles?: string
+  closeOnClickOutside?: boolean
 }
 
 type BaseModal = PropsWithChildren<BaseModalProps>
@@ -29,6 +30,7 @@ export function BaseModal({
   open,
   closeOnEscape = true,
   extraStyles,
+  closeOnClickOutside,
 }: BaseModal) {
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -39,6 +41,16 @@ export function BaseModal({
     [onClose],
   )
 
+  const handleBackdropClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (!closeOnClickOutside) return
+      if (e.target === e.currentTarget) {
+        onClose()
+      }
+    },
+    [closeOnClickOutside, onClose],
+  )
+
   useEffect(() => {
     if (!closeOnEscape || !open) return
 
@@ -46,24 +58,10 @@ export function BaseModal({
     return () => document.removeEventListener('keydown', escape)
   }, [escape, closeOnEscape, open])
 
-  useEffect(() => {
-    if (!open) return
-
-    // Store the currently focused element before opening modal
-    const previouslyFocusedElement = document.activeElement as HTMLElement
-
-    // Focus modal
-    if (modalRef.current) {
-      modalRef.current.focus()
-    }
-
-    return () => previouslyFocusedElement?.focus()
-  }, [open])
-
   if (!open) return null
 
   return (
-    <FocusLock>
+    <FocusLock returnFocus>
       <RemoveScroll>
         <AnimatePresence>
           <motion.div
@@ -75,6 +73,7 @@ export function BaseModal({
             aria-modal="true"
             aria-labelledby={title ? 'modal-title' : undefined}
             aria-describedby={description ? 'modal-description' : undefined}
+            onClick={handleBackdropClick}
           >
             <motion.div
               ref={modalRef}
