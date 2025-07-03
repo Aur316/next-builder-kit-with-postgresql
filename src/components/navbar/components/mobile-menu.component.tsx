@@ -1,40 +1,51 @@
 'use client'
 
-import { Dispatch, SetStateAction, memo, useCallback, useMemo } from 'react'
-
-import Link from 'next/link'
+import {
+  Dispatch,
+  JSX,
+  SetStateAction,
+  cloneElement,
+  memo,
+  useCallback,
+} from 'react'
 
 import { AnimatePresence, motion } from 'motion/react'
-import { useTranslation } from 'react-i18next'
-
-import { Route } from '../../../types'
 
 interface MobileMenuProps {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
-  routes: Array<Route>
+  routeItems: JSX.Element
 }
 
 export const MobileMenu = memo(function MobileMenu({
   isOpen,
   setIsOpen,
-  routes,
+  routeItems,
 }: MobileMenuProps) {
-  const { t } = useTranslation()
-
   const linkClick = useCallback(() => {
     setIsOpen(false)
   }, [setIsOpen])
 
-  const routeItems = useMemo(
-    () =>
-      routes.map((route) => (
-        <Link key={route.path} href={route.path} onClick={linkClick}>
-          {t(route.name)}
-        </Link>
-      )),
-    [routes, t, linkClick],
-  )
+  const MobileRouteItems = useCallback(() => {
+    // Clone the ul element and add onClick to each li
+    const ulElement = routeItems
+    const liElements = ulElement.props.children
+
+    const mobileLiElements = liElements.map((li: JSX.Element, index: number) =>
+      cloneElement(li, {
+        key: li.key || index,
+        onClick: linkClick,
+      }),
+    )
+
+    return cloneElement(
+      ulElement,
+      {
+        className: 'mt-4 flex flex-col gap-3',
+      },
+      mobileLiElements,
+    )
+  }, [routeItems, linkClick])
 
   return (
     <AnimatePresence initial={false}>
@@ -47,7 +58,7 @@ export const MobileMenu = memo(function MobileMenu({
           transition={{ duration: 0.25, ease: 'easeInOut' }}
           className="overflow-hidden md:hidden"
         >
-          <div className="mt-4 flex flex-col gap-3">{routeItems}</div>
+          <MobileRouteItems />
         </motion.div>
       )}
     </AnimatePresence>
