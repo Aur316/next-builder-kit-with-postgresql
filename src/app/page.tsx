@@ -13,7 +13,7 @@ import {
   Toggle,
   showToast,
 } from '../components'
-import { InfoBox, RadioButtonGroup } from '../components/base-ui-elements'
+import { RadioButtonGroup } from '../components/base-ui-elements'
 import { DROPDOWN_OPTIONS, RADIO_OPTIONS, initialFormData } from '../constants'
 import { FormData } from '../types'
 
@@ -84,10 +84,6 @@ export default function Home() {
           {t('homePage.description')}
         </p>
       </section>
-      <InfoBox type="info" title="Info" description="This is an info box" />
-      <InfoBox type="success" title="Info" description="This is an info box" />
-      <InfoBox type="warning" title="Info" description="This is an info box" />
-      <InfoBox type="error" title="Info" description="This is an info box" />
 
       <section id="mainContent">
         <form className="flex flex-col items-center gap-4" onSubmit={submit}>
