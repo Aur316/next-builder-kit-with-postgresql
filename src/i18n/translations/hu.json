@@ -49,5 +49,9 @@
     "title": "Üdvözöllek a Modalban!",
     "description": "Ez egy példa modal, ami bemutatja a BaseModal komponens funkcionalitását.",
     "successMessage": "Sikeres"
+  },
+  "navbar": {
+    "openMenu": "Menü megnyitása",
+    "closeMenu": "Menü bezárása"
   }
 }

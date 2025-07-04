@@ -49,5 +49,9 @@
     "title": "Welcome to the Modal",
     "description": "This is a sample modal that demonstrates the BaseModal component functionality.",
     "successMessage": "Success"
+  },
+  "navbar": {
+    "openMenu": "Open Menu",
+    "closeMenu": "Close Menu"
   }
 }
