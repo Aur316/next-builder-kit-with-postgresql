@@ -1,9 +1,10 @@
 'use client'
 
-import { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
+import { PropsWithChildren, useCallback, useEffect } from 'react'
 
 import { X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { createPortal } from 'react-dom'
 import FocusLock from 'react-focus-lock'
 import { RemoveScroll } from 'react-remove-scroll'
 import { twMerge } from 'tailwind-merge'
@@ -32,15 +33,6 @@ export function BaseModal({
   extraStyles,
   closeOnClickOutside,
 }: BaseModal) {
-  const modalRef = useRef<HTMLDivElement>(null)
-
-  const escape = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    },
-    [onClose],
-  )
-
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
       if (!closeOnClickOutside) return
@@ -54,13 +46,17 @@ export function BaseModal({
   useEffect(() => {
     if (!closeOnEscape || !open) return
 
-    document.addEventListener('keydown', escape)
-    return () => document.removeEventListener('keydown', escape)
-  }, [escape, closeOnEscape, open])
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [onClose, closeOnEscape, open])
 
   if (!open) return null
 
-  return (
+  return createPortal(
     <FocusLock returnFocus>
       <RemoveScroll>
         <AnimatePresence>
@@ -76,7 +72,6 @@ export function BaseModal({
             onClick={handleBackdropClick}
           >
             <motion.div
-              ref={modalRef}
               className={twMerge(
                 'w-full max-w-md rounded-xl bg-white p-6 shadow-xl focus:outline-none',
                 extraStyles,
@@ -118,6 +113,7 @@ export function BaseModal({
           </motion.div>
         </AnimatePresence>
       </RemoveScroll>
-    </FocusLock>
+    </FocusLock>,
+    document.body,
   )
 }

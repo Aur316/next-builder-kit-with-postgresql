@@ -50,28 +50,15 @@ export const showToast = ({
     }
   }
 
-  if (type === 'success') {
-    toast.success(
-      <Toast
-        type={'success'}
-        description={description}
-        requestId={requestId}
-      />,
-    )
-  }
-  if (type === 'error') {
-    toast.error(
-      <Toast type={type} description={description} requestId={requestId} />,
-      {
-        action: <CopyButton onClick={copy} />,
-      },
-    )
-  }
-  if (type === 'warning') {
-    toast.warning(
-      <Toast type={type} description={description} requestId={requestId} />,
-    )
-  }
+  const toastContent = (
+    <Toast type={type} description={description} requestId={requestId} />
+  )
+
+  const toastConfig =
+    type === 'error' ? { action: <CopyButton onClick={copy} /> } : {}
+
+  const toastMethod = toast[type] || toast.success
+  toastMethod(toastContent, toastConfig)
 }
 
 export const Toast = ({ description, requestId, type }: IToastProps) => {
@@ -81,6 +68,7 @@ export const Toast = ({ description, requestId, type }: IToastProps) => {
       : type === 'error'
         ? 'text-secondary-red-900'
         : 'text-secondary-desert-orange-800'
+
   return (
     <div className={twMerge(`flex flex-col text-sm`, textColor)}>
       {description && <span className="font-bold">{description}</span>}
