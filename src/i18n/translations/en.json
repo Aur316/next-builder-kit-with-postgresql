@@ -53,5 +53,11 @@
   "navbar": {
     "openMenu": "Open Menu",
     "closeMenu": "Close Menu"
+  },
+  "infoBox": {
+    "info": "Information",
+    "success": "Success",
+    "warning": "Warning",
+    "error": "Error"
   }
 }

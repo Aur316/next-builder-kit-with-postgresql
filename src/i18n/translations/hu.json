@@ -53,5 +53,11 @@
   "navbar": {
     "openMenu": "Menü megnyitása",
     "closeMenu": "Menü bezárása"
+  },
+  "infoBox": {
+    "info": "Információ",
+    "success": "Sikeres",
+    "warning": "Figyelmeztetés",
+    "error": "Hiba"
   }
 }
