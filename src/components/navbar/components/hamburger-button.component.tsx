@@ -4,17 +4,20 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useTranslation } from 'react-i18next'
 
 interface HamburgerButtonProps {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 export function HamburgerButton({ isOpen, setIsOpen }: HamburgerButtonProps) {
+  const { t } = useTranslation()
   return (
     <button
       className="cursor-pointer md:hidden"
       onClick={() => setIsOpen((prev) => !prev)}
-      aria-label="Toggle Menu"
+      aria-expanded={isOpen}
+      aria-label={isOpen ? t('navbar.closeMenu') : t('navbar.openMenu')}
     >
       <AnimatePresence mode="wait">
         {isOpen ? (
