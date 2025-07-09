@@ -69,5 +69,11 @@
     "fileCountInfo": "Files: {{current}}/{{max}}",
     "totalSizeInfo": "Total size: {{current}}/{{max}}",
     "errorTitle": "File Upload Error"
+  },
+  "drawer": {
+    "menu": "Menu",
+    "toggleMenu": "Toggle menu",
+    "closeMenu": "Close menu",
+    "footer": "© 2024 Next Builder Kit"
   }
 }

@@ -1,4 +1,5 @@
 export * from './base-ui-elements'
+export * from './drawer'
 export * from './footer'
 export * from './gallery'
 export * from './language-switcher'

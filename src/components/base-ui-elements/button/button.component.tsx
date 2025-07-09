@@ -58,7 +58,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
       size = 'md',
       className,
       icon,
-      iconPosition,
+      iconPosition = 'left',
       isConfirmSignaling,
       loading,
       disabled,
@@ -70,7 +70,7 @@ export const Button = forwardRef<HTMLButtonElement, BaseButtonProps>(
     const isLoadingOrDisabled = disabled || loading
 
     const buttonClasses = twJoin(
-      'flex gap-2 items-center w-full justify-center rounded-2xl font-medium transition-colors duration-300 ease-in-out tracking-wider cursor-pointer',
+      'flex gap-2 items-center justify-center rounded-2xl font-medium transition-colors duration-300 ease-in-out tracking-wider cursor-pointer',
       isConfirmSignaling
         ? 'pointer-events-none bg-secondary-ghaf-green-800'
         : null,

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { Footer, Navbar, ToastProvider } from '../components'
+import { Drawer, Footer, ToastProvider } from '../components'
 import { I18nProvider, ReactQueryProvider, StoreProvider } from '../providers'
 import './globals.css'
 
@@ -17,7 +17,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <I18nProvider>
             <StoreProvider>
               <div className="bg-primary-midnight-blue-900 flex min-h-dvh flex-col">
-                <Navbar />
+                <Drawer />
+                {/* <Navbar /> */}
                 <main className="flex flex-1 items-center justify-center overflow-y-auto">
                   {children}
                 </main>

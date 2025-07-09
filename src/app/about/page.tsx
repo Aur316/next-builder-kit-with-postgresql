@@ -5,13 +5,13 @@ import { use, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button, Modal, SpinnableBorderWrapper } from '../../components'
-import { useModal } from '../../hooks'
+import { useToggle } from '../../hooks'
 import { StoreContext } from '../../providers'
 
 export default function AboutPage() {
   const { t } = useTranslation()
   const { storeNumber } = use(StoreContext)
-  const { open, openModal, closeModal } = useModal()
+  const { isOpen, open, close } = useToggle()
 
   const viewSource = useCallback(() => {
     window.open('https://github.com/Aur316/simple-model', '_blank')
@@ -31,10 +31,10 @@ export default function AboutPage() {
           {t('store.context.storeMessage')}
           <span className="text-primary-midnight-blue-100">{storeNumber}</span>
         </p>
-        <Button variant="secondary" onClick={openModal}>
-          {t('aboutPage.openModalButton')}
-        </Button>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button variant="secondary" onClick={open}>
+            {t('aboutPage.openModalButton')}
+          </Button>
           <SpinnableBorderWrapper isSpinning baseStyle="rounded-2xl">
             <Button variant="secondary" onClick={viewSource}>
               {t('aboutPage.buttonText')}
@@ -42,7 +42,7 @@ export default function AboutPage() {
           </SpinnableBorderWrapper>
         </div>
       </div>
-      <Modal open={open} onClose={closeModal} />
+      <Modal open={isOpen} onClose={close} />
     </div>
   )
 }
