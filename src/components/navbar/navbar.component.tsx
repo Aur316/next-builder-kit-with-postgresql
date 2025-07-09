@@ -7,13 +7,14 @@ import { usePathname } from 'next/navigation'
 import { Github } from 'lucide-react'
 
 import { useRoutes } from '../../hooks'
+import { RouteItems } from '../../route'
 import { LanguageSwitcher } from '../language-switcher'
 import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 
 export const Navbar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { routeItems, routes } = useRoutes()
+  const routes = useRoutes()
 
   const handleSetIsOpen = useCallback<Dispatch<SetStateAction<boolean>>>(
     (value) => {
@@ -35,12 +36,14 @@ export const Navbar = () => {
         <Github />
         <LanguageSwitcher />
         <HamburgerButton isOpen={isOpen} setIsOpen={handleSetIsOpen} />
-        <DesktopMenu routeItems={routeItems} />
+        <DesktopMenu
+          routeItems={<RouteItems type="navbar" routes={routes} />}
+        />
       </div>
       <MobileMenu
         isOpen={isOpen}
         setIsOpen={handleSetIsOpen}
-        routeItems={routeItems}
+        routeItems={<RouteItems type="drawer" routes={routes} />}
       />
     </nav>
   )
