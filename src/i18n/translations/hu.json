@@ -20,7 +20,8 @@
     "formSubmitted": "Sikeresen kitöltötted a formot.",
     "yesRadio": "Igen",
     "noRadio": "Nem",
-    "radioChoiceLabel": "Melyiket választod?"
+    "radioChoiceLabel": "Melyiket választod?",
+    "uploadButton": "Fájlok kiválasztása"
   },
   "aboutPage": {
     "title": "A projekt bemutatása",

@@ -20,7 +20,8 @@
     "formSubmitted": "You successfully filled the form.",
     "yesRadio": "Yes",
     "noRadio": "No",
-    "radioChoiceLabel": "Which one?"
+    "radioChoiceLabel": "Which one?",
+    "uploadButton": "Choose files"
   },
   "aboutPage": {
     "title": "About this project",

@@ -16,10 +16,13 @@ import {
   showToast,
 } from '../components'
 import { DROPDOWN_OPTIONS, RADIO_OPTIONS, initialFormData } from '../constants'
+import { useFileUpload } from '../hooks'
 import { FormData } from '../types'
 
 export default function Home() {
   const { t } = useTranslation()
+  const { fileError, setFileError, selectedFiles, setSelectedFiles } =
+    useFileUpload()
 
   const [formData, setFormData] = useState<FormData>(initialFormData)
 
@@ -37,9 +40,11 @@ export default function Home() {
         description: t('homePage.formSubmitted'),
       })
       setFormData(initialFormData)
+      setSelectedFiles([])
+      setFileError(null)
       inputRef.current?.focus()
     },
-    [t],
+    [t, setSelectedFiles, setFileError],
   )
 
   const nameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,12 +160,18 @@ export default function Home() {
             maxFileCount={3}
             maxTotalSize={5}
             required
+            fileError={fileError}
+            setFileError={setFileError}
+            selectedFiles={selectedFiles}
+            setSelectedFiles={setSelectedFiles}
+            uploadButtonText={t('homePage.uploadButton')}
           />
           <Button
             variant="secondary"
             icon={<SendHorizontal strokeWidth={1.5} />}
             iconPosition="right"
             type="submit"
+            disabled={!!fileError}
           >
             {t('homePage.submitButton')}
           </Button>

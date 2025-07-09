@@ -1,6 +1,6 @@
 'use client'
 
-import { InputHTMLAttributes, useCallback, useId, useState } from 'react'
+import { InputHTMLAttributes, useCallback, useId } from 'react'
 
 import { File, FileImage, FileText, Music, Video, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -12,23 +12,45 @@ import { InfoBox } from '../info-box/info-box.component'
 interface FileUploadProps extends InputHTMLAttributes<HTMLInputElement> {
   id?: string
   onFilesChange?: (files: Array<File>) => void
-  className?: string
+  containerClassName?: string
   maxFileCount?: number
   maxTotalSize?: number // in Mb
+  fileError: string | null
+  setFileError: (error: string | null) => void
+  selectedFiles: Array<File>
+  setSelectedFiles: (files: Array<File>) => void
+  inputType?:
+    | 'primary'
+    | 'secondary'
+    | 'accent'
+    | 'neutral'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
+  extraInputClassName?: string
+  fileUploadButtonClassName?: string
+  uploadButtonText: string
 }
 
 export function FileUpload({
   id,
   onFilesChange,
   onChange,
-  className,
+  containerClassName,
   maxFileCount,
   maxTotalSize,
+  fileError,
+  setFileError,
+  selectedFiles,
+  setSelectedFiles,
+  inputType = 'info',
+  extraInputClassName,
+  fileUploadButtonClassName,
+  uploadButtonText,
   ...props
 }: FileUploadProps) {
   const { t } = useTranslation()
-  const [selectedFiles, setSelectedFiles] = useState<Array<File>>([])
-  const [error, setError] = useState<string | null>(null)
   const internalId = useId()
   const inputId = id ?? internalId
 
@@ -96,20 +118,27 @@ export function FileUpload({
 
       const updatedFiles = [...selectedFiles, ...uniqueFiles]
 
-      // Validate the updated files
-      const validation = validateFiles(updatedFiles)
-
-      if (!validation.isValid) {
-        setError(validation.error || null)
-        return
-      }
-
-      setError(null)
+      // Always add files to selectedFiles, regardless of validation
       setSelectedFiles(updatedFiles)
       onFilesChange?.(updatedFiles)
       onChange?.(e)
+
+      // Validate the updated files and set error if needed
+      const validation = validateFiles(updatedFiles)
+      if (!validation.isValid) {
+        setFileError(validation.error || null)
+      } else {
+        setFileError(null)
+      }
     },
-    [selectedFiles, onFilesChange, onChange, validateFiles],
+    [
+      selectedFiles,
+      onFilesChange,
+      onChange,
+      validateFiles,
+      setFileError,
+      setSelectedFiles,
+    ],
   )
 
   const removeFile = useCallback(
@@ -126,14 +155,21 @@ export function FileUpload({
       onFilesChange?.(updatedFiles)
 
       // Clear error if files are now valid
-      if (error) {
+      if (fileError) {
         const validation = validateFiles(updatedFiles)
         if (validation.isValid) {
-          setError(null)
+          setFileError(null)
         }
       }
     },
-    [selectedFiles, onFilesChange, error, validateFiles],
+    [
+      selectedFiles,
+      onFilesChange,
+      fileError,
+      validateFiles,
+      setFileError,
+      setSelectedFiles,
+    ],
   )
 
   const currentTotalSize = selectedFiles.reduce(
@@ -148,15 +184,28 @@ export function FileUpload({
     : false
 
   return (
-    <div className={twMerge('w-full', className)}>
-      <input
-        id={inputId}
-        type="file"
-        className="file-input file-input-info w-full"
-        onChange={handleFileChange}
-        disabled={isAtFileLimit || isAtSizeLimit}
-        {...props}
-      />
+    <div className={twMerge('w-full', containerClassName)}>
+      <label className="flex items-center">
+        <span
+          className={twMerge(
+            `btn border-${inputType} rounded-r-none border-r-0 focus:outline-none`,
+            fileUploadButtonClassName,
+          )}
+        >
+          {uploadButtonText}
+        </span>
+        <input
+          id={inputId}
+          type="file"
+          className={twMerge(
+            `file-input file-input-${inputType} w-full rounded-l-none border-l-0 focus:outline-none [&::file-selector-button]:hidden`,
+            extraInputClassName,
+          )}
+          onChange={handleFileChange}
+          disabled={isAtFileLimit || isAtSizeLimit}
+          {...props}
+        />
+      </label>
 
       {(maxFileCount || maxTotalSize) && (
         <div className="mt-2 text-xs text-gray-500">
@@ -179,11 +228,11 @@ export function FileUpload({
         </div>
       )}
 
-      {error && (
+      {fileError && (
         <InfoBox
           type="error"
           title={t('fileUpload.errorTitle')}
-          description={error}
+          description={fileError}
         />
       )}
 
