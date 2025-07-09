@@ -58,7 +58,7 @@ export const Input = forwardRef(function Input(
     'outline-none border border-primary-midnight-blue-700 focus:border-primary-midnight-blue-800 hover:border-primary-midnight-blue-600'
 
   const baseStyle = twMerge(
-    'px-3 outline-none rounded-lg placeholder:text-primary-midnight-blue-700 text-white',
+    'px-3 outline-none rounded-lg placeholder:text-primary-midnight-blue-700 text-white w-full',
     !legend && 'py-1',
   )
 
@@ -88,6 +88,7 @@ export const Input = forwardRef(function Input(
 
       <fieldset
         className={twMerge(
+          'w-full',
           legend && !label && [baseFieldsetStyle, borderStyle],
         )}
       >

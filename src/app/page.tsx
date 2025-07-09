@@ -9,16 +9,20 @@ import {
   Button,
   Checkbox,
   Dropdown,
+  FileUpload,
   Input,
+  RadioButtonGroup,
   Toggle,
   showToast,
 } from '../components'
-import { RadioButtonGroup } from '../components/base-ui-elements'
 import { DROPDOWN_OPTIONS, RADIO_OPTIONS, initialFormData } from '../constants'
+import { useFileUpload } from '../hooks'
 import { FormData } from '../types'
 
 export default function Home() {
   const { t } = useTranslation()
+  const { fileError, setFileError, selectedFiles, setSelectedFiles } =
+    useFileUpload()
 
   const [formData, setFormData] = useState<FormData>(initialFormData)
 
@@ -36,9 +40,11 @@ export default function Home() {
         description: t('homePage.formSubmitted'),
       })
       setFormData(initialFormData)
+      setSelectedFiles([])
+      setFileError(null)
       inputRef.current?.focus()
     },
-    [t],
+    [t, setSelectedFiles, setFileError],
   )
 
   const nameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,11 +154,24 @@ export default function Home() {
             checked={formData.isAgreed}
             onChange={agreementChange}
           />
+          <FileUpload
+            multiple
+            accept="file/*"
+            maxFileCount={3}
+            maxTotalSize={5}
+            required
+            fileError={fileError}
+            setFileError={setFileError}
+            selectedFiles={selectedFiles}
+            setSelectedFiles={setSelectedFiles}
+            uploadButtonText={t('homePage.uploadButton')}
+          />
           <Button
             variant="secondary"
             icon={<SendHorizontal strokeWidth={1.5} />}
             iconPosition="right"
             type="submit"
+            disabled={!!fileError}
           >
             {t('homePage.submitButton')}
           </Button>

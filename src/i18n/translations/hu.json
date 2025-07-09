@@ -20,7 +20,8 @@
     "formSubmitted": "Sikeresen kitöltötted a formot.",
     "yesRadio": "Igen",
     "noRadio": "Nem",
-    "radioChoiceLabel": "Melyiket választod?"
+    "radioChoiceLabel": "Melyiket választod?",
+    "uploadButton": "Fájlok kiválasztása"
   },
   "aboutPage": {
     "title": "A projekt bemutatása",
@@ -59,5 +60,14 @@
     "success": "Sikeres",
     "warning": "Figyelmeztetés",
     "error": "Hiba"
+  },
+  "fileUpload": {
+    "selectedFiles": "Kiválasztott fájlok: {{count}}",
+    "removeFile": "Eltávolít {{name}}",
+    "tooManyFiles": "Túl sok fájl van kiválasztva. Maximum engedélyezett: {{maxCount}}",
+    "totalSizeExceeded": "A fájlok összmérete meghaladja a limitet. Maximum engedélyezett: {{maxSize}}",
+    "fileCountInfo": "Fájlok: {{current}}/{{max}}",
+    "totalSizeInfo": "Összméret: {{current}}/{{max}}",
+    "errorTitle": "Fájl feltöltési hiba"
   }
 }
