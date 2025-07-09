@@ -48,7 +48,7 @@ export function RouteItems({
                 {route.icon ? (
                   <route.icon className="size-5" />
                 ) : (
-                  <span className="text-sm font-semibold">
+                  <span className="text-lg font-semibold">
                     {route.name.charAt(0).toUpperCase()}
                   </span>
                 )}

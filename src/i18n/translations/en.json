@@ -75,5 +75,9 @@
     "toggleMenu": "Toggle menu",
     "closeMenu": "Close menu",
     "footer": "© 2024 Next Builder Kit"
+  },
+  "switcher": {
+    "navbar": "Toggle navbar",
+    "drawer": "Toggle drawer"
   }
 }
