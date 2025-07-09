@@ -1,6 +1,8 @@
 import { PropsWithChildren } from 'react'
 
-import { Drawer, Footer, ToastProvider } from '../components'
+import { twMerge } from 'tailwind-merge'
+
+import { Drawer, Footer, Navbar, ToastProvider } from '../components'
 import { I18nProvider, ReactQueryProvider, StoreProvider } from '../providers'
 import './globals.css'
 
@@ -10,6 +12,7 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
+  const isDrawer = true
   return (
     <html lang="en">
       <body className="flex min-h-dvh flex-col">
@@ -17,12 +20,18 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <I18nProvider>
             <StoreProvider>
               <div className="bg-primary-midnight-blue-900 flex min-h-dvh flex-col">
-                <Drawer />
-                {/* <Navbar /> */}
-                <main className="flex flex-1 items-center justify-center overflow-y-auto">
+                {isDrawer ? <Drawer /> : <Navbar />}
+                <main
+                  className={twMerge(
+                    'flex flex-1 items-center justify-center overflow-y-auto',
+                    isDrawer && 'pl-16',
+                  )}
+                >
                   {children}
                 </main>
-                <Footer />
+                <div className={isDrawer ? 'pl-16' : ''}>
+                  <Footer />
+                </div>
               </div>
               <ToastProvider />
             </StoreProvider>
