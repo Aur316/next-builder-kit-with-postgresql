@@ -69,5 +69,11 @@
     "fileCountInfo": "Fájlok: {{current}}/{{max}}",
     "totalSizeInfo": "Összméret: {{current}}/{{max}}",
     "errorTitle": "Fájl feltöltési hiba"
+  },
+  "drawer": {
+    "menu": "Menü",
+    "toggleMenu": "Menü váltása",
+    "closeMenu": "Menü bezárása",
+    "footer": "© 2024 Next Builder Kit"
   }
 }
