@@ -7,6 +7,7 @@ import { twMerge } from 'tailwind-merge'
 import { useRoutes, useToggle } from '../../hooks'
 import { RouteItems } from '../../route/route-items.component'
 import { Button } from '../base-ui-elements'
+import { NavigationSwitcher } from '../navigation-switcher'
 
 export function Drawer() {
   const { t } = useTranslation()
@@ -15,7 +16,7 @@ export function Drawer() {
 
   return (
     <div className="relative">
-      {/* Overlay csak nagy drawer esetén */}
+      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
@@ -61,8 +62,13 @@ export function Drawer() {
           showIcon
           closeDrawer={close}
         />
-
-        {/* Footer (csak nagy drawer) */}
+        <NavigationSwitcher
+          className={twMerge(
+            'absolute',
+            isOpen ? 'bottom-15 left-3' : 'bottom-5 left-1/2 -translate-x-1/2',
+          )}
+        />
+        {/* Footer */}
         {isOpen && (
           <div className="absolute bottom-0 w-full border-t border-gray-500 p-4">
             <div className="text-center text-sm text-gray-500">

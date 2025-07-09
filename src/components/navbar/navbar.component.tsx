@@ -9,6 +9,7 @@ import { Github } from 'lucide-react'
 import { useRoutes } from '../../hooks'
 import { RouteItems } from '../../route'
 import { LanguageSwitcher } from '../language-switcher'
+import { NavigationSwitcher } from '../navigation-switcher'
 import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 
 export const Navbar = () => {
@@ -39,6 +40,7 @@ export const Navbar = () => {
         <DesktopMenu
           routeItems={<RouteItems type="navbar" routes={routes} />}
         />
+        <NavigationSwitcher className="ml-5" />
       </div>
       <MobileMenu
         isOpen={isOpen}
