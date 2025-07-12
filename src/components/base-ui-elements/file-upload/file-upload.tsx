@@ -183,12 +183,34 @@ export function FileUpload({
     ? currentTotalSize >= maxTotalSize * 1024 * 1024
     : false
 
+  const getBorderClass = (type: string) => {
+    switch (type) {
+      case 'primary':
+        return 'border-primary'
+      case 'secondary':
+        return 'border-secondary'
+      case 'accent':
+        return 'border-accent'
+      case 'info':
+        return 'border-info'
+      case 'success':
+        return 'border-success'
+      case 'warning':
+        return 'border-warning'
+      case 'error':
+        return 'border-error'
+      default:
+        return 'border-primary'
+    }
+  }
+
   return (
     <div className={twMerge('w-full', containerClassName)}>
       <label className="flex items-center">
         <span
           className={twMerge(
-            `btn border-${inputType} rounded-r-none border-r-0 focus:outline-none`,
+            getBorderClass(inputType),
+            `btn rounded-r-none border-r-0 focus:outline-none`,
             fileUploadButtonClassName,
           )}
         >
@@ -198,7 +220,8 @@ export function FileUpload({
           id={inputId}
           type="file"
           className={twMerge(
-            `file-input file-input-${inputType} w-full rounded-l-none border-l-0 focus:outline-none [&::file-selector-button]:hidden`,
+            `file-input rounded-l-none border-l-0 pl-2 focus:outline-none [&::file-selector-button]:hidden`,
+            getBorderClass(inputType),
             extraInputClassName,
           )}
           onChange={handleFileChange}

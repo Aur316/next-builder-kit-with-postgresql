@@ -14,6 +14,7 @@ export function NavigationSwitcher({
   const { t } = useTranslation()
 
   const style = 'cursor-pointer hover:text-gray-300 transition-colors'
+  const strokeWidth = 1
 
   return (
     <div {...props}>
@@ -22,12 +23,14 @@ export function NavigationSwitcher({
           onClick={toggleNavigation}
           aria-label={t('switcher.navbar')}
           className={style}
+          strokeWidth={strokeWidth}
         />
       ) : (
         <PanelRightClose
           onClick={toggleNavigation}
           aria-label={t('switcher.drawer')}
           className={style}
+          strokeWidth={strokeWidth}
         />
       )}
     </div>
