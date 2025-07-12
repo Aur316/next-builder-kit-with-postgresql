@@ -22,12 +22,13 @@ export default function Posts() {
         >
           <Button
             type="submit"
-            text={t('postsPage.postForm.createPost')}
             variant="secondary"
             icon={<SendHorizontal />}
             iconPosition="right"
             loading={isPending}
-          />
+          >
+            {t('postsPage.postForm.createPost')}
+          </Button>
         </PostForm>
         <PostList posts={posts} isLoading={isGetPending} isError={isError} />
       </div>

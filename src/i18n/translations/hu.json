@@ -27,13 +27,29 @@
     "toggleText": "Értesítések engedélyezése",
     "dropdownLabel": "Válassz egyet",
     "checkboxText": "Elfogadom a feltételeket",
-    "toastSuccess": "Sikeresen elindítottál egy toast üzenetet."
+    "toastSuccess": "Sikeresen elindítottál egy toast üzenetet.",
+    "submitButton": "Küldés",
+    "nameLabel": "Neved",
+    "namePlaceholder": "Kiss János",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Add meg az e-mail címed",
+    "messageLabel": "Üzenet",
+    "messagePlaceholder": "Írj valamit ...",
+    "frameworkLabel": "Válassz egyet",
+    "notificationsLabel": "Értesítések engedélyezése",
+    "agreeToTerms": "Elfogadom a feltételeket",
+    "formSubmitted": "Sikeresen kitöltötted a formot.",
+    "yesRadio": "Igen",
+    "noRadio": "Nem",
+    "radioChoiceLabel": "Melyiket választod?",
+    "uploadButton": "Fájlok kiválasztása"
   },
   "aboutPage": {
     "title": "A projekt bemutatása",
     "description1": "Ez egy letisztult és moduláris Next.js starter sablon, amely TypeScriptet, Tailwind CSS-t, DaisyUI-t és React Query-t használ. Szigorú kódolási szabályokat követ, és újrahasználható UI komponenseket, toast értesítéseket és API segédleteket tartalmaz.",
     "description2": "A cél egy szilárd alap biztosítása a modern webalkalmazások gyors és következetes minták szerinti fejlesztéséhez.",
-    "buttonText": "Forrás megtekintése a GitHubon"
+    "buttonText": "Forrás megtekintése a GitHubon",
+    "openModalButton": "Modal megnyitása"
   },
   "galleryPage": {
     "coverflow": "Coverflow Galéria"
@@ -97,5 +113,49 @@
   },
   "footer": {
     "rights": "Minden jog fenntartva."
+  },
+  "componentErrors": {
+    "legendAndLabel": "A legend és a label nem használható együtt"
+  },
+  "store": {
+    "context": {
+      "storeMessage": "Hello, a store Provider-ból jövök: "
+    }
+  },
+  "modal": {
+    "closeButton": "Bezárás",
+    "actionButton": "Művelet",
+    "title": "Üdvözöllek a Modalban!",
+    "description": "Ez egy példa modal, ami bemutatja a BaseModal komponens funkcionalitását.",
+    "successMessage": "Sikeres"
+  },
+  "navbar": {
+    "openMenu": "Menü megnyitása",
+    "closeMenu": "Menü bezárása"
+  },
+  "infoBox": {
+    "info": "Információ",
+    "success": "Sikeres",
+    "warning": "Figyelmeztetés",
+    "error": "Hiba"
+  },
+  "fileUpload": {
+    "selectedFiles": "Kiválasztott fájlok: {{count}}",
+    "removeFile": "Eltávolít {{name}}",
+    "tooManyFiles": "Túl sok fájl van kiválasztva. Maximum engedélyezett: {{maxCount}}",
+    "totalSizeExceeded": "A fájlok összmérete meghaladja a limitet. Maximum engedélyezett: {{maxSize}}",
+    "fileCountInfo": "Fájlok: {{current}}/{{max}}",
+    "totalSizeInfo": "Összméret: {{current}}/{{max}}",
+    "errorTitle": "Fájl feltöltési hiba"
+  },
+  "drawer": {
+    "menu": "Menü",
+    "toggleMenu": "Menü váltása",
+    "closeMenu": "Menü bezárása",
+    "footer": "© 2024 Next Builder Kit"
+  },
+  "switcher": {
+    "navbar": "Navbar váltása",
+    "drawer": "Drawer váltása"
   }
 }

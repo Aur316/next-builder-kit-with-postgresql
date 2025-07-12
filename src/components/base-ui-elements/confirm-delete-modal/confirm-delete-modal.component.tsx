@@ -24,6 +24,11 @@ export const ConfirmDeleteModal = ({
   cancelText,
   pending,
 }: ConfirmDeleteModalProps) => {
+  const confirm = () => {
+    onConfirm()
+    onClose()
+  }
+
   return (
     <BaseModal
       title={title}
@@ -34,22 +39,12 @@ export const ConfirmDeleteModal = ({
       extraStyles="bg-primary-midnight-blue-900"
     >
       <div className="flex justify-end gap-2">
-        <Button
-          variant="primary"
-          size="sm"
-          text={cancelText}
-          onClick={onClose}
-        />
-        <Button
-          variant="secondary"
-          size="sm"
-          text={confirmText}
-          onClick={() => {
-            onConfirm()
-            onClose()
-          }}
-          loading={pending}
-        />
+        <Button variant="primary" onClick={onClose}>
+          {cancelText}
+        </Button>
+        <Button variant="secondary" onClick={confirm} loading={pending}>
+          {confirmText}
+        </Button>
       </div>
     </BaseModal>
   )

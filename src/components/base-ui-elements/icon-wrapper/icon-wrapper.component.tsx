@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
+import { ButtonHTMLAttributes, PropsWithChildren, memo } from 'react'
 
 import { LucideIcon } from 'lucide-react'
 
@@ -7,7 +7,12 @@ interface IconWrapperProps
   Icon: LucideIcon
   size?: number
 }
-export function IconWrapper({ Icon, size = 16, ...props }: IconWrapperProps) {
+
+export const IconWrapper = memo(function IconWrapper({
+  Icon,
+  size = 16,
+  ...props
+}: IconWrapperProps) {
   return (
     <button
       className="group flex cursor-pointer items-center justify-center p-1"
@@ -19,4 +24,4 @@ export function IconWrapper({ Icon, size = 16, ...props }: IconWrapperProps) {
       />
     </button>
   )
-}
+})

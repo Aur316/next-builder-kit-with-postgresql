@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useId } from 'react'
+import { InputHTMLAttributes, memo, useId } from 'react'
 
 import { twMerge } from 'tailwind-merge'
 
@@ -7,26 +7,29 @@ interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
 }
 
-export const Toggle = ({
+export const Toggle = memo(function Toggle({
   text,
   className = 'toggle-primary',
   id,
   ...props
-}: ToggleProps) => {
+}: ToggleProps) {
   const internalId = useId()
   const inputId = id ?? internalId
 
   return (
-    <div className="form-control">
-      <label htmlFor={inputId} className="label cursor-pointer gap-2">
-        <span className="label-text">{text}</span>
-        <input
-          id={inputId}
-          type="checkbox"
-          className={twMerge('toggle', className)}
-          {...props}
-        />
+    <div className="form-control flex items-center gap-2">
+      <label
+        htmlFor={inputId}
+        className="label text-primary-midnight-blue-600 cursor-pointer"
+      >
+        {text}
       </label>
+      <input
+        id={inputId}
+        type="checkbox"
+        className={twMerge('toggle', className)}
+        {...props}
+      />
     </div>
   )
-}
+})

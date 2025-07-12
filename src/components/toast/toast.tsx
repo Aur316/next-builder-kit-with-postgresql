@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { CircleAlert, CircleCheck, Copy } from 'lucide-react'
 import { Toaster, toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
@@ -48,28 +50,15 @@ export const showToast = ({
     }
   }
 
-  if (type === 'success') {
-    toast.success(
-      <Toast
-        type={'success'}
-        description={description}
-        requestId={requestId}
-      />,
-    )
-  }
-  if (type === 'error') {
-    toast.error(
-      <Toast type={type} description={description} requestId={requestId} />,
-      {
-        action: <CopyButton onClick={copy} />,
-      },
-    )
-  }
-  if (type === 'warning') {
-    toast.warning(
-      <Toast type={type} description={description} requestId={requestId} />,
-    )
-  }
+  const toastContent = (
+    <Toast type={type} description={description} requestId={requestId} />
+  )
+
+  const toastConfig =
+    type === 'error' ? { action: <CopyButton onClick={copy} /> } : {}
+
+  const toastMethod = toast[type] || toast.success
+  toastMethod(toastContent, toastConfig)
 }
 
 export const Toast = ({ description, requestId, type }: IToastProps) => {
@@ -91,7 +80,7 @@ interface CopyButtonProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const CopyButton = ({ onClick }: CopyButtonProps) => {
+const CopyButton = memo(function CopyButton({ onClick }: CopyButtonProps) {
   return (
     <div
       onClick={onClick}
@@ -100,4 +89,4 @@ const CopyButton = ({ onClick }: CopyButtonProps) => {
       <Copy size={18} />
     </div>
   )
-}
+})

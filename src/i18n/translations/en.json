@@ -21,19 +21,28 @@
   "homePage": {
     "title": "Welcome to Next Builder Kit",
     "description": "This is a clean starter template with TypeScript, Tailwind, DaisyUI, reusable components and best practices.",
-    "buttonText": "Click Me",
-    "inputLabel": "Your Name",
-    "inputPlaceholder": "John Doe",
-    "toggleText": "Enable notifications",
-    "dropdownLabel": "Choose one",
-    "checkboxText": "I agree to the terms",
-    "toastSuccess": "You successfully triggered a toast."
+    "submitButton": "Submit",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Enter your e-mail",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Write something ...",
+    "frameworkLabel": "Choose one",
+    "notificationsLabel": "Enable notifications",
+    "agreeToTerms": "I agree to the terms",
+    "formSubmitted": "You successfully filled the form.",
+    "yesRadio": "Yes",
+    "noRadio": "No",
+    "radioChoiceLabel": "Which one?",
+    "uploadButton": "Choose files"
   },
   "aboutPage": {
     "title": "About this project",
     "description1": "This is a clean and modular Next.js starter template built with TypeScript, Tailwind CSS, DaisyUI, and React Query. It follows strict coding conventions and includes reusable UI components, toast notifications, and API utilities.",
     "description2": "The goal is to provide a solid foundation for rapidly building modern web applications with consistent patterns.",
-    "buttonText": "View Source on GitHub"
+    "buttonText": "View Source on GitHub",
+    "openModalButton": "Open Modal"
   },
   "galleryPage": {
     "coverflow": "Coverflow Gallery"
@@ -97,5 +106,49 @@
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "componentErrors": {
+    "legendAndLabel": "Legend and label cannot be used together"
+  },
+  "store": {
+    "context": {
+      "storeMessage": "Hello, I am coming from store Provider: "
+    }
+  },
+  "modal": {
+    "closeButton": "Close",
+    "actionButton": "Action",
+    "title": "Welcome to the Modal",
+    "description": "This is a sample modal that demonstrates the BaseModal component functionality.",
+    "successMessage": "Success"
+  },
+  "navbar": {
+    "openMenu": "Open Menu",
+    "closeMenu": "Close Menu"
+  },
+  "infoBox": {
+    "info": "Information",
+    "success": "Success",
+    "warning": "Warning",
+    "error": "Error"
+  },
+  "fileUpload": {
+    "selectedFiles": "Selected files: {{count}}",
+    "removeFile": "Remove {{name}}",
+    "tooManyFiles": "Too many files selected. Maximum allowed: {{maxCount}}",
+    "totalSizeExceeded": "Total file size exceeds the limit. Maximum allowed: {{maxSize}}",
+    "fileCountInfo": "Files: {{current}}/{{max}}",
+    "totalSizeInfo": "Total size: {{current}}/{{max}}",
+    "errorTitle": "File Upload Error"
+  },
+  "drawer": {
+    "menu": "Menu",
+    "toggleMenu": "Toggle menu",
+    "closeMenu": "Close menu",
+    "footer": "© 2024 Next Builder Kit"
+  },
+  "switcher": {
+    "navbar": "Toggle navbar",
+    "drawer": "Toggle drawer"
   }
 }

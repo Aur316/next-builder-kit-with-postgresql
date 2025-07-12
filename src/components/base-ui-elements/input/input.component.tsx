@@ -8,6 +8,7 @@ import {
   useId,
 } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { twMerge } from 'tailwind-merge'
 
 type CommonProps = {
@@ -16,9 +17,9 @@ type CommonProps = {
   labelPosition?: 'top' | 'bottom' | 'left' | 'right'
   labelClassName?: string
   inputClassName?: string
-  req?: boolean
   isTextArea?: boolean
   maxTextareaSize?: number
+  legend?: string
 }
 
 type InputProps = CommonProps &
@@ -34,72 +35,98 @@ export const Input = forwardRef(function Input(
     labelPosition = 'top',
     labelClassName,
     inputClassName,
-    req,
     isTextArea,
     id,
     maxTextareaSize = 100,
+    legend,
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
 ) {
   const internalId = useId()
   const inputId = id ?? internalId
+  const { t } = useTranslation()
+
+  if (legend && label) {
+    throw new Error(t('componentErrors.legendAndLabel'))
+  }
 
   const isVertical = labelPosition === 'top' || labelPosition === 'bottom'
   const isLabelFirst = labelPosition === 'top' || labelPosition === 'left'
 
-  const baseStyle = 'px-3 outline-none focus:border-primary-midnight-blue-800'
+  const borderStyle =
+    'outline-none border border-primary-midnight-blue-700 focus:border-primary-midnight-blue-800 hover:border-primary-midnight-blue-600'
 
-  const labelContent = label && (
+  const baseStyle = twMerge(
+    'px-3 outline-none rounded-lg placeholder:text-primary-midnight-blue-700 text-white w-full',
+    !legend && 'py-1',
+  )
+
+  const baseFieldsetStyle = twMerge(
+    'block rounded-lg border p-2',
+    legend && 'pt-0.5',
+  )
+
+  const labelContent = label && !legend && (
     <label
       htmlFor={inputId}
       className={twMerge('cursor-pointer', labelClassName)}
     >
       {label}
-      {req && (
-        <span className="text-qfont-2 text-primary-purple-100 ml-0.5 align-super">
-          *
-        </span>
-      )}
     </label>
   )
 
   return (
     <div
       className={twMerge(
-        'flex gap-1',
+        'flex w-full gap-1',
         isVertical ? 'flex-col items-start' : 'flex-row items-center',
         containerClassName,
       )}
     >
-      {isLabelFirst && labelContent}
+      {isLabelFirst && !legend && labelContent}
 
-      {isTextArea ? (
-        <textarea
-          id={inputId}
-          ref={ref as ForwardedRef<HTMLTextAreaElement>}
-          className={twMerge(baseStyle, inputClassName)}
-          autoComplete={props.autoComplete ?? 'off'}
-          {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          aria-required={req}
-          onInput={(e) => {
-            const el = e.currentTarget
-            el.style.height = 'auto'
-            el.style.height = Math.min(el.scrollHeight, maxTextareaSize) + 'px'
-          }}
-        />
-      ) : (
-        <input
-          id={inputId}
-          ref={ref as ForwardedRef<HTMLInputElement>}
-          className={twMerge(baseStyle, inputClassName)}
-          autoComplete={props.autoComplete ?? 'off'}
-          {...(props as InputHTMLAttributes<HTMLInputElement>)}
-          aria-required={req}
-        />
-      )}
+      <fieldset
+        className={twMerge(
+          'w-full',
+          legend && !label && [baseFieldsetStyle, borderStyle],
+        )}
+      >
+        {legend && !label && (
+          <legend className="isolate block p-0.5 text-white">{legend}</legend>
+        )}
+        {isTextArea ? (
+          <textarea
+            id={inputId}
+            ref={ref as ForwardedRef<HTMLTextAreaElement>}
+            className={twMerge(
+              baseStyle,
+              !legend && [inputClassName, borderStyle],
+            )}
+            autoComplete={props.autoComplete ?? 'off'}
+            {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
+            onInput={(e) => {
+              const el = e.currentTarget
+              el.style.height = 'auto'
+              el.style.height =
+                Math.min(el.scrollHeight, maxTextareaSize) + 'px'
+            }}
+          />
+        ) : (
+          <input
+            id={inputId}
+            ref={ref as ForwardedRef<HTMLInputElement>}
+            className={twMerge(
+              baseStyle,
+              !legend && [inputClassName, borderStyle],
+            )}
+            autoComplete={props.autoComplete ?? 'off'}
+            {...(props as InputHTMLAttributes<HTMLInputElement>)}
+          />
+        )}
+      </fieldset>
 
-      {!isLabelFirst && labelContent}
+      {!isLabelFirst && !legend && labelContent}
     </div>
   )
 })

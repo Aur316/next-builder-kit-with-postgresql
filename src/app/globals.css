@@ -60,6 +60,12 @@
   --color-secondary-red-700: #ed8d7c;
   --color-secondary-red-800: #e86c57;
   --color-secondary-red-900: #e24b32;
+  --color-white: #e3e6e8;
+
+  --color-info: #2563eb;
+  --color-success: #16a34a;
+  --color-warning: #eab308;
+  --color-error: #dc2626;
 }
 
 body {
