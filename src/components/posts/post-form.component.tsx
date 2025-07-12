@@ -64,7 +64,7 @@ export const PostForm = ({
             <Input
               label={t('postsPage.postForm.title')}
               placeholder={t('postsPage.postForm.titlePlaceholder')}
-              req
+              required
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               inputClassName="border-primary-midnight-blue-700 w-full h-8 rounded-lg border"
@@ -90,7 +90,7 @@ export const PostForm = ({
             <Input
               label={t('postsPage.postForm.content')}
               placeholder={t('postsPage.postForm.contentPlaceholder')}
-              req
+              required
               isTextArea
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}

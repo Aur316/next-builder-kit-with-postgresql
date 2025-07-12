@@ -1,3 +1,5 @@
+import { LucideIcon } from 'lucide-react'
+
 export enum RouteKey {
   HOME = 'home',
   ABOUT = 'about',
@@ -9,6 +11,7 @@ export type Route = {
   path: string
   name: RouteKey
   visibleInNavbar?: boolean
+  icon?: LucideIcon
 }
 
 export interface Routes {

@@ -1,33 +1,52 @@
 'use client'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { usePathname } from 'next/navigation'
 
 import { Github } from 'lucide-react'
 
-import { getRoutes } from '../../route'
+import { useRoutes } from '../../hooks'
+import { RouteItems } from '../../route'
 import { LanguageSwitcher } from '../language-switcher'
+import { NavigationSwitcher } from '../navigation-switcher'
 import { DesktopMenu, HamburgerButton, MobileMenu } from './components'
 
 export const Navbar = () => {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const routes = getRoutes().routes.filter((r) => r.visibleInNavbar)
+  const routes = useRoutes()
+
+  const handleSetIsOpen = useCallback<Dispatch<SetStateAction<boolean>>>(
+    (value) => {
+      setIsOpen(value)
+    },
+    [],
+  )
 
   if (!routes.some((route) => route.path === pathname)) {
     return null
   }
 
   return (
-    <nav className="bg-primary-midnight-blue-800 m-2 rounded-xl px-6 py-4 text-white">
+    <nav
+      role="navigation"
+      className="bg-primary-midnight-blue-800 m-2 rounded-xl px-6 py-4 text-white"
+    >
       <div className="flex items-center justify-between">
         <Github />
         <LanguageSwitcher />
-        <HamburgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
-        <DesktopMenu routes={routes} />
+        <HamburgerButton isOpen={isOpen} setIsOpen={handleSetIsOpen} />
+        <DesktopMenu
+          routeItems={<RouteItems type="navbar" routes={routes} />}
+        />
+        <NavigationSwitcher className="ml-5" />
       </div>
-      <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} routes={routes} />
+      <MobileMenu
+        isOpen={isOpen}
+        setIsOpen={handleSetIsOpen}
+        routeItems={<RouteItems type="drawer" routes={routes} />}
+      />
     </nav>
   )
 }

@@ -1,23 +1,20 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, JSX, SetStateAction, memo } from 'react'
 
-import Link from 'next/link'
-
-import { AnimatePresence, motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
-
-import { Route } from '../../../types'
+import { AnimatePresence, motion } from 'motion/react'
 
 interface MobileMenuProps {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
-  routes: Array<Route>
+  routeItems: JSX.Element
 }
 
-export function MobileMenu({ isOpen, setIsOpen, routes }: MobileMenuProps) {
-  const { t } = useTranslation()
-
+export const MobileMenu = memo(function MobileMenu({
+  isOpen,
+  setIsOpen,
+  routeItems,
+}: MobileMenuProps) {
   return (
     <AnimatePresence initial={false}>
       {isOpen && (
@@ -28,20 +25,11 @@ export function MobileMenu({ isOpen, setIsOpen, routes }: MobileMenuProps) {
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.25, ease: 'easeInOut' }}
           className="overflow-hidden md:hidden"
+          onClick={() => setIsOpen(false)}
         >
-          <div className="mt-4 flex flex-col gap-3">
-            {routes.map((route) => (
-              <Link
-                key={route.path}
-                href={route.path}
-                onClick={() => setIsOpen(false)}
-              >
-                {t(route.name)}
-              </Link>
-            ))}
-          </div>
+          {routeItems}
         </motion.div>
       )}
     </AnimatePresence>
   )
-}
+})

@@ -1,136 +1,103 @@
 'use client'
 
-import { useState } from 'react'
+import { PropsWithChildren, SelectHTMLAttributes, useId } from 'react'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { twMerge } from 'tailwind-merge'
 
-interface DropdownProps {
-  value?: string
-  onValueChange?: (value: string) => void
+interface DropdownProps
+  extends PropsWithChildren<SelectHTMLAttributes<HTMLSelectElement>> {
+  id?: string
   options: Array<{ value: string; label: string }>
   label?: string
+  legend?: string
   placeholder?: string
+  nestedOption?: string
   labelClassName?: string
-  triggerClassName?: string
-  pickClassName?: string
+  selectClassName?: string
   optionClassName?: string
-  placeholderColor?: string
 }
 
 export const Dropdown = ({
-  value,
-  onValueChange,
+  id,
   options,
   label,
+  legend,
   placeholder = 'Select...',
+  nestedOption,
   labelClassName,
-  triggerClassName,
-  pickClassName,
+  selectClassName,
   optionClassName,
-  placeholderColor = 'text-gray-400',
+  ...props
 }: DropdownProps) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const internalId = useId()
+  const dropDownId = id ?? internalId
+  const { t } = useTranslation()
 
-  const selectedLabel =
-    options.find((opt) => opt.value === value)?.label ?? placeholder
+  if (legend && label) {
+    throw new Error(t('componentErrors.legendAndLabel'))
+  }
 
   const baseStyle =
     'w-full rounded-md border px-3 py-2 text-sm text-white focus:outline-none'
   const baseColors =
-    'border-primary-midnight-blue-700 bg-primary-midnight-blue-900'
+    'border-primary-midnight-blue-700 bg-primary-midnight-blue-900 hover:border-primary-midnight-blue-600'
   const baseOptionClassName =
     'hover:bg-primary-midnight-blue-700 cursor-pointer rounded px-3 py-2 text-sm text-white'
+  const baseFieldsetStyle = twMerge(
+    'border-primary-midnight-blue-700 block rounded-lg border border-solid p-2',
+    legend && 'pt-0.5',
+  )
+
+  const renderOptions = () => {
+    return options.map((option) => (
+      <option
+        key={option.value}
+        value={option.value}
+        className={twMerge(baseOptionClassName, optionClassName)}
+      >
+        {option.label}
+      </option>
+    ))
+  }
 
   return (
-    <div className="relative flex w-full flex-col gap-1">
-      {label && (
-        <label
-          htmlFor={`dropdown-${label}`}
-          className={twMerge(
-            'cursor-pointer text-sm text-white',
-            labelClassName,
-          )}
-        >
-          {label}
-        </label>
-      )}
-
-      <button
-        type="button"
-        id={`dropdown-${label}`}
-        onClick={() => setOpen((prev) => !prev)}
-        className={twMerge(
-          baseStyle,
-          baseColors,
-          'flex cursor-pointer items-center justify-between',
-          triggerClassName,
-        )}
-      >
-        <span className="truncate">{selectedLabel}</span>
-        <ChevronDown
-          className={twMerge(
-            'ml-2 h-4 w-4 transition-transform duration-200',
-            open ? 'rotate-180' : '',
-          )}
-        />
-      </button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.ul
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -2 },
-              visible: {
-                opacity: 1,
-                y: 4,
-                transition: { duration: 0.35, staggerChildren: 0.05 },
-              },
-            }}
-            className={twMerge(
-              'absolute top-full left-0 z-50 mt-1 w-full',
-              baseStyle,
-              baseColors,
-              pickClassName,
-            )}
+    <div className="flex w-full flex-col gap-1">
+      <fieldset className={twMerge(legend && !label && baseFieldsetStyle)}>
+        {legend && !label ? (
+          <legend className="isolate block p-0.5">{legend}</legend>
+        ) : (
+          <label
+            htmlFor={dropDownId}
+            className={twMerge('cursor-pointer text-white', labelClassName)}
           >
-            {placeholder && (
-              <motion.li
-                variants={{
-                  hidden: { opacity: 0, y: -2 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                className={twMerge(
-                  placeholderColor,
-                  'px-3 py-2 text-sm select-none',
-                )}
-              >
-                {placeholder}
-              </motion.li>
-            )}
-            {options.map((option) => (
-              <motion.li
-                key={option.value}
-                variants={{
-                  hidden: { opacity: 0, y: -2 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                onClick={() => {
-                  onValueChange?.(option.value)
-                  setOpen(false)
-                }}
-                className={twMerge(baseOptionClassName, optionClassName)}
-              >
-                {option.label}
-              </motion.li>
-            ))}
-          </motion.ul>
+            {label}
+          </label>
         )}
-      </AnimatePresence>
+        <select
+          id={dropDownId}
+          value={props.value}
+          className={twMerge(
+            'w-full outline-none',
+            !legend && baseStyle,
+            !legend && baseColors,
+            !legend && 'flex cursor-pointer items-center justify-between',
+            selectClassName,
+          )}
+          {...props}
+        >
+          {placeholder && (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          )}
+          {nestedOption ? (
+            <optgroup label={nestedOption}>{renderOptions()}</optgroup>
+          ) : (
+            renderOptions()
+          )}
+        </select>
+      </fieldset>
     </div>
   )
 }

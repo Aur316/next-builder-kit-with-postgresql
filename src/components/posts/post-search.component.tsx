@@ -73,13 +73,17 @@ export const PostSearch = () => {
           <Dropdown
             label="Title filter"
             value={titleFilter}
-            onValueChange={setTitleFilter}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setTitleFilter(e.target.value)
+            }
             options={filterTypeOptions}
           />
           <Dropdown
             label="Title mode"
             value={titleMode}
-            onValueChange={setTitleMode}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setTitleMode(e.target.value)
+            }
             options={modeOptions}
           />
         </div>
@@ -101,13 +105,17 @@ export const PostSearch = () => {
           <Dropdown
             label="Content filter"
             value={contentFilter}
-            onValueChange={setContentFilter}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setContentFilter(e.target.value)
+            }
             options={filterTypeOptions}
           />
           <Dropdown
             label="Content mode"
             value={contentMode}
-            onValueChange={setContentMode}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setContentMode(e.target.value)
+            }
             options={modeOptions}
           />
         </div>
@@ -115,13 +123,15 @@ export const PostSearch = () => {
 
       <Button
         onClick={handleSubmit}
-        text={t('search')}
         variant="secondary"
         icon={<Search />}
         iconPosition="right"
         disabled={!titleValue && !contentValue}
         loading={isLoading}
-      />
+        className="w-full"
+      >
+        {t('search')}
+      </Button>
       {posts && (
         <PostList posts={posts} isLoading={isLoading} isError={isError} />
       )}

@@ -1,8 +1,14 @@
 import { PropsWithChildren } from 'react'
 
-import { Footer, Navbar, ToastProvider } from '../components'
+import { ToastProvider } from '../components'
 import { I18nProvider, ReactQueryProvider, StoreProvider } from '../providers'
+import { App } from './app'
 import './globals.css'
+
+export const metadata = {
+  title: 'Next Builder Kit',
+  description: 'A modern Next.js application with TypeScript and Tailwind CSS',
+}
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -11,13 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ReactQueryProvider>
           <I18nProvider>
             <StoreProvider>
-              <div className="bg-primary-midnight-blue-900 flex min-h-dvh flex-col">
-                <Navbar />
-                <main className="flex flex-1 items-center justify-center overflow-y-auto">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <App>{children}</App>
               <ToastProvider />
             </StoreProvider>
           </I18nProvider>
