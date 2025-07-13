@@ -13,8 +13,35 @@ model Post {
   title     String
   content   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
-  isDeleted  Boolean  @default(false)
-  deletedAt DateTime? 
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+  GUEST
+}
+
+model User {
+  id                  String               @id @default(cuid())
+  email               String               @unique
+  password            String
+  name                String?
+  createdAt           DateTime             @default(now())
+  role                Role                 @default(USER)
+  emailVerified       DateTime?
+  passwordResetTokens PasswordResetToken[]
+  refreshToken        String?              @unique
+}
+
+model PasswordResetToken {
+  token     String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
