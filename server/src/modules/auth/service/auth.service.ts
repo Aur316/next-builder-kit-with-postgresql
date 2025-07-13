@@ -5,14 +5,20 @@ import jwt from 'jsonwebtoken'
 
 import { Role, User } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
+import { mailService } from '../../mailer'
 import { authRepository } from '../repository/auth.repository'
 
 const generateAccessToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.JWT_SECRET!, { expiresIn: '15m' })
+  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15m' })
 
 const generateRefreshToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET!, {
     expiresIn: '7d',
+  })
+
+const generateVerificationToken = (userId: string): string =>
+  jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
+    expiresIn: '15m',
   })
 
 export const authService = {
@@ -36,9 +42,18 @@ export const authService = {
 
     const accessToken = generateAccessToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
+    const verificationToken = generateVerificationToken(user.id)
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
-
+    await mailService.sendMail({
+      to: user.email,
+      subject: 'Verify your email',
+      html: `
+        <h1>Welcome, ${user.name ?? 'user'}!</h1>
+        <p>Please verify your email by clicking the link below:</p>
+        <a href="${process.env.FRONTEND_URL}/verify-email/${user.id}/${verificationToken}">Verify Email</a>
+      `,
+    })
     return { user, accessToken, refreshToken }
   },
 
@@ -64,12 +79,21 @@ export const authService = {
     userId: string
     token: string
   }): Promise<{ message: string }> {
-    // Itt feltételezzük, hogy a token az email-ben küldött JWT
-    const decoded = jwt.verify(data.token, process.env.JWT_SECRET!) as {
-      userId: string
+    let decoded: { userId: string }
+    try {
+      decoded = jwt.verify(
+        data.token,
+        process.env.VERIFICATION_TOKEN_SECRET!,
+      ) as {
+        userId: string
+      }
+    } catch (error) {
+      throw new Error('Invalid or expired token: ' + error)
     }
 
-    if (decoded.userId !== data.userId) throw new Error('Invalid token')
+    if (decoded.userId !== data.userId) {
+      throw new Error('Invalid token')
+    }
 
     await authRepository.markEmailAsVerified(data.userId)
 

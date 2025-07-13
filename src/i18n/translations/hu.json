@@ -109,6 +109,11 @@
         "errorMessage": "A bejegyzés frissítése sikertelen",
         "successMessage": "A bejegyzés sikeresen frissítve lett"
       }
+    },
+    "auth": {
+      "verifyEmail": {
+        "errorMessage": "Email megerősítése sikertelen"
+      }
     }
   },
   "footer": {

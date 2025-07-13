@@ -102,6 +102,11 @@
         "errorMessage": "Failed to update post",
         "successMessage": "Post updated successfully"
       }
+    },
+    "auth": {
+      "verifyEmail": {
+        "errorMessage": "Failed to verify email"
+      }
     }
   },
   "footer": {

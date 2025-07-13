@@ -2,8 +2,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 
-import { authRoutes } from './modules/auth/routes/auth.route'
-import { postRoutes } from './modules/posts'
+import { authRoutes, postRoutes } from './modules'
 
 dotenv.config()
 

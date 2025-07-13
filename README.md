@@ -150,7 +150,7 @@ This allows simplified and consistent imports, improves maintainability, and dec
 
 ## HTTP Client & API Utilities
 
-Axios is configured with dynamic baseURL support, allowing you to switch between local API routes (/api) and an external server (NEXT_PUBLIC_API_URL) via environment variables.
+Axios is configured with dynamic baseURL support, allowing you to switch between local API routes (/api) and an external server (BACKEND_API_URL) via environment variables.
 
 A custom useHttp() hook is included to standardize all HTTP requests across the app with strong TypeScript support.
 
@@ -172,7 +172,7 @@ To configure environment-dependent behavior, create a `.env.local` file with:
 
 ```env
 NEXT_PUBLIC_USE_EXTERNAL_API=true
-NEXT_PUBLIC_API_URL=http://localhost:5000
+BACKEND_API_URL=http://localhost:5000
 ```
 
 # License
