@@ -102,6 +102,45 @@
         "errorMessage": "Failed to update post",
         "successMessage": "Post updated successfully"
       }
+    },
+    "auth": {
+      "verifyEmail": {
+        "errorMessage": "Failed to verify email"
+      },
+      "login": {
+        "invalidCredentials": "Invalid credentials",
+        "emailNotVerified": "Email not verified"
+      },
+      "register": {
+        "emailAlreadyInUse": "Email already in use"
+      },
+      "invalidTokenOrExpiredToken": {
+        "errorMessage": "Invalid token or expired token"
+      },
+      "invalidToken": {
+        "errorMessage": "Invalid token"
+      },
+      "resendVerificationEmail": {
+        "userNotFound": "User not found",
+        "emailAlreadyVerified": "Email already verified"
+      },
+      "forgotPassword": {
+        "userNotFound": "User not found"
+      },
+      "resetPassword": {
+        "invalidOrExpiredToken": "Invalid or expired reset token"
+      },
+      "changePassword": {
+        "userNotFound": "User not found",
+        "invalidCurrentPassword": "Invalid current password"
+      },
+      "refreshToken": {
+        "invalidRefreshToken": "Invalid refresh token"
+      },
+      "getMe": {
+        "unauthorized": "Unauthorized",
+        "userNotFound": "User not found"
+      }
     }
   },
   "footer": {

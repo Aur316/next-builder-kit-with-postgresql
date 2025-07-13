@@ -1,4 +1,5 @@
 import { ApiErrorResult } from '../../api'
+import { VerifyEmailRequest, VerifyEmailResponse } from '../../types'
 import {
   GetPostsResponse,
   Post,
@@ -8,6 +9,7 @@ import {
 import { OperationResult } from '../api-call-handler'
 import { apiCallHandler } from '../api-call-handler/api-handler'
 import { postApiClient } from '../clients'
+import { authApiClient } from '../clients/auth'
 
 export const postQueryFns = {
   create: (
@@ -94,5 +96,16 @@ export const postQueryFns = {
       errorMessage: t('toastMessages.post.update.errorMessage'),
       showSuccessToast: true,
       successMessage: t('toastMessages.post.update.successMessage'),
+    }),
+}
+
+export const authQueryFns = {
+  verifyEmail: (
+    payload: VerifyEmailRequest,
+    t: (key: string) => string,
+  ): Promise<OperationResult<VerifyEmailResponse, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.verifyEmail(payload), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.auth.verifyEmail.errorMessage'),
     }),
 }

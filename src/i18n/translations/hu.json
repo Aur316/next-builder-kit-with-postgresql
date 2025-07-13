@@ -109,6 +109,45 @@
         "errorMessage": "A bejegyzés frissítése sikertelen",
         "successMessage": "A bejegyzés sikeresen frissítve lett"
       }
+    },
+    "auth": {
+      "verifyEmail": {
+        "errorMessage": "Email megerősítése sikertelen"
+      },
+      "login": {
+        "invalidCredentials": "Érvénytelen hitelesítő adatok",
+        "emailNotVerified": "Email nincs megerősítve"
+      },
+      "register": {
+        "emailAlreadyInUse": "Email már használatban van"
+      },
+      "invalidTokenOrExpiredToken": {
+        "errorMessage": "Érvénytelen vagy lejárt token"
+      },
+      "invalidToken": {
+        "errorMessage": "Érvénytelen token"
+      },
+      "resendVerificationEmail": {
+        "userNotFound": "Felhasználó nem található",
+        "emailAlreadyVerified": "Email már megerősítve"
+      },
+      "forgotPassword": {
+        "userNotFound": "Felhasználó nem található"
+      },
+      "resetPassword": {
+        "invalidOrExpiredToken": "Érvénytelen vagy lejárt visszaállító token"
+      },
+      "changePassword": {
+        "userNotFound": "Felhasználó nem található",
+        "invalidCurrentPassword": "Érvénytelen jelenlegi jelszó"
+      },
+      "refreshToken": {
+        "invalidRefreshToken": "Érvénytelen token"
+      },
+      "getMe": {
+        "unauthorized": "Nincs jogosultságod",
+        "userNotFound": "Felhasználó nem található"
+      }
     }
   },
   "footer": {
