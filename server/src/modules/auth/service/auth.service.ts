@@ -6,6 +6,10 @@ import { Role, User } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
 import { mailService } from '../../mailer'
 import { authRepository } from '../repository/auth.repository'
+import {
+  RegistrationApiRequest,
+  RegistrationApiResponse,
+} from '../types/auth.type'
 
 const generateAccessToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15m' })
@@ -38,12 +42,9 @@ const sendVerificationEmail = async (user: User, verificationToken: string) => {
 }
 
 export const authService = {
-  async register(data: {
-    email: string
-    password: string
-    name?: string
-    role?: Role
-  }): Promise<{ user: User; accessToken: string; refreshToken: string }> {
+  async register(
+    data: RegistrationApiRequest,
+  ): Promise<RegistrationApiResponse> {
     const existing = await authRepository.findByEmail(data.email)
     if (existing) throw new Error('register.emailAlreadyInUse')
 
@@ -53,7 +54,7 @@ export const authService = {
       email: data.email,
       password: hashed,
       name: data.name,
-      role: data.role,
+      role: Role.USER,
     })
 
     const accessToken = generateAccessToken(user.id)

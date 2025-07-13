@@ -1,5 +1,10 @@
 import { ApiErrorResult } from '../../api'
-import { VerifyEmailRequest, VerifyEmailResponse } from '../../types'
+import {
+  RegistrationFormProps,
+  RegistrationResponse,
+  VerifyEmailRequest,
+  VerifyEmailResponse,
+} from '../../types'
 import {
   GetPostsResponse,
   Post,
@@ -107,5 +112,16 @@ export const authQueryFns = {
     apiCallHandler(() => authApiClient.verifyEmail(payload), {
       showErrorToast: true,
       errorMessage: t('toastMessages.auth.verifyEmail.errorMessage'),
+    }),
+
+  registration: (
+    payload: RegistrationFormProps,
+    t: (key: string) => string,
+  ): Promise<OperationResult<RegistrationResponse, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.registration(payload), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.auth.registration.errorMessage'),
+      showSuccessToast: true,
+      successMessage: t('toastMessages.auth.registration.successMessage'),
     }),
 }

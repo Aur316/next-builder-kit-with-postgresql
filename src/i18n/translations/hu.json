@@ -3,6 +3,8 @@
   "about": "Rólunk",
   "gallery": "Galéria",
   "posts": "Bejegyzések",
+  "registration": "Regisztráció",
+  "register": "Regisztráció",
   "back": "Vissza",
   "not-found": "Az oldal nem található",
   "yes": "Igen",
@@ -147,6 +149,11 @@
       "getMe": {
         "unauthorized": "Nincs jogosultságod",
         "userNotFound": "Felhasználó nem található"
+      },
+      "registration": {
+        "errorMessage": "Regisztráció sikertelen",
+        "emailAlreadyInUse": "Email már használatban van",
+        "successMessage": "Regisztráció sikeres"
       }
     }
   },
@@ -196,5 +203,16 @@
   "switcher": {
     "navbar": "Navbar váltása",
     "drawer": "Drawer váltása"
+  },
+  "registrationPage": {
+    "error": "Regisztráció sikertelen",
+    "name": "Név",
+    "email": "Email",
+    "password": "Jelszó",
+    "validation": {
+      "name": "Névnek legalább 3 karakter hosszúnak kell lennie",
+      "email": "Email megadása kötelező",
+      "password": "Jelszó megadása kötelező"
+    }
   }
 }

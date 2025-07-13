@@ -19,6 +19,11 @@ export function getRoutes(): Routes {
         //icon: Image,
       },
       { path: '/posts', name: RouteKey.POSTS, visibleInNavbar: true },
+      {
+        path: '/registration',
+        name: RouteKey.REGISTRATION,
+        visibleInNavbar: true,
+      },
     ],
   }
 }

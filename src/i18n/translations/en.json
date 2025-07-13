@@ -3,6 +3,7 @@
   "about": "About",
   "gallery": "Gallery",
   "posts": "Posts",
+  "registration": "Registration",
   "back": "Go back",
   "not-found": "Page not found",
   "yes": "Yes",
@@ -140,6 +141,11 @@
       "getMe": {
         "unauthorized": "Unauthorized",
         "userNotFound": "User not found"
+      },
+      "registration": {
+        "errorMessage": "Failed to register",
+        "emailAlreadyInUse": "Email already in use",
+        "successMessage": "Registration successful"
       }
     }
   },
@@ -189,5 +195,16 @@
   "switcher": {
     "navbar": "Toggle navbar",
     "drawer": "Toggle drawer"
+  },
+  "registrationPage": {
+    "error": "Registration failed",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "validation": {
+      "name": "Name must be at least 3 characters long",
+      "email": "Email is required",
+      "password": "Password is required"
+    }
   }
 }

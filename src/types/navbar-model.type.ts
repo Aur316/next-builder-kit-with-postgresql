@@ -5,6 +5,7 @@ export enum RouteKey {
   ABOUT = 'about',
   GALLERY = 'gallery',
   POSTS = 'posts',
+  REGISTRATION = 'registration',
 }
 
 export type Route = {
