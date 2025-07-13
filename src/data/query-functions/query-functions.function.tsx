@@ -1,5 +1,7 @@
 import { ApiErrorResult } from '../../api'
 import {
+  LoginFormProps,
+  LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
   VerifyEmailRequest,
@@ -123,5 +125,16 @@ export const authQueryFns = {
       errorMessage: t('toastMessages.auth.registration.errorMessage'),
       showSuccessToast: true,
       successMessage: t('toastMessages.auth.registration.successMessage'),
+    }),
+
+  login: (
+    payload: LoginFormProps,
+    t: (key: string) => string,
+  ): Promise<OperationResult<LoginResponse, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.login(payload), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.auth.login.errorMessage'),
+      showSuccessToast: true,
+      successMessage: t('toastMessages.auth.login.successMessage'),
     }),
 }

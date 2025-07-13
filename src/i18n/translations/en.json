@@ -4,6 +4,7 @@
   "gallery": "Gallery",
   "posts": "Posts",
   "registration": "Registration",
+  "login": "Login",
   "back": "Go back",
   "not-found": "Page not found",
   "yes": "Yes",
@@ -109,8 +110,8 @@
         "errorMessage": "Failed to verify email"
       },
       "login": {
-        "invalidCredentials": "Invalid credentials",
-        "emailNotVerified": "Email not verified"
+        "errorMessage": "Failed to login",
+        "successMessage": "Login successful"
       },
       "register": {
         "emailAlreadyInUse": "Email already in use"

@@ -1,4 +1,6 @@
 import {
+  LoginFormProps,
+  LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
   VerifyEmailRequest,
@@ -16,4 +18,7 @@ export const authApiClient = {
 
   verifyEmail: (payload: VerifyEmailRequest): Promise<VerifyEmailResponse> =>
     httpClient.post<VerifyEmailResponse>(`${ROOT}/verify-email`, payload),
+
+  login: (payload: LoginFormProps): Promise<LoginResponse> =>
+    httpClient.post<LoginResponse>(`${ROOT}/login`, payload),
 }

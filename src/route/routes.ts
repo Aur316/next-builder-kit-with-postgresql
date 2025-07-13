@@ -1,4 +1,4 @@
-import { Home, Info } from 'lucide-react'
+import { FileText, Home, Image, Info, LogIn, UserPlus } from 'lucide-react'
 
 import { RouteKey, Routes } from '../types'
 
@@ -16,13 +16,25 @@ export function getRoutes(): Routes {
         path: '/gallery',
         name: RouteKey.GALLERY,
         visibleInNavbar: true,
-        //icon: Image,
+        icon: Image,
       },
-      { path: '/posts', name: RouteKey.POSTS, visibleInNavbar: true },
+      {
+        path: '/posts',
+        name: RouteKey.POSTS,
+        visibleInNavbar: true,
+        icon: FileText,
+      },
       {
         path: '/registration',
         name: RouteKey.REGISTRATION,
         visibleInNavbar: true,
+        icon: UserPlus,
+      },
+      {
+        path: '/login',
+        name: RouteKey.LOGIN,
+        visibleInNavbar: true,
+        icon: LogIn,
       },
     ],
   }

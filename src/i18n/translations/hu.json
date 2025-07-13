@@ -5,6 +5,7 @@
   "posts": "Bejegyzések",
   "registration": "Regisztráció",
   "register": "Regisztráció",
+  "login": "Bejelentkezés",
   "back": "Vissza",
   "not-found": "Az oldal nem található",
   "yes": "Igen",
@@ -117,8 +118,8 @@
         "errorMessage": "Email megerősítése sikertelen"
       },
       "login": {
-        "invalidCredentials": "Érvénytelen hitelesítő adatok",
-        "emailNotVerified": "Email nincs megerősítve"
+        "errorMessage": "Bejelentkezés sikertelen",
+        "successMessage": "Bejelentkezés sikeres"
       },
       "register": {
         "emailAlreadyInUse": "Email már használatban van"
