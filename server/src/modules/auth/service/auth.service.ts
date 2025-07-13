@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-import crypto from 'crypto'
 import { addMinutes } from 'date-fns'
 import jwt from 'jsonwebtoken'
 
@@ -20,6 +19,23 @@ const generateVerificationToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
     expiresIn: '15m',
   })
+
+const generatePasswordResetToken = (userId: string): string =>
+  jwt.sign({ userId }, process.env.PASSWORD_RESET_TOKEN_SECRET!, {
+    expiresIn: '15m',
+  })
+
+const sendVerificationEmail = async (user: User, verificationToken: string) => {
+  await mailService.sendMail({
+    to: user.email,
+    subject: 'Verify your email',
+    html: `
+      <h1>Welcome, ${user.name ?? 'user'}!</h1>
+      <p>Please verify your email by clicking the link below:</p>
+      <a href="${process.env.FRONTEND_URL}/verify-email/${user.id}/${verificationToken}">Verify Email</a>
+    `,
+  })
+}
 
 export const authService = {
   async register(data: {
@@ -44,16 +60,10 @@ export const authService = {
     const refreshToken = generateRefreshToken(user.id)
     const verificationToken = generateVerificationToken(user.id)
 
+    await sendVerificationEmail(user, verificationToken)
+
     await authRepository.saveRefreshToken(user.id, refreshToken)
-    await mailService.sendMail({
-      to: user.email,
-      subject: 'Verify your email',
-      html: `
-        <h1>Welcome, ${user.name ?? 'user'}!</h1>
-        <p>Please verify your email by clicking the link below:</p>
-        <a href="${process.env.FRONTEND_URL}/verify-email/${user.id}/${verificationToken}">Verify Email</a>
-      `,
-    })
+
     return { user, accessToken, refreshToken }
   },
 
@@ -113,22 +123,34 @@ export const authService = {
     if (user.emailVerified)
       throw new Error('resendVerificationEmail.emailAlreadyVerified')
 
-    const token = generateAccessToken(user.id)
+    const verificationToken = generateVerificationToken(user.id)
+    await sendVerificationEmail(user, verificationToken)
 
-    // itt majd email küldés jönhet
-    return { token }
+    return { token: verificationToken }
   },
 
   async forgotPassword(data: { email: string }) {
     const user = await authRepository.findByEmail(data.email)
     if (!user) throw new Error('forgotPassword.userNotFound')
 
-    const token = crypto.randomBytes(32).toString('hex')
+    const passwordResetToken = generatePasswordResetToken(user.id)
     const expiresAt = addMinutes(new Date(), 15)
 
-    await authRepository.savePasswordResetToken(user.id, token, expiresAt)
+    await authRepository.savePasswordResetToken(
+      user.id,
+      passwordResetToken,
+      expiresAt,
+    )
 
-    // TODO: email küldése itt (pl. nodemailer vagy külső API)
+    await mailService.sendMail({
+      to: user.email,
+      subject: 'Reset your password',
+      html: `
+        <h1>Reset your password</h1>
+        <p>Click the link below to reset your password:</p>
+        <a href="${process.env.FRONTEND_URL}/reset-password/${passwordResetToken}">Reset Password</a>
+      `,
+    })
 
     return { message: 'Password reset email sent' }
   },
