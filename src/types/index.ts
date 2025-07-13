@@ -1,5 +1,6 @@
 export * from './auth.type'
 export * from './form.model'
+export * from './login.type'
 export * from './navbar-model.type'
 export * from './registration.type'
 export * from './use-http-model.type'

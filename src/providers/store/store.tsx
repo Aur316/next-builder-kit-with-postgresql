@@ -46,7 +46,12 @@ export const StoreProvider = ({ children }: PropsWithChildren) => {
   }, [])
 
   const contextValue = useMemo(
-    () => ({ storeNumber, setStoreNumber, isDrawer, toggleNavigation }),
+    () => ({
+      storeNumber,
+      setStoreNumber,
+      isDrawer,
+      toggleNavigation,
+    }),
     [storeNumber, isDrawer, toggleNavigation],
   )
 

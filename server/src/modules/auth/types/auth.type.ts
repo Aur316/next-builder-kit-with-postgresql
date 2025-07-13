@@ -11,3 +11,14 @@ export type RegistrationApiRequest = {
   password: string
   name?: string
 }
+
+export type LoginApiResponse = {
+  user: User
+  accessToken: string
+  refreshToken: string
+}
+
+export type LoginApiRequest = {
+  email: string
+  password: string
+}

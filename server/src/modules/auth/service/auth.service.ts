@@ -7,6 +7,8 @@ import { AuthenticatedRequest } from '../../../middleware'
 import { mailService } from '../../mailer'
 import { authRepository } from '../repository/auth.repository'
 import {
+  LoginApiRequest,
+  LoginApiResponse,
   RegistrationApiRequest,
   RegistrationApiResponse,
 } from '../types/auth.type'
@@ -68,10 +70,7 @@ export const authService = {
     return { user, accessToken, refreshToken }
   },
 
-  async login(data: {
-    email: string
-    password: string
-  }): Promise<{ user: User; accessToken: string; refreshToken: string }> {
+  async login(data: LoginApiRequest): Promise<LoginApiResponse> {
     const user = await authRepository.findByEmail(data.email)
     if (!user) throw new Error('login.invalidCredentials')
 
