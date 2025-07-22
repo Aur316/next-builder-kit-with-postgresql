@@ -21,8 +21,6 @@ export function LoginForm() {
     await login(loginForm)
   }
 
-  // TODO: tkme t és a jelszavat ne adjuk vissza a userben a backendről.
-
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <label htmlFor="login-form">Login</label>
@@ -41,6 +39,7 @@ export function LoginForm() {
           onChange={(e) =>
             setLoginForm({ ...loginForm, email: e.target.value })
           }
+          autoComplete="email"
           required
         />
         <Input
@@ -52,7 +51,12 @@ export function LoginForm() {
           }
           required
         />
-        <Button type="submit" variant="secondary" loading={isPending}>
+        <Button
+          type="submit"
+          variant="secondary"
+          disabled={isPending}
+          loading={isPending}
+        >
           {t('login')}
         </Button>
       </form>

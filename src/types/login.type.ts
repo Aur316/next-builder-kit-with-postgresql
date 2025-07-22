@@ -7,6 +7,12 @@ export type LoginFormProps = {
 
 export type LoginResponse = {
   user: User
+  tokens: {
+    accessToken: string
+    refreshToken: string
+  }
+}
+
+export type AuthTokens = {
   accessToken: string
-  refreshToken: string
 }

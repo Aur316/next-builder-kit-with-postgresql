@@ -1,8 +1,13 @@
 export type User = {
   id: string
-  name: string
+  name: string | null
   email: string
   role: Role
+}
+
+export type AuthTokens = {
+  accessToken: string
+  refreshToken?: string
 }
 
 export enum Role {
@@ -10,4 +15,9 @@ export enum Role {
   ADMIN = 'ADMIN',
   USER = 'USER',
   GUEST = 'GUEST',
+}
+
+export type UserResponse = {
+  user: User
+  tokens: AuthTokens
 }

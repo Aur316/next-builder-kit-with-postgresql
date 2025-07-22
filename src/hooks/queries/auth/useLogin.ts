@@ -7,7 +7,7 @@ import { LoginFormProps } from '../../../types'
 
 export const useLogin = () => {
   const { t } = useTranslation()
-  const { setUser } = useAuth()
+  const { setAuthData } = useAuth()
   const {
     mutateAsync: login,
     isPending,
@@ -17,7 +17,8 @@ export const useLogin = () => {
     mutationFn: (data: LoginFormProps) => authQueryFns.login(data, t),
     onSuccess: (data) => {
       if (data.isSuccess) {
-        setUser(data.payload.user)
+        setAuthData(data.payload.user, data.payload.tokens)
+        localStorage.setItem('accessToken', data.payload.tokens.accessToken)
       }
     },
   })

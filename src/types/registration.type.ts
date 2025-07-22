@@ -8,6 +8,8 @@ export type RegistrationFormProps = {
 
 export type RegistrationResponse = {
   user: User
-  accessToken: string
-  refreshToken: string
+  tokens: {
+    accessToken: string
+    refreshToken: string
+  }
 }
