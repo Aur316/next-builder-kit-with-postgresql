@@ -2,10 +2,9 @@ import bcrypt from 'bcrypt'
 import { addMinutes } from 'date-fns'
 import jwt from 'jsonwebtoken'
 
-import { Role, User } from '../../../generated/prisma'
+import { Role } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
-import { mailService } from '../../mailer'
-import { MINUTES_IN_MS } from '../helper'
+import { authHelper } from '../helper'
 import { authMapper } from '../mapper/auth.mapper'
 import { authRepository } from '../repository/auth.repository'
 import {
@@ -14,38 +13,6 @@ import {
   RegistrationApiResponse,
   UserApiResponse,
 } from '../types/auth.type'
-
-const generateAccessToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, {
-    expiresIn: 15 * MINUTES_IN_MS,
-  })
-
-const generateRefreshToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET!, {
-    expiresIn: 1 * MINUTES_IN_MS,
-  })
-
-const generateVerificationToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
-    expiresIn: 15 * MINUTES_IN_MS,
-  })
-
-const generatePasswordResetToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.PASSWORD_RESET_TOKEN_SECRET!, {
-    expiresIn: 15 * MINUTES_IN_MS,
-  })
-
-const sendVerificationEmail = async (user: User, verificationToken: string) => {
-  await mailService.sendMail({
-    to: user.email,
-    subject: 'Verify your email',
-    html: `
-      <h1>Welcome, ${user.name ?? 'user'}!</h1>
-      <p>Please verify your email by clicking the link below:</p>
-      <a href="${process.env.FRONTEND_URL}/verify-email/${user.id}/${verificationToken}">Verify Email</a>
-    `,
-  })
-}
 
 export const authService = {
   async register(
@@ -63,11 +30,11 @@ export const authService = {
       role: Role.USER,
     })
 
-    const accessToken = generateAccessToken(user.id)
-    const refreshToken = generateRefreshToken(user.id)
-    const verificationToken = generateVerificationToken(user.id)
+    const accessToken = authHelper.generateAccessToken(user.id)
+    const refreshToken = authHelper.generateRefreshToken(user.id)
+    const verificationToken = authHelper.generateVerificationToken(user.id)
 
-    await sendVerificationEmail(user, verificationToken)
+    await authHelper.sendVerificationEmail(user, verificationToken)
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
@@ -92,8 +59,8 @@ export const authService = {
     }
     const userResponse = authMapper.toUserResponse(user)
 
-    const accessToken = generateAccessToken(user.id)
-    const refreshToken = generateRefreshToken(user.id)
+    const accessToken = authHelper.generateAccessToken(user.id)
+    const refreshToken = authHelper.generateRefreshToken(user.id)
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
@@ -140,8 +107,8 @@ export const authService = {
     if (user.emailVerified)
       throw new Error('resendVerificationEmail.emailAlreadyVerified')
 
-    const verificationToken = generateVerificationToken(user.id)
-    await sendVerificationEmail(user, verificationToken)
+    const verificationToken = authHelper.generateVerificationToken(user.id)
+    await authHelper.sendVerificationEmail(user, verificationToken)
 
     return { token: verificationToken }
   },
@@ -150,7 +117,7 @@ export const authService = {
     const user = await authRepository.findByEmail(data.email)
     if (!user) throw new Error('forgotPassword.userNotFound')
 
-    const passwordResetToken = generatePasswordResetToken(user.id)
+    const passwordResetToken = authHelper.generatePasswordResetToken(user.id)
     const expiresAt = addMinutes(new Date(), 15)
 
     await authRepository.savePasswordResetToken(
@@ -159,15 +126,7 @@ export const authService = {
       expiresAt,
     )
 
-    await mailService.sendMail({
-      to: user.email,
-      subject: 'Reset your password',
-      html: `
-        <h1>Reset your password</h1>
-        <p>Click the link below to reset your password:</p>
-        <a href="${process.env.FRONTEND_URL}/reset-password/${passwordResetToken}">Reset Password</a>
-      `,
-    })
+    await authHelper.sendForgotPasswordEmail(user, passwordResetToken)
 
     return { message: 'Password reset email sent' }
   },
@@ -214,8 +173,8 @@ export const authService = {
       throw new Error('refreshToken.invalidRefreshToken')
     }
 
-    const newAccessToken = generateAccessToken(user.id)
-    const newRefreshToken = generateRefreshToken(user.id)
+    const newAccessToken = authHelper.generateAccessToken(user.id)
+    const newRefreshToken = authHelper.generateRefreshToken(user.id)
 
     await authRepository.saveRefreshToken(user.id, newRefreshToken)
 
