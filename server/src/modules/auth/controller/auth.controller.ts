@@ -11,8 +11,18 @@ export const authController = {
   },
 
   async login(req: Request, res: Response) {
-    const result = await authService.login(req.body)
-    res.status(200).json(result)
+    const { user, tokens } = await authService.login(req.body)
+
+    res
+      .cookie('refreshToken', tokens.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        domain: process.env.COOKIE_DOMAIN || 'localhost',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ user, tokens })
   },
 
   async logout(req: AuthenticatedRequest, res: Response) {
@@ -20,8 +30,13 @@ export const authController = {
       await authRepository.deleteRefreshToken(req.user.userId)
     }
     res
+      .clearCookie('refreshToken', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+      })
       .status(200)
-      .json({ message: 'Logout handled on client side or by token removal' })
+      .json({ message: 'Logged out' })
   },
 
   async verifyEmail(req: Request, res: Response) {
@@ -54,8 +69,22 @@ export const authController = {
   },
 
   async refreshToken(req: Request, res: Response) {
-    const result = await authService.refreshToken(req.body)
-    res.status(200).json(result)
+    const tokenFromCookie = req.cookies.refreshToken
+    if (!tokenFromCookie) throw new Error('refreshToken.missing')
+
+    const { user, tokens } = await authService.refreshToken({
+      refreshToken: tokenFromCookie,
+    })
+
+    res
+      .cookie('refreshToken', tokens.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ user, tokens })
   },
 
   async getMe(req: AuthenticatedRequest, res: Response) {

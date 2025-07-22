@@ -8,9 +8,9 @@ import { mailService } from '../../mailer'
 import { authRepository } from '../repository/auth.repository'
 import {
   LoginApiRequest,
-  LoginApiResponse,
   RegistrationApiRequest,
   RegistrationApiResponse,
+  UserApiResponse,
 } from '../types/auth.type'
 
 const generateAccessToken = (userId: string): string =>
@@ -67,10 +67,16 @@ export const authService = {
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
-    return { user, accessToken, refreshToken }
+    return {
+      user,
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
+    }
   },
 
-  async login(data: LoginApiRequest): Promise<LoginApiResponse> {
+  async login(data: LoginApiRequest): Promise<UserApiResponse> {
     const user = await authRepository.findByEmail(data.email)
     if (!user) throw new Error('login.invalidCredentials')
 
@@ -80,13 +86,25 @@ export const authService = {
     if (!user.emailVerified) {
       throw new Error('login.emailNotVerified')
     }
+    const userResponse = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    }
 
     const accessToken = generateAccessToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
-    return { user, accessToken, refreshToken }
+    return {
+      user: userResponse,
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
+    }
   },
 
   async verifyEmail(data: {
@@ -185,7 +203,7 @@ export const authService = {
     return { message: 'Password changed successfully' }
   },
 
-  async refreshToken(data: { refreshToken: string }) {
+  async refreshToken(data: { refreshToken: string }): Promise<UserApiResponse> {
     const decoded = jwt.verify(
       data.refreshToken,
       process.env.REFRESH_TOKEN_SECRET!,
@@ -202,7 +220,18 @@ export const authService = {
 
     await authRepository.saveRefreshToken(user.id, newRefreshToken)
 
-    return { accessToken: newAccessToken, refreshToken: newRefreshToken }
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+      tokens: {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      },
+    }
   },
 
   async getMe(req: AuthenticatedRequest) {
@@ -214,5 +243,10 @@ export const authService = {
     if (!user) throw new Error('getMe.userNotFound')
 
     return { user }
+  },
+
+  async getUserFromToken(token: string) {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!)
+    return decoded
   },
 }
