@@ -26,9 +26,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [tokens, setTokens] = useState<AuthTokens | null>(null)
-  const [isInitializing, setIsInitializing] = useState(true)
+  const [isInitializing, setIsInitializing] = useState<boolean>(true)
 
   const { t } = useTranslation()
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -60,9 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error) {
         console.error('Authentication check failed:', error)
-        localStorage.removeItem('accessToken')
-        setUser(null)
-        setTokens(null)
+        init()
       } finally {
         setIsInitializing(false)
       }
@@ -81,11 +80,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const logout = async () => {
-    await authQueryFns.logout(t)
+  const init = () => {
     localStorage.removeItem('accessToken')
     setUser(null)
     setTokens(null)
+  }
+
+  const logout = async () => {
+    await authQueryFns.logout(t)
+    init()
   }
 
   return (
