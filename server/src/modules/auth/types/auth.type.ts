@@ -14,13 +14,15 @@ export type RegistrationApiRequest = {
   name?: string
 }
 
+export type UserResponse = {
+  id: string
+  email: string
+  name: string | null
+  role: Role
+}
+
 export type UserApiResponse = {
-  user: {
-    id: string
-    email: string
-    name: string | null
-    role: Role
-  }
+  user: UserResponse
   tokens: {
     accessToken: string
     refreshToken: string

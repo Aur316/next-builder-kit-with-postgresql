@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import { Role, User } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
 import { mailService } from '../../mailer'
+import { authMapper } from '../mapper/auth.mapper'
 import { authRepository } from '../repository/auth.repository'
 import {
   LoginApiRequest,
@@ -86,12 +87,7 @@ export const authService = {
     if (!user.emailVerified) {
       throw new Error('login.emailNotVerified')
     }
-    const userResponse = {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-    }
+    const userResponse = authMapper.toUserResponse(user)
 
     const accessToken = generateAccessToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
@@ -221,12 +217,7 @@ export const authService = {
     await authRepository.saveRefreshToken(user.id, newRefreshToken)
 
     return {
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      },
+      user: authMapper.toUserResponse(user),
       tokens: {
         accessToken: newAccessToken,
         refreshToken: newRefreshToken,
@@ -241,8 +232,8 @@ export const authService = {
 
     const user = await authRepository.findById(req.user.userId)
     if (!user) throw new Error('getMe.userNotFound')
-
-    return { user }
+    const userResponse = authMapper.toUserResponse(user)
+    return { user: userResponse }
   },
 
   async getUserFromToken(token: string) {
