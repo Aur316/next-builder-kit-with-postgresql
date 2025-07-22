@@ -19,7 +19,7 @@ export const requireAuth = (
   const token = authHeader.split(' ')[1]
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!) as {
       userId: string
     }
     req.user = { userId: decoded.userId }

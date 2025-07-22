@@ -1,8 +1,10 @@
 import {
+  GetMeResponse,
   LoginFormProps,
   LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
+  UserResponse,
   VerifyEmailRequest,
   VerifyEmailResponse,
 } from '../../../types'
@@ -21,4 +23,13 @@ export const authApiClient = {
 
   login: (payload: LoginFormProps): Promise<LoginResponse> =>
     httpClient.post<LoginResponse>(`${ROOT}/login`, payload),
+
+  refreshToken: (): Promise<UserResponse> =>
+    httpClient.post(`${ROOT}/refresh-token`, {}, { withCredentials: true }),
+
+  getMe: (): Promise<GetMeResponse> =>
+    httpClient.get(`${ROOT}/me`, { withCredentials: true }),
+
+  logout: (): Promise<{ message: string }> =>
+    httpClient.post(`${ROOT}/logout`, {}, { withCredentials: true }),
 }

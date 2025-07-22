@@ -5,30 +5,34 @@ import jwt from 'jsonwebtoken'
 import { Role, User } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
 import { mailService } from '../../mailer'
+import { MINUTES_IN_MS } from '../helper'
+import { authMapper } from '../mapper/auth.mapper'
 import { authRepository } from '../repository/auth.repository'
 import {
   LoginApiRequest,
-  LoginApiResponse,
   RegistrationApiRequest,
   RegistrationApiResponse,
+  UserApiResponse,
 } from '../types/auth.type'
 
 const generateAccessToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15m' })
+  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, {
+    expiresIn: 15 * MINUTES_IN_MS,
+  })
 
 const generateRefreshToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET!, {
-    expiresIn: '7d',
+    expiresIn: 1 * MINUTES_IN_MS,
   })
 
 const generateVerificationToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
-    expiresIn: '15m',
+    expiresIn: 15 * MINUTES_IN_MS,
   })
 
 const generatePasswordResetToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.PASSWORD_RESET_TOKEN_SECRET!, {
-    expiresIn: '15m',
+    expiresIn: 15 * MINUTES_IN_MS,
   })
 
 const sendVerificationEmail = async (user: User, verificationToken: string) => {
@@ -67,10 +71,16 @@ export const authService = {
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
-    return { user, accessToken, refreshToken }
+    return {
+      user,
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
+    }
   },
 
-  async login(data: LoginApiRequest): Promise<LoginApiResponse> {
+  async login(data: LoginApiRequest): Promise<UserApiResponse> {
     const user = await authRepository.findByEmail(data.email)
     if (!user) throw new Error('login.invalidCredentials')
 
@@ -80,13 +90,20 @@ export const authService = {
     if (!user.emailVerified) {
       throw new Error('login.emailNotVerified')
     }
+    const userResponse = authMapper.toUserResponse(user)
 
     const accessToken = generateAccessToken(user.id)
     const refreshToken = generateRefreshToken(user.id)
 
     await authRepository.saveRefreshToken(user.id, refreshToken)
 
-    return { user, accessToken, refreshToken }
+    return {
+      user: userResponse,
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
+    }
   },
 
   async verifyEmail(data: {
@@ -185,7 +202,7 @@ export const authService = {
     return { message: 'Password changed successfully' }
   },
 
-  async refreshToken(data: { refreshToken: string }) {
+  async refreshToken(data: { refreshToken: string }): Promise<UserApiResponse> {
     const decoded = jwt.verify(
       data.refreshToken,
       process.env.REFRESH_TOKEN_SECRET!,
@@ -202,7 +219,13 @@ export const authService = {
 
     await authRepository.saveRefreshToken(user.id, newRefreshToken)
 
-    return { accessToken: newAccessToken, refreshToken: newRefreshToken }
+    return {
+      user: authMapper.toUserResponse(user),
+      tokens: {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+      },
+    }
   },
 
   async getMe(req: AuthenticatedRequest) {
@@ -212,7 +235,12 @@ export const authService = {
 
     const user = await authRepository.findById(req.user.userId)
     if (!user) throw new Error('getMe.userNotFound')
+    const userResponse = authMapper.toUserResponse(user)
+    return { user: userResponse }
+  },
 
-    return { user }
+  async getUserFromToken(token: string) {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!)
+    return decoded
   },
 }

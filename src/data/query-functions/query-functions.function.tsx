@@ -1,9 +1,11 @@
 import { ApiErrorResult } from '../../api'
 import {
+  GetMeResponse,
   LoginFormProps,
   LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
+  UserResponse,
   VerifyEmailRequest,
   VerifyEmailResponse,
 } from '../../types'
@@ -136,5 +138,31 @@ export const authQueryFns = {
       errorMessage: t('toastMessages.auth.login.errorMessage'),
       showSuccessToast: true,
       successMessage: t('toastMessages.auth.login.successMessage'),
+    }),
+
+  refreshToken: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<UserResponse, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.refreshToken(), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.auth.refreshToken.errorMessage'),
+    }),
+
+  getMe: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<GetMeResponse, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.getMe(), {
+      showErrorToast: false,
+      errorMessage: t('toastMessages.auth.getMe.errorMessage'),
+    }),
+
+  logout: (
+    t: (key: string) => string,
+  ): Promise<OperationResult<{ message: string }, ApiErrorResult>> =>
+    apiCallHandler(() => authApiClient.logout(), {
+      showErrorToast: true,
+      errorMessage: t('toastMessages.auth.logout.errorMessage'),
+      showSuccessToast: true,
+      successMessage: t('toastMessages.auth.logout.successMessage'),
     }),
 }

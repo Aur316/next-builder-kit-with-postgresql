@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useLogin } from '../../hooks'
+import { useAuth } from '../../providers/auth/auth.provider'
 import { LoginFormProps } from '../../types'
 import { Button, Input } from '../base-ui-elements'
 
@@ -16,12 +17,10 @@ export function LoginForm() {
   })
 
   const { login, isPending } = useLogin()
-
+  const { user } = useAuth()
   const handleSubmit = async () => {
     await login(loginForm)
   }
-
-  // TODO: tkme t és a jelszavat ne adjuk vissza a userben a backendről.
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
@@ -41,6 +40,7 @@ export function LoginForm() {
           onChange={(e) =>
             setLoginForm({ ...loginForm, email: e.target.value })
           }
+          autoComplete="email"
           required
         />
         <Input
@@ -52,10 +52,16 @@ export function LoginForm() {
           }
           required
         />
-        <Button type="submit" variant="secondary" loading={isPending}>
+        <Button
+          type="submit"
+          variant="secondary"
+          disabled={isPending}
+          loading={isPending}
+        >
           {t('login')}
         </Button>
       </form>
+      {user && <div>{user.name}</div>}
     </div>
   )
 }

@@ -1,9 +1,11 @@
-import { User } from '../../../generated/prisma'
+import { Role, User } from '../../../generated/prisma'
 
 export type RegistrationApiResponse = {
   user: User
-  accessToken: string
-  refreshToken: string
+  tokens: {
+    accessToken: string
+    refreshToken: string
+  }
 }
 
 export type RegistrationApiRequest = {
@@ -12,10 +14,19 @@ export type RegistrationApiRequest = {
   name?: string
 }
 
-export type LoginApiResponse = {
-  user: User
-  accessToken: string
-  refreshToken: string
+export type UserResponse = {
+  id: string
+  email: string
+  name: string | null
+  role: Role
+}
+
+export type UserApiResponse = {
+  user: UserResponse
+  tokens: {
+    accessToken: string
+    refreshToken: string
+  }
 }
 
 export type LoginApiRequest = {
