@@ -10,7 +10,7 @@ import {
 
 import { useTranslation } from 'react-i18next'
 
-import { authQueryFns } from '../../data'
+import { authQueryFns, setGlobalLogout } from '../../data'
 import { AuthTokens, User } from '../../types'
 
 type AuthContextType = {
@@ -27,9 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [tokens, setTokens] = useState<AuthTokens | null>(null)
   const [isInitializing, setIsInitializing] = useState<boolean>(true)
-
   const { t } = useTranslation()
-
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -39,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           try {
             const meResponse = await authQueryFns.getMe(t)
             if (meResponse.isSuccess) {
-              setUser(meResponse.payload)
+              setUser(meResponse.payload.user)
               setTokens({ accessToken })
               setIsInitializing(false)
               return
@@ -90,6 +88,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await authQueryFns.logout(t)
     init()
   }
+
+  // Set up global logout function for HTTP interceptor
+  useEffect(() => {
+    setGlobalLogout(() => {
+      localStorage.removeItem('accessToken')
+      setUser(null)
+      setTokens(null)
+    })
+  }, [])
 
   return (
     <AuthContext.Provider

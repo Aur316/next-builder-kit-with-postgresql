@@ -2,6 +2,13 @@ import axios, { AxiosRequestConfig } from 'axios'
 
 import { authApiClient } from '../auth/auth.client'
 
+// Global logout function - will be set by auth provider
+let globalLogout: (() => void) | null = null
+
+export const setGlobalLogout = (logoutFn: () => void) => {
+  globalLogout = logoutFn
+}
+
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
   headers: {
@@ -40,7 +47,9 @@ instance.interceptors.response.use(
         return instance(originalRequest)
       } catch (refreshError) {
         // If the refresh fails, we log out the user
-        // Here we would call the context logout method
+        if (globalLogout) {
+          globalLogout()
+        }
         return Promise.reject(refreshError)
       }
     }

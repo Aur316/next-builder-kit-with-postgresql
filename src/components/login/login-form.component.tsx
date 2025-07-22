@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useLogin } from '../../hooks'
+import { useAuth } from '../../providers/auth/auth.provider'
 import { LoginFormProps } from '../../types'
 import { Button, Input } from '../base-ui-elements'
 
@@ -16,7 +17,7 @@ export function LoginForm() {
   })
 
   const { login, isPending } = useLogin()
-
+  const { user } = useAuth()
   const handleSubmit = async () => {
     await login(loginForm)
   }
@@ -60,6 +61,7 @@ export function LoginForm() {
           {t('login')}
         </Button>
       </form>
+      {user && <div>{user.name}</div>}
     </div>
   )
 }

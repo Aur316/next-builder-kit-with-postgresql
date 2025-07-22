@@ -1,9 +1,9 @@
 import {
+  GetMeResponse,
   LoginFormProps,
   LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
-  User,
   UserResponse,
   VerifyEmailRequest,
   VerifyEmailResponse,
@@ -27,7 +27,7 @@ export const authApiClient = {
   refreshToken: (): Promise<UserResponse> =>
     httpClient.post(`${ROOT}/refresh-token`, {}, { withCredentials: true }),
 
-  getMe: (): Promise<User> =>
+  getMe: (): Promise<GetMeResponse> =>
     httpClient.get(`${ROOT}/me`, { withCredentials: true }),
 
   logout: (): Promise<{ message: string }> =>

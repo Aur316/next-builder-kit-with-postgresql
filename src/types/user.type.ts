@@ -21,3 +21,5 @@ export type UserResponse = {
   user: User
   tokens: AuthTokens
 }
+
+export type GetMeResponse = Omit<UserResponse, 'tokens'>

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 
 import { AuthenticatedRequest } from '../../../middleware'
+import { MINUTES_IN_MS } from '../helper/constants'
 import { authRepository } from '../repository'
 import { authService } from '../service/auth.service'
 
@@ -19,7 +20,7 @@ export const authController = {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         domain: process.env.COOKIE_DOMAIN || 'localhost',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 1 * MINUTES_IN_MS,
       })
       .status(200)
       .json({ user, tokens })
@@ -81,7 +82,7 @@ export const authController = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 1 * MINUTES_IN_MS,
       })
       .status(200)
       .json({ user, tokens })

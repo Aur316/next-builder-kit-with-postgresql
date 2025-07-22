@@ -1,10 +1,10 @@
 import { ApiErrorResult } from '../../api'
 import {
+  GetMeResponse,
   LoginFormProps,
   LoginResponse,
   RegistrationFormProps,
   RegistrationResponse,
-  User,
   UserResponse,
   VerifyEmailRequest,
   VerifyEmailResponse,
@@ -150,7 +150,7 @@ export const authQueryFns = {
 
   getMe: (
     t: (key: string) => string,
-  ): Promise<OperationResult<User, ApiErrorResult>> =>
+  ): Promise<OperationResult<GetMeResponse, ApiErrorResult>> =>
     apiCallHandler(() => authApiClient.getMe(), {
       showErrorToast: false,
       errorMessage: t('toastMessages.auth.getMe.errorMessage'),

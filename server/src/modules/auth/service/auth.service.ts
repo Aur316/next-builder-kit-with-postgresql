@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import { Role, User } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
 import { mailService } from '../../mailer'
+import { MINUTES_IN_MS } from '../helper'
 import { authMapper } from '../mapper/auth.mapper'
 import { authRepository } from '../repository/auth.repository'
 import {
@@ -15,21 +16,23 @@ import {
 } from '../types/auth.type'
 
 const generateAccessToken = (userId: string): string =>
-  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '15m' })
+  jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, {
+    expiresIn: 15 * MINUTES_IN_MS,
+  })
 
 const generateRefreshToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET!, {
-    expiresIn: '7d',
+    expiresIn: 1 * MINUTES_IN_MS,
   })
 
 const generateVerificationToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
-    expiresIn: '15m',
+    expiresIn: 15 * MINUTES_IN_MS,
   })
 
 const generatePasswordResetToken = (userId: string): string =>
   jwt.sign({ userId }, process.env.PASSWORD_RESET_TOKEN_SECRET!, {
-    expiresIn: '15m',
+    expiresIn: 15 * MINUTES_IN_MS,
   })
 
 const sendVerificationEmail = async (user: User, verificationToken: string) => {
