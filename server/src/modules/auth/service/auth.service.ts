@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 
 import { Role } from '../../../generated/prisma'
 import { AuthenticatedRequest } from '../../../middleware'
-import { mailService } from '../../mailer'
 import { authHelper } from '../helper'
 import { authMapper } from '../mapper/auth.mapper'
 import { authRepository } from '../repository/auth.repository'
@@ -127,15 +126,7 @@ export const authService = {
       expiresAt,
     )
 
-    await mailService.sendMail({
-      to: user.email,
-      subject: 'Reset your password',
-      html: `
-        <h1>Reset your password</h1>
-        <p>Click the link below to reset your password:</p>
-        <a href="${process.env.FRONTEND_URL}/reset-password/${passwordResetToken}">Reset Password</a>
-      `,
-    })
+    await authHelper.sendForgotPasswordEmail(user, passwordResetToken)
 
     return { message: 'Password reset email sent' }
   },

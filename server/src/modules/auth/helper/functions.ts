@@ -36,4 +36,15 @@ export const authHelper = {
           `,
     })
   },
+
+  sendForgotPasswordEmail: async (user: User, passwordResetToken: string) =>
+    mailService.sendMail({
+      to: user.email,
+      subject: 'Reset your password',
+      html: `
+      <h1>Reset your password</h1>
+      <p>Click the link below to reset your password:</p>
+      <a href="${process.env.FRONTEND_URL}/reset-password/${passwordResetToken}">Reset Password</a>
+    `,
+    }),
 }
