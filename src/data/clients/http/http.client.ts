@@ -3,9 +3,9 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { authApiClient } from '../auth/auth.client'
 
 // Global logout function - will be set by auth provider
-let globalLogout: (() => void) | null = null
+let globalLogout: (() => void | Promise<void>) | null = null
 
-export const setGlobalLogout = (logoutFn: () => void) => {
+export const setGlobalLogout = (logoutFn: () => void | Promise<void>) => {
   globalLogout = logoutFn
 }
 
@@ -48,7 +48,11 @@ instance.interceptors.response.use(
       } catch (refreshError) {
         // If the refresh fails, we log out the user
         if (globalLogout) {
-          globalLogout()
+          try {
+            await globalLogout()
+          } catch (error) {
+            console.error('Global logout failed:', error)
+          }
         }
         return Promise.reject(refreshError)
       }

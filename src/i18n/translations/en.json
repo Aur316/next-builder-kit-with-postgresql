@@ -147,6 +147,13 @@
         "errorMessage": "Failed to register",
         "emailAlreadyInUse": "Email already in use",
         "successMessage": "Registration successful"
+      },
+      "logout": {
+        "errorMessage": "Failed to logout",
+        "successMessage": "Logout successful"
+      },
+      "autoLogout": {
+        "message": "Session expired. You have been automatically logged out."
       }
     }
   },

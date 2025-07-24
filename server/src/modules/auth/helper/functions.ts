@@ -2,12 +2,17 @@ import jwt from 'jsonwebtoken'
 
 import { User } from '../../../generated/prisma'
 import { mailService } from '../../mailer'
-import { MINUTES_IN_MS, REFRESH_TOKEN_EXPIRATION_TIME } from './constants'
+import {
+  ACCESS_TOKEN_EXPIRATION_TIME,
+  PASSWORD_RESET_TOKEN_EXPIRATION_TIME,
+  REFRESH_TOKEN_EXPIRATION_TIME,
+  VERIFICATION_TOKEN_EXPIRATION_TIME,
+} from './constants'
 
 export const authHelper = {
   generateAccessToken: (userId: string): string =>
     jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET!, {
-      expiresIn: 15 * MINUTES_IN_MS,
+      expiresIn: ACCESS_TOKEN_EXPIRATION_TIME,
     }),
 
   generateRefreshToken: (userId: string): string =>
@@ -17,12 +22,12 @@ export const authHelper = {
 
   generateVerificationToken: (userId: string): string =>
     jwt.sign({ userId }, process.env.VERIFICATION_TOKEN_SECRET!, {
-      expiresIn: 15 * MINUTES_IN_MS,
+      expiresIn: VERIFICATION_TOKEN_EXPIRATION_TIME,
     }),
 
   generatePasswordResetToken: (userId: string): string =>
     jwt.sign({ userId }, process.env.PASSWORD_RESET_TOKEN_SECRET!, {
-      expiresIn: 15 * MINUTES_IN_MS,
+      expiresIn: PASSWORD_RESET_TOKEN_EXPIRATION_TIME,
     }),
 
   sendVerificationEmail: async (user: User, verificationToken: string) => {

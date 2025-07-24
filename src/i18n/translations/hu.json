@@ -155,6 +155,13 @@
         "errorMessage": "Regisztráció sikertelen",
         "emailAlreadyInUse": "Email már használatban van",
         "successMessage": "Regisztráció sikeres"
+      },
+      "logout": {
+        "errorMessage": "Kijelentkezés sikertelen",
+        "successMessage": "Kijelentkezés sikeres"
+      },
+      "autoLogout": {
+        "message": "A munkamenet lejárt. Automatikusan kijelentkeztetve lettél."
       }
     }
   },

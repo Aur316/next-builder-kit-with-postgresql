@@ -19,16 +19,16 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className="flex min-h-dvh flex-col">
-        <AuthProvider>
-          <ReactQueryProvider>
+        <ReactQueryProvider>
+          <AuthProvider>
             <I18nProvider>
               <StoreProvider>
                 <App>{children}</App>
                 <ToastProvider />
               </StoreProvider>
             </I18nProvider>
-          </ReactQueryProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   )

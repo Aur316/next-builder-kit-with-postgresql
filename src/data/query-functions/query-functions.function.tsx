@@ -140,12 +140,9 @@ export const authQueryFns = {
       successMessage: t('toastMessages.auth.login.successMessage'),
     }),
 
-  refreshToken: (
-    t: (key: string) => string,
-  ): Promise<OperationResult<UserResponse, ApiErrorResult>> =>
+  refreshToken: (): Promise<OperationResult<UserResponse, ApiErrorResult>> =>
     apiCallHandler(() => authApiClient.refreshToken(), {
-      showErrorToast: true,
-      errorMessage: t('toastMessages.auth.refreshToken.errorMessage'),
+      showErrorToast: false,
     }),
 
   getMe: (
